@@ -19,4 +19,4 @@ NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 
 echo "proc test"
-python pull_image.py -s 10
+python ~/workspace/JUMP_vision_model/pull_image.py -s 10
