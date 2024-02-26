@@ -7,6 +7,7 @@
 #PBS -l filesystems=home:eagle
 
 module load singularity
+conda activate cellprofiler
 cd ~/workspace
 
 # MPI example w/ 4 MPI ranks per node w/ threads spread evenly across cores (1 thread per core)
