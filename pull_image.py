@@ -3,6 +3,7 @@ import os
 import random
 import string
 import shutil
+import argparse
 
 def pull_meta(num_samples):
     profile_formatter = (
@@ -123,4 +124,16 @@ def main(num_samples):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument(
+    "-s",
+    "--num_samples",
+    help="number of samples to be taken from metadata",
+    type=int,
+    required=True,
+    )
+
+    args = parser.parse_args()
+
+    main(args)
