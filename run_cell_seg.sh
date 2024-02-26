@@ -3,7 +3,7 @@
 #PBS -l place=scatter
 #PBS -l walltime=0:05:00
 #PBS -q debug 
-#PBS -A    
+#PBS -A CVD-Mol-AI
 #PBS -l filesystems=home:eagle
 
 module load singularity
