@@ -3,7 +3,7 @@
 #PBS -l place=scatter
 #PBS -l walltime=24:00:00
 #PBS -q debug 
-#PBS -A RL-fold
+#PBS -A APSDataAnalysis
 #PBS -l filesystems=home:eagle
 
 module load singularity
