@@ -29,7 +29,6 @@ def pull_meta(num_samples):
 
     sample = (
         plates.query('Metadata_PlateType=="COMPOUND"')
-        .sample(num_samples, random_state=34)
 )
     sample = sample.sample(n=num_samples)
     # sample = plates
