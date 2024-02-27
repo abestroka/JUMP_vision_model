@@ -7,6 +7,7 @@
 #PBS -l filesystems=home:eagle
 
 module load singularity
+module load conda
 conda activate cellprofiler
 cd ~/workspace
 
