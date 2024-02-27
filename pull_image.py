@@ -28,11 +28,11 @@ def pull_meta(num_samples):
     # plates.query('Metadata_PlateType=="COMPOUND"')
     # )
 
-    sample1 = (
+    sample = (
         plates.query('Metadata_PlateType=="COMPOUND"')
 )
-    idx = np.random.choice(len(sample1)-1, replace=True, size=num_samples)
-    sample = sample1.iloc[idx]
+    # idx = np.random.choice(len(sample1)-1, replace=True, size=num_samples)
+    # sample = sample1.iloc[idx]
     # sample = sample.sample(n=num_samples)
     # sample = plates
 
