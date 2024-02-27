@@ -17,10 +17,10 @@ def pull_meta(num_samples):
     "{Metadata_Batch}/{Metadata_Plate}/load_data_with_illum.parquet"
 )
     
-    plates = pd.read_csv("./datasets/metadata/plate.csv.gz")
-    wells = pd.read_csv("./datasets/metadata/well.csv.gz")
-    compound = pd.read_csv("./datasets/metadata/compound.csv.gz")
-    orf = pd.read_csv("./datasets/metadata/orf.csv.gz")
+    plates = pd.read_csv("~/workspace/JUMP_vision_model/datasets/metadata/plate.csv.gz")
+    wells = pd.read_csv("~/workspace/JUMP_vision_model/datasets/metadata/well.csv.gz")
+    compound = pd.read_csv("~/workspace/JUMP_vision_model/datasets/metadata/compound.csv.gz")
+    orf = pd.read_csv("~/workspace/JUMP_vision_model/datasets/metadata/orf.csv.gz")
 
     #get all plates treated with compound
     # sample = (
@@ -125,7 +125,7 @@ def main(num_samples):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    
+
     parser.add_argument(
     "-s",
     "--num_samples",
