@@ -1,7 +1,7 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=0:30:00
+#PBS -l walltime=24:00:00
 #PBS -q debug 
 #PBS -A RL-fold
 #PBS -l filesystems=home:eagle
