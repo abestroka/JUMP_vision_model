@@ -31,8 +31,8 @@ def pull_meta(num_samples):
         plates.query('Metadata_PlateType=="COMPOUND"')
         .sample(num_samples, random_state=34)
 )
-
-    sample = plates
+    sample = sample.sample(n=num_samples)
+    # sample = plates
 
     # load profiles of all plates
     dframes = []
