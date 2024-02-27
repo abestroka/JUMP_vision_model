@@ -4,6 +4,7 @@ import random
 import string
 import shutil
 import argparse
+import numpy as np
 
 def pull_meta(num_samples):
     profile_formatter = (
@@ -27,9 +28,11 @@ def pull_meta(num_samples):
     # plates.query('Metadata_PlateType=="COMPOUND"')
     # )
 
-    sample = (
+    sample1 = (
         plates.query('Metadata_PlateType=="COMPOUND"')
 )
+    idx = np.random.choice(len(sample1)-1, replace=True, size=num_samples)
+    sample = sample1.iloc[idx]
     # sample = sample.sample(n=num_samples)
     # sample = plates
 
