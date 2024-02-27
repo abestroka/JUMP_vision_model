@@ -1,9 +1,9 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=0:05:00
+#PBS -l walltime=0:30:00
 #PBS -q debug 
-#PBS -A APSDataAnalysis
+#PBS -A RL-fold
 #PBS -l filesystems=home:eagle
 
 module load singularity
@@ -20,5 +20,5 @@ NTHREADS=1
 NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 
-echo "proc test"
+echo "pulling metadata"
 python ~/workspace/JUMP_vision_model/pull_image.py -s 10
