@@ -30,7 +30,7 @@ def pull_meta(num_samples):
     sample = (
         plates.query('Metadata_PlateType=="COMPOUND"')
 )
-    sample = sample.sample(n=num_samples)
+    # sample = sample.sample(n=num_samples)
     # sample = plates
 
     # load profiles of all plates
