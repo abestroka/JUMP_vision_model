@@ -5,6 +5,9 @@ import string
 import shutil
 import argparse
 import numpy as np
+import boto3
+from botocore import UNSIGNED
+from botocore.config import Config
 
 def pull_meta(num_samples):
     profile_formatter = (
@@ -122,39 +125,81 @@ def find_treatment(s3path):
 
     return treatment
 
-def pull_image(i, linked):
-    for _, row in linked.iterrows():
-        dna_path = linked["PathName_OrigDNA"][i]
-        dna_file = linked["FileName_OrigDNA"][i]
-        er_path = linked["PathName_OrigER"][i]
-        er_file = linked["FileName_OrigER"][i]
-        rna_path = linked["PathName_OrigRNA"][i]
-        rna_file = linked["FileName_OrigRNA"][i]
-        agp_path = linked["PathName_OrigAGP"][i]
-        agp_file = linked["FileName_OrigAGP"][i]
-        mito_path = linked["PathName_OrigMito"][i]
-        mito_file = linked["FileName_OrigMito"][i]
+def pull_image(i, linked, temp_image_path):
+    s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
-        illum_dna_path = linked["PathName_IllumDNA"][i]
-        illum_dna_file = linked["FileName_IllumDNA"][i]
-        illum_er_path = linked["PathName_IllumER"][i]
-        illum_er_file = linked["FileName_IllumER"][i]
-        illum_rna_path = linked["PathName_IllumRNA"][i]
-        illum_rna_file = linked["FileName_IllumRNA"][i]
-        illum_agp_path = linked["PathName_IllumAGP"][i]
-        illum_agp_file = linked["FileName_IllumAGP"][i]
-        illum_mito_path = linked["PathName_IllumMito"][i]
-        illum_mito_file = linked["FileName_IllumMito"][i]
 
-        target = linked["Metadata_InChIKey"][i]
+    dna_path = linked["PathName_OrigDNA"][i]
+    dna_file = linked["FileName_OrigDNA"][i]
+    dna_key = dna_path+dna_file
+    dna_key = dna_key[26:]
 
-    
+    er_path = linked["PathName_OrigER"][i]
+    er_file = linked["FileName_OrigER"][i]
+    er_key = er_path+er_file
+    er_key = er_key[26:]
+
+    rna_path = linked["PathName_OrigRNA"][i]
+    rna_file = linked["FileName_OrigRNA"][i]
+    rna_key = rna_path+rna_file
+    rna_key = rna_key[26:]
+
+    agp_path = linked["PathName_OrigAGP"][i]
+    agp_file = linked["FileName_OrigAGP"][i]
+    agp_key = agp_path+agp_file
+    agp_key = agp_key[26:]
+
+    mito_path = linked["PathName_OrigMito"][i]
+    mito_file = linked["FileName_OrigMito"][i]
+    mito_key = mito_path+mito_file
+    mito_key = mito_key[26:]
+
+
+    illum_dna_path = linked["PathName_IllumDNA"][i]
+    illum_dna_file = linked["FileName_IllumDNA"][i]
+    illum_dna_key = illum_dna_path+illum_dna_file
+    illum_dna_key = illum_dna_key[26:]
+
+    illum_er_path = linked["PathName_IllumER"][i]
+    illum_er_file = linked["FileName_IllumER"][i]
+    illum_er_key = illum_er_path+illum_er_file
+    illum_er_key = illum_er_key[26:]
+
+    illum_rna_path = linked["PathName_IllumRNA"][i]
+    illum_rna_file = linked["FileName_IllumRNA"][i]
+    illum_rna_key = illum_rna_path+illum_rna_file
+    illum_rna_key = illum_rna_key[26:]
+
+    illum_agp_path = linked["PathName_IllumAGP"][i]
+    illum_agp_file = linked["FileName_IllumAGP"][i]
+    illum_agp_key = illum_agp_path+illum_agp_file
+    illum_agp_key = illum_agp_key[26:]
+
+    illum_mito_path = linked["PathName_IllumMito"][i]
+    illum_mito_file = linked["FileName_IllumMito"][i]
+    illum_mito_key = illum_mito_path+illum_mito_file
+    illum_mito_key = illum_mito_key[26:]
+
+    target = linked["Metadata_InChIKey"][i]
+
+    s3.download_file('cellpainting-gallery', dna_key, temp_image_path+ "/dna.tiff")
+    s3.download_file('cellpainting-gallery', er_key, temp_image_path+ "/er.tiff")
+    s3.download_file('cellpainting-gallery', rna_key, temp_image_path+ "/rna.tiff")
+    s3.download_file('cellpainting-gallery', agp_key, temp_image_path+ "/agp.tiff")
+    s3.download_file('cellpainting-gallery', mito_key, temp_image_path+ "/mito.tiff")
+    s3.download_file('cellpainting-gallery', illum_dna_key, temp_image_path+ "/illum_dna.npy")
+    s3.download_file('cellpainting-gallery', illum_er_key, temp_image_path+ "/illum_er.npy")
+    s3.download_file('cellpainting-gallery', illum_rna_key, temp_image_path+ "/illum_rna.npy")
+    s3.download_file('cellpainting-gallery', illum_agp_key, temp_image_path+ "/illum_agp.npy")
+    s3.download_file('cellpainting-gallery', illum_mito_key, temp_image_path+ "/illum_mito.npy")
+
+
 
 def main(num_samples, num_image_sets):
     meta = pull_meta(num_samples)
-    temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
-    for i in range(num_image_sets):
-        pull_image(i, meta)
+    # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
+    # for i in range(num_image_sets):
+    #     pull_image(i, meta, temp_image_path)
 
 
 
