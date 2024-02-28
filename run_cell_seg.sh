@@ -21,4 +21,16 @@ NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 
 echo "pulling metadata"
-python ~/workspace/JUMP_vision_model/pull_image.py -s 10
+# pull metadata, save to csv (TODO pare down into just filenames and targets, then export as lists)
+# python ~/workspace/JUMP_vision_model/pull_meta.py -s 10
+# image_set=1
+# while [$image_set -le 10]
+# do
+#     python ~/workspace/JUMP_vision_model/pull_images.py -i image_set
+
+
+#     ((image_set++))
+# done
+
+aws s3 cp \--no-sign-request \s3://cellpainting-gallery/cpg0016-jump/source_11/images/Batch3/images/EC000133__2021-09-24T18_01_09-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff /workspace/results/image_temp
+
