@@ -195,7 +195,7 @@ def pull_image(i, linked, temp_image_path):
 
 
 
-def main(num_samples, num_image_sets):
+def main(num_samples):
     meta = pull_meta(num_samples)
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     # for i in range(num_image_sets):
