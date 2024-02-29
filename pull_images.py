@@ -85,6 +85,7 @@ def pull_image(i, linked, temp_image_path):
 
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
+    print(meta)
     temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     pull_image(index, meta, temp_image_path)
 
