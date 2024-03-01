@@ -24,7 +24,9 @@ echo "pulling metadata"
 # pull metadata, save to csv (TODO pare down into just filenames and targets, then export as lists)
 python ~/workspace/JUMP_vision_model/pull_meta.py -s 10
 image_set=1
-python ~/workspace/JUMP_vision_model/pull_images.py -i "$image_set"
+echo "image set"
+echo "$image_set"
+python ~/workspace/JUMP_vision_model/pull_images.py -index 1
 # while [$image_set -le 10]
 # do
 #     python ~/workspace/JUMP_vision_model/pull_images.py -i image_set
