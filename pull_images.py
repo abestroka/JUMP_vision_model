@@ -13,20 +13,7 @@ from botocore.config import Config
 def pull_image(i, linked, temp_image_path):
     s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
-    print("LINKED")
-    print(linked)
 
-    print("TYPE i")
-    print(type(i))
-
-    print("I")
-    print(i)
-
-    print("TOTAL FIX")
-    print(linked["PathName_OrigDNA"][int(i)])
-
-    print("TOTAL")
-    print(linked["PathName_OrigDNA"][i])
 
 
 
@@ -109,15 +96,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-    "-i",
-    "--index",
-    help="number of images to be taken from metadata",
+    "-s",
+    "--num_samples",
+    help="number of samples to be taken from metadata",
     type=int,
     required=True,
     )
 
-    print("ARGS")
 
     args = parser.parse_args()
+
+    print("ARGS")
     print(args)
+
     main(args)

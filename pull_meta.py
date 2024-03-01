@@ -214,13 +214,7 @@ if __name__ == "__main__":
     type=int,
     required=True,
     )
-    # parser.add_argument(
-    # "-i",
-    # "--num_image_sets",
-    # help="number of image sets to be pulled from metadata",
-    # type=int,
-    # required=True,
-    # )
+
 
     args = parser.parse_args()
 
