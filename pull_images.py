@@ -13,6 +13,22 @@ from botocore.config import Config
 def pull_image(i, linked, temp_image_path):
     s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
+    print("LINKED")
+    print(linked)
+
+    print("TYPE i")
+    print(type(i))
+
+    print("I")
+    print(i)
+
+    print("TOTAL FIX")
+    print(linked["PathName_OrigDNA"][int(i)])
+
+    print("TOTAL")
+    print(linked["PathName_OrigDNA"][i])
+
+
 
     dna_path = linked["PathName_OrigDNA"][i]
     dna_file = linked["FileName_OrigDNA"][i]
