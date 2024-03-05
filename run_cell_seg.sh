@@ -26,6 +26,7 @@ python ~/workspace/JUMP_vision_model/pull_meta.py -s 10
 image_set=1
 echo "image set"
 echo "$image_set"
+echo "pulling images from aws"
 python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
 # while [$image_set -le 10]
 # do
