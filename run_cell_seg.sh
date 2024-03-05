@@ -18,6 +18,16 @@ NDEPTH=8
 NTHREADS=1
 
 NTOTRANKS=$(( NNODES * NRANKS_PER_NODE ))
+
+# proxy settings
+export HTTP_PROXY="http://proxy.alcf.anl.gov:3128"
+export HTTPS_PROXY="http://proxy.alcf.anl.gov:3128"
+export http_proxy="http://proxy.alcf.anl.gov:3128"
+export https_proxy="http://proxy.alcf.anl.gov:3128"
+export ftp_proxy="http://proxy.alcf.anl.gov:3128"
+export no_proxy="admin,polaris-adminvm-01,localhost,*.cm.polaris.alcf.anl.gov,polaris-*,*.polaris.alcf.anl.gov,*.alcf.anl.gov"
+
+
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 
 echo "pulling metadata"
