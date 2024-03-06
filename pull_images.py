@@ -80,9 +80,8 @@ def pull_image(i, linked, temp_image_path):
     print(temp_image_path+ "/dna.tiff")
 
 
-    s3.download_file('cellpainting-gallery', dna_key, "astroka/workspace/JUMP_vision_model/dna.tiff")
 
-    # s3.download_file('cellpainting-gallery', dna_key, temp_image_path+ "/dna.tiff")
+    s3.download_file('cellpainting-gallery', dna_key, temp_image_path+ "/dna.tiff")
     s3.download_file('cellpainting-gallery', er_key, temp_image_path+ "/er.tiff")
     s3.download_file('cellpainting-gallery', rna_key, temp_image_path+ "/rna.tiff")
     s3.download_file('cellpainting-gallery', agp_key, temp_image_path+ "/agp.tiff")
