@@ -8,13 +8,11 @@ import numpy as np
 import boto3
 from botocore import UNSIGNED
 from botocore.config import Config
+# import path
 
 
 def pull_image(i, linked, temp_image_path):
     s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
-
-
-
 
 
     dna_path = linked["PathName_OrigDNA"][i]
@@ -70,15 +68,6 @@ def pull_image(i, linked, temp_image_path):
 
     target = linked["Metadata_InChIKey"][i]
 
-    print('ILLUM DNA KEY')
-    print(illum_dna_key)
-
-    print('TEMP IMAGE PATH')
-    print(temp_image_path)
-
-    print("FULL PATH")
-    print(temp_image_path+ "/dna.tiff")
-
     # base_path = "/eagle/projects/APSDataAnalysis/LUCID"
     # path.mkdirs(temp_image_path)
     curr_path = temp_image_path
@@ -94,7 +83,7 @@ def pull_image(i, linked, temp_image_path):
     s3.download_file('cellpainting-gallery', illum_agp_key, curr_path+ "/illum_agp.npy")
     s3.download_file('cellpainting-gallery', illum_mito_key, curr_path+ "/illum_mito.npy")
 
-
+    
 
 
 
@@ -102,7 +91,7 @@ def pull_image(i, linked, temp_image_path):
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
     print(meta)
-    temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID/test"
+    temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID/image_temp"
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     pull_image(1, meta, temp_image_path)
 

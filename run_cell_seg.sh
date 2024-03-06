@@ -38,16 +38,16 @@ echo "image set"
 echo "$image_set"
 echo "pulling images from aws"
 python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
-# while [$image_set -le 10]
-# do
-#     python ~/workspace/JUMP_vision_model/pull_images.py -i image_set
+while [$image_set -le 3]
+do
+    python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
 
         # cellprofiler into temp directory
         # run directory cleaning python
 
 
 
-#     ((image_set++))
-# done
+    ((image_set++))
+done
 
 # model
