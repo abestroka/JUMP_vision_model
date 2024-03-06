@@ -70,8 +70,8 @@ def pull_image(i, linked, temp_image_path):
 
     target = linked["Metadata_InChIKey"][i]
 
-    print('DNA KEY')
-    print(dna_key)
+    print('ILLUM DNA KEY')
+    print(illum_dna_key)
 
     print('TEMP IMAGE PATH')
     print(temp_image_path)
@@ -83,11 +83,11 @@ def pull_image(i, linked, temp_image_path):
     # path.mkdirs(temp_image_path)
     curr_path = temp_image_path
 
-    s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
-    s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
-    s3.download_file('cellpainting-gallery', rna_key, curr_path+ "/rna.tiff")
-    s3.download_file('cellpainting-gallery', agp_key, curr_path+ "/agp.tiff")
-    s3.download_file('cellpainting-gallery', mito_key, curr_path+ "/mito.tiff")
+    # s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
+    # s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
+    # s3.download_file('cellpainting-gallery', rna_key, curr_path+ "/rna.tiff")
+    # s3.download_file('cellpainting-gallery', agp_key, curr_path+ "/agp.tiff")
+    # s3.download_file('cellpainting-gallery', mito_key, curr_path+ "/mito.tiff")
     s3.download_file('cellpainting-gallery', illum_dna_key, curr_path+ "/illum_dna.npy")
     s3.download_file('cellpainting-gallery', illum_er_key, curr_path+ "/illum_er.npy")
     s3.download_file('cellpainting-gallery', illum_rna_key, curr_path+ "/illum_rna.npy")
