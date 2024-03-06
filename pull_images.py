@@ -91,9 +91,12 @@ def pull_image(i, linked, temp_image_path):
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
     temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID/image_temp"
+    segmented_image_path = "/eagle/projects/APSDataAnalysis/LUCID/segmented_images"
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
-    pull_image(1, meta, temp_image_path)
+    pull_image(index, meta, temp_image_path)
+    if os.path.isdir(segmented_image_path) == False:
+        os.mkdir(segmented_image_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
