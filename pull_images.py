@@ -81,7 +81,7 @@ def pull_image(i, linked, temp_image_path):
 
     # base_path = "/eagle/projects/APSDataAnalysis/LUCID"
     # path.mkdirs(temp_image_path)
-    curr_path = temp_image_path+"/test"
+    curr_path = temp_image_path
 
     s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
     s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
