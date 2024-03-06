@@ -79,18 +79,20 @@ def pull_image(i, linked, temp_image_path):
     print("FULL PATH")
     print(temp_image_path+ "/dna.tiff")
 
+    # base_path = "/eagle/projects/APSDataAnalysis/LUCID"
+    # path.mkdirs(temp_image_path)
+    curr_path = temp_image_path+"/test"
 
-
-    s3.download_file('cellpainting-gallery', dna_key, temp_image_path+ "/dna.tiff")
-    s3.download_file('cellpainting-gallery', er_key, temp_image_path+ "/er.tiff")
-    s3.download_file('cellpainting-gallery', rna_key, temp_image_path+ "/rna.tiff")
-    s3.download_file('cellpainting-gallery', agp_key, temp_image_path+ "/agp.tiff")
-    s3.download_file('cellpainting-gallery', mito_key, temp_image_path+ "/mito.tiff")
-    s3.download_file('cellpainting-gallery', illum_dna_key, temp_image_path+ "/illum_dna.npy")
-    s3.download_file('cellpainting-gallery', illum_er_key, temp_image_path+ "/illum_er.npy")
-    s3.download_file('cellpainting-gallery', illum_rna_key, temp_image_path+ "/illum_rna.npy")
-    s3.download_file('cellpainting-gallery', illum_agp_key, temp_image_path+ "/illum_agp.npy")
-    s3.download_file('cellpainting-gallery', illum_mito_key, temp_image_path+ "/illum_mito.npy")
+    s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
+    s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
+    s3.download_file('cellpainting-gallery', rna_key, curr_path+ "/rna.tiff")
+    s3.download_file('cellpainting-gallery', agp_key, curr_path+ "/agp.tiff")
+    s3.download_file('cellpainting-gallery', mito_key, curr_path+ "/mito.tiff")
+    s3.download_file('cellpainting-gallery', illum_dna_key, curr_path+ "/illum_dna.npy")
+    s3.download_file('cellpainting-gallery', illum_er_key, curr_path+ "/illum_er.npy")
+    s3.download_file('cellpainting-gallery', illum_rna_key, curr_path+ "/illum_rna.npy")
+    s3.download_file('cellpainting-gallery', illum_agp_key, curr_path+ "/illum_agp.npy")
+    s3.download_file('cellpainting-gallery', illum_mito_key, curr_path+ "/illum_mito.npy")
 
 
 
@@ -100,7 +102,8 @@ def pull_image(i, linked, temp_image_path):
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
     print(meta)
-    temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
+    temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID"
+    # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     pull_image(1, meta, temp_image_path)
 
 if __name__ == "__main__":
