@@ -102,8 +102,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-    "-s",
-    "--num_samples",
+    "-i",
+    "--index",
     help="number of samples to be taken from metadata",
     type=int,
     required=True,
