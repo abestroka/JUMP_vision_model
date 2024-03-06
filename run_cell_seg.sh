@@ -34,20 +34,20 @@ echo "pulling metadata"
 # pull metadata, save to csv (TODO pare down into just filenames and targets, then export as lists)
 python ~/workspace/JUMP_vision_model/pull_meta.py -s 10
 image_set=1
-echo "image set"
-echo "$image_set"
 echo "pulling images from aws"
 python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
-while [$image_set -le 3]
+for i in {1..5}
 do
-    python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
+    echo "image set"
+    echo "$i"
+    python ~/workspace/JUMP_vision_model/pull_images.py -s "$i"
 
         # cellprofiler into temp directory
         # run directory cleaning python
 
 
 
-    ((image_set++))
+    # ((image_set++))
 done
 
 # model
