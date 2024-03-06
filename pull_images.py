@@ -45,27 +45,27 @@ def pull_image(i, linked, temp_image_path):
 
     illum_dna_path = linked["PathName_IllumDNA"][i]
     illum_dna_file = linked["FileName_IllumDNA"][i]
-    illum_dna_key = illum_dna_path+illum_dna_file
+    illum_dna_key = illum_dna_path+"/"+illum_dna_file
     illum_dna_key = illum_dna_key[26:]
 
     illum_er_path = linked["PathName_IllumER"][i]
     illum_er_file = linked["FileName_IllumER"][i]
-    illum_er_key = illum_er_path+illum_er_file
+    illum_er_key = illum_er_path+"/"+illum_er_file
     illum_er_key = illum_er_key[26:]
 
     illum_rna_path = linked["PathName_IllumRNA"][i]
     illum_rna_file = linked["FileName_IllumRNA"][i]
-    illum_rna_key = illum_rna_path+illum_rna_file
+    illum_rna_key = illum_rna_path+"/"+illum_rna_file
     illum_rna_key = illum_rna_key[26:]
 
     illum_agp_path = linked["PathName_IllumAGP"][i]
     illum_agp_file = linked["FileName_IllumAGP"][i]
-    illum_agp_key = illum_agp_path+illum_agp_file
+    illum_agp_key = illum_agp_path+"/"+illum_agp_file
     illum_agp_key = illum_agp_key[26:]
 
     illum_mito_path = linked["PathName_IllumMito"][i]
     illum_mito_file = linked["FileName_IllumMito"][i]
-    illum_mito_key = illum_mito_path+illum_mito_file
+    illum_mito_key = illum_mito_path+"/"+illum_mito_file
     illum_mito_key = illum_mito_key[26:]
 
     target = linked["Metadata_InChIKey"][i]
@@ -83,11 +83,11 @@ def pull_image(i, linked, temp_image_path):
     # path.mkdirs(temp_image_path)
     curr_path = temp_image_path
 
-    # s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
-    # s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
-    # s3.download_file('cellpainting-gallery', rna_key, curr_path+ "/rna.tiff")
-    # s3.download_file('cellpainting-gallery', agp_key, curr_path+ "/agp.tiff")
-    # s3.download_file('cellpainting-gallery', mito_key, curr_path+ "/mito.tiff")
+    s3.download_file('cellpainting-gallery', dna_key, curr_path+ "/dna.tiff")
+    s3.download_file('cellpainting-gallery', er_key, curr_path+ "/er.tiff")
+    s3.download_file('cellpainting-gallery', rna_key, curr_path+ "/rna.tiff")
+    s3.download_file('cellpainting-gallery', agp_key, curr_path+ "/agp.tiff")
+    s3.download_file('cellpainting-gallery', mito_key, curr_path+ "/mito.tiff")
     s3.download_file('cellpainting-gallery', illum_dna_key, curr_path+ "/illum_dna.npy")
     s3.download_file('cellpainting-gallery', illum_er_key, curr_path+ "/illum_er.npy")
     s3.download_file('cellpainting-gallery', illum_rna_key, curr_path+ "/illum_rna.npy")
@@ -102,7 +102,7 @@ def pull_image(i, linked, temp_image_path):
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
     print(meta)
-    temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID"
+    temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID/test"
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     pull_image(1, meta, temp_image_path)
 
