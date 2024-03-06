@@ -83,16 +83,16 @@ def pull_image(i, linked, temp_image_path):
     s3.download_file('cellpainting-gallery', illum_agp_key, curr_path+ "/illum_agp.npy")
     s3.download_file('cellpainting-gallery', illum_mito_key, curr_path+ "/illum_mito.npy")
 
-    
+
 
 
 
 
 def main(index):
     meta = pd.read_csv('~/workspace/JUMP_vision_model/linked_metadata.csv')
-    print(meta)
     temp_image_path =  "/eagle/projects/APSDataAnalysis/LUCID/image_temp"
-    # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
+    if os.path.isdir(temp_image_path) == False:
+        os.mkdir(temp_image_path)
     pull_image(1, meta, temp_image_path)
 
 if __name__ == "__main__":
