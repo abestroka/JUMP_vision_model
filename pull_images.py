@@ -114,5 +114,7 @@ if __name__ == "__main__":
 
     print("ARGS")
     print(args)
+    print(vars(args))
+    print(vars(args).index)
 
     main(args)
