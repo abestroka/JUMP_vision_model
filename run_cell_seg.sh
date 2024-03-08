@@ -41,7 +41,7 @@ do
     echo "image set"
     echo "$i"
     python ~/workspace/JUMP_vision_model/pull_images.py --index $i
-    target=$(head -n 1 target_name.txt)
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
     echo "TARGET"
     echo $target
 
