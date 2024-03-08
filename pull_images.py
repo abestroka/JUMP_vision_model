@@ -72,19 +72,21 @@ def pull_image(i, linked, temp_image_path):
     #     os.remove('~/workspace/JUMP_vision_model/target_name.txt')
     # os.mkdir('~/workspace/JUMP_vision_model/target_name.txt')
 
-    if os.path.exists('~/workspace/JUMP_vision_model/target_name.txt'):
-        os.remove('~/workspace/JUMP_vision_model/target_name.txt')
+    # if os.path.exists('~/workspace/JUMP_vision_model/target_name.txt'):
+    #     os.remove('~/workspace/JUMP_vision_model/target_name.txt')
 
-    try:
-        os.mknod('~/workspace/JUMP_vision_model/target_name.txt')
-    except FileExistsError as e:
-        print(f'An error occurred: {e}')
+    # try:
+    #     os.mknod('~/workspace/JUMP_vision_model/target_name.txt')
+    # except FileExistsError as e:
+    #     print(f'An error occurred: {e}')
     
     f = open('~/workspace/JUMP_vision_model/target_name.txt', 'w')
+    f.truncate(0)
     f.write(target)
     f.close()
 
     seg_image_path = "/eagle/projects/APSDataAnalysis/LUCID/segmented_images/{i}"
+    print('seg image path')
     print(seg_image_path)
 
     if os.path.isdir(seg_image_path) == False:
