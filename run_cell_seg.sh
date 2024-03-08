@@ -41,11 +41,12 @@ do
     echo "image set"
     echo "$i"
     python ~/workspace/JUMP_vision_model/pull_images.py --index $i
+    target=$(head -n 1 target_name.txt)
+    echo "TARGET"
+    echo $target
 
-        # cellprofiler into temp directory
-        # run directory cleaning python
-
-
+    # cellprofiler into target directory
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/$target 
 
     # ((image_set++))
 done

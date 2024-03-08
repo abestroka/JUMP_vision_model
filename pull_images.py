@@ -68,6 +68,13 @@ def pull_image(i, linked, temp_image_path):
 
     target = linked["Metadata_InChIKey"][i]
 
+    if os.path.isdir('~/workspace/JUMP_vision_model/target_name.txt') == True:
+        os.remove('~/workspace/JUMP_vision_model/target_name.txt')
+    os.mkdir('~/workspace/JUMP_vision_model/target_name.txt')
+    f = open('~/workspace/JUMP_vision_model/target_name.txt', "a")
+    f.write(target)
+    f.close()
+
     # base_path = "/eagle/projects/APSDataAnalysis/LUCID"
     # path.mkdirs(temp_image_path)
     curr_path = temp_image_path
@@ -112,10 +119,5 @@ if __name__ == "__main__":
 
 
     args = parser.parse_args()
-
-    # print("ARGS")
-    # print(args)
-    # print(vars(args))
-    # print(vars(args)["index"])
 
     main(args)
