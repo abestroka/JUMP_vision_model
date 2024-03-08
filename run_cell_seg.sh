@@ -48,7 +48,8 @@ do
 
     # cellprofiler into target directory
     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o ~/workspace/results/segmented_image_temp/"$i"/
+    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o ~/workspace/results/segmented_image_temp/"$i"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$i"/
 
     # ((image_set++))
 done
