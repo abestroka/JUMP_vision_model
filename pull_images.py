@@ -67,20 +67,8 @@ def pull_image(i, linked, temp_image_path):
     illum_mito_key = illum_mito_key[26:]
 
     target = linked["Metadata_InChIKey"][i]
-
-    # if os.path.isdir('~/workspace/JUMP_vision_model/target_name.txt') == True:
-    #     os.remove('~/workspace/JUMP_vision_model/target_name.txt')
-    # os.mkdir('~/workspace/JUMP_vision_model/target_name.txt')
-
-    # if os.path.exists('~/workspace/JUMP_vision_model/target_name.txt'):
-    #     os.remove('~/workspace/JUMP_vision_model/target_name.txt')
-
-    # try:
-    #     os.mknod('~/workspace/JUMP_vision_model/target_name.txt')
-    # except FileExistsError as e:
-    #     print(f'An error occurred: {e}')
     
-    f = open('~/workspace/JUMP_vision_model/target_name.txt', 'w')
+    f = open('/home/astroka/workspace/JUMP_vision_model/target_name.txt', 'w')
     f.truncate(0)
     f.write(target)
     f.close()
