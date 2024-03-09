@@ -53,16 +53,16 @@ do
     # delete local directory
     python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
 
-    echo "image set $i segmented in $SECONDS seconds
+    echo "image set $i segmented in $SECONDS seconds"
 
 
 done
 
 # model
 
-echo "time before running model: $SECONDS seconds
+echo "time before running model: $SECONDS seconds"
 
-echo "running vision transformer
+echo "running vision transformer"
 python ~/workspace/JUMP_vision_model/ViT.py
 
 echo "model finished at $SECONDS seconds
