@@ -25,7 +25,7 @@ def change_names(target, dst_dir, src_dir):
 
 def main(args):
     target = vars(args)["target"]
-    src_dir = '/home/astroka/workspace/JUMP_vision_model/'+target
+    src_dir = '/home/astroka/workspace/results/segmented_image_temp/'+target
     dst_path = "/eagle/projects/APSDataAnalysis/LUCID/segmented_images"+target
     if os.path.isdir(dst_path) == False:
         os.mkdir(dst_path)
