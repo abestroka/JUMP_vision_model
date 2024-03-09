@@ -16,7 +16,7 @@ def change_names(target, dst_dir, src_dir):
         # rename so no overwrite
         new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
         new_name = new_name + ".png"
-        new_path = os.path.join(src_dir, new_name)
+        new_path = os.path.join(dst_dir, new_name)
         os.rename(curr_path, new_path)
 
         shutil.copy(new_path, dst_dir)
