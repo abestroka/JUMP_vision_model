@@ -29,10 +29,11 @@ export no_proxy="admin,polaris-adminvm-01,localhost,*.cm.polaris.alcf.anl.gov,po
 
 
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
-
+SECONDS=0
 echo "pulling metadata"
 # pull metadata, save to csv (TODO pare down into just filenames and targets, then export as lists)
 python ~/workspace/JUMP_vision_model/pull_meta.py -s 10
+echo "metadata pulled at $SECONDS seconds"
 image_set=1
 echo "pulling images from aws"
 # python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
@@ -52,10 +53,16 @@ do
     # delete local directory
     python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
 
+    echo "image set $i segmented in $SECONDS seconds
+
 
 done
 
 # model
 
+echo "time before running model: $SECONDS seconds
+
 echo "running vision transformer
 python ~/workspace/JUMP_vision_model/ViT.py
+
+echo "model finished at $SECONDS seconds
