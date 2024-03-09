@@ -73,13 +73,13 @@ def pull_image(i, linked, temp_image_path):
     f.write(target)
     f.close()
 
-    seg_image_path = "/eagle/projects/APSDataAnalysis/LUCID/segmented_images/" + str(i)
-    print('seg image path')
-    print(seg_image_path)
+    # seg_image_path = "/eagle/projects/APSDataAnalysis/LUCID/segmented_images/" + str(i)
+    # print('seg image path')
+    # print(seg_image_path)
 
-    if os.path.isdir(seg_image_path) == False:
-        os.mkdir(seg_image_path)
-        print('seg_image_path created')
+    # if os.path.isdir(seg_image_path) == False:
+    #     os.mkdir(seg_image_path)
+    #     print('seg_image_path created')
 
     # base_path = "/eagle/projects/APSDataAnalysis/LUCID"
     # path.mkdirs(temp_image_path)
