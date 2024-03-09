@@ -38,8 +38,8 @@ echo "pulling images from aws"
 # python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
 for i in {1..2}
 do
-    echo "image set"
-    echo "$i"
+    # echo "image set"
+    # echo "$i"
     python ~/workspace/JUMP_vision_model/pull_images.py --index $i
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
 
@@ -50,10 +50,12 @@ do
     #iterate through target directory and change names of cells
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
-
     python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
 
 
 done
 
 # model
+
+echo "running vision transformer
+python ~/workspace/JUMP_vision_model/ViT.py

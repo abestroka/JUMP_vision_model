@@ -57,7 +57,7 @@ def pull_meta(num_samples):
             pd.read_parquet(s3_path, storage_options={"anon": True}, columns=columns)
         )
         i+=1
-        print("profile " + str(i) + " of " + str(u) + " complete")
+        # print("profile " + str(i) + " of " + str(u) + " complete")
         
     dframes = pd.concat(dframes)
 
@@ -74,7 +74,7 @@ def pull_meta(num_samples):
         s3_path = loaddata_formatter.format(**row.to_dict())
         load_data.append(pd.read_parquet(s3_path, storage_options={"anon": True}))
         i+=1
-        print("profile " + str(i) + " of " + str(u) + " complete")
+        # print("profile " + str(i) + " of " + str(u) + " complete")
 
     load_data = pd.concat(load_data)
 
