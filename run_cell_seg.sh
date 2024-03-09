@@ -42,9 +42,6 @@ do
     echo "$i"
     python ~/workspace/JUMP_vision_model/pull_images.py --index $i
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
-    echo "TARGET"
-    echo $target
-    echo segmented_images/"$i"
 
     # cellprofiler into target directory
     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
@@ -54,7 +51,7 @@ do
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
 
-    python ~/workspace/JUMP_vision_model/pull_images.py --target "$target"
+    python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
 
 
 done
