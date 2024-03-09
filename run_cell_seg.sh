@@ -47,10 +47,16 @@ do
     echo segmented_images/"$i"
 
     # cellprofiler into target directory
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
+    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
 
-    # ((image_set++))
+    #iterate through target directory and change names of cells
+    # check if target directory exists on eagle, if not create one, and transfer contents
+    # delete local directory
+
+    python ~/workspace/JUMP_vision_model/pull_images.py --target "$target"
+
+
 done
 
 # model
