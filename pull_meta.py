@@ -83,7 +83,7 @@ def pull_meta(num_samples):
         load_data, ann_dframe, on=["Metadata_Source", "Metadata_Plate", "Metadata_Well"]
     )
 
-    linked.to_csv('~/workspace/JUMP_vision_model/linked_metadata.csv', index=False)
+    linked.to_csv("/eagle/projects/APSDataAnalysis/LUCID/linked_metadata.csv", index=False)
     
     return linked
 
