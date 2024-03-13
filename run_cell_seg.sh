@@ -65,4 +65,4 @@ echo "time before running model: $SECONDS seconds"
 echo "running vision transformer"
 mpiexec -n 1 ~/workspace/JUMP_vision_model/ViT.py
 
-echo "model finished at $SECONDS seconds
+echo "model finished at $SECONDS seconds"
