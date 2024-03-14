@@ -33,7 +33,7 @@ def pull_meta(num_samples):
 
     sample = (
         plates.query('Metadata_PlateType=="COMPOUND"')
-        .sample(10, random_state=34)
+        # .sample(10, random_state=34)
 )
     # idx = np.random.choice(len(sample1)-1, replace=True, size=num_samples)
     # sample = sample1.iloc[idx]
