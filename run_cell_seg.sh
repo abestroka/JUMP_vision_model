@@ -56,7 +56,7 @@ do
     echo "image set $i segmented in $SECONDS seconds"
 
 
-# done
+done
 
 # model
 
