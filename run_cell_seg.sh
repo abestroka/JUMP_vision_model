@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=1:00:00
-#PBS -q prod
+#PBS -l walltime=72:00:00
+#PBS -q preemptable
 #PBS -A APSDataAnalysis
 #PBS -l filesystems=home:eagle
 
@@ -37,7 +37,7 @@ SECONDS=0
 # image_set=1
 # echo "pulling images from aws"
 # python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
-for i in {1..200}
+for i in {1..1000}
 do
     # echo "image set"
     # echo "$i"
