@@ -39,7 +39,7 @@ class ImageClassificationCollator:
 
 class Classifier(pl.LightningModule):
 
-    def __init__(self, model, lr: float = 2e-5, **kwargs):
+    def __init__(self, model, lr, float = 2e-5, **kwargs):
         super().__init__()
         self.save_hyperparameters('lr', *list(kwargs))
         self.model = model
