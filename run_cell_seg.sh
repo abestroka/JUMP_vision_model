@@ -37,31 +37,31 @@ SECONDS=0
 # image_set=1
 # echo "pulling images from aws"
 # python ~/workspace/JUMP_vision_model/pull_images.py -s "$image_set"
-for i in {1..1000}
-do
-    # echo "image set"
-    # echo "$i"
-    python ~/workspace/JUMP_vision_model/pull_images.py --index $i
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
+# for i in {1..1000}
+# do
+#     # echo "image set"
+#     # echo "$i"
+#     python ~/workspace/JUMP_vision_model/pull_images.py --index $i
+#     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
 
-    # cellprofiler into target directory
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
+#     # cellprofiler into target directory
+#     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/APSDataAnalysis/LUCID/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
+#     singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
 
-    #iterate through target directory and change names of cells
-    # check if target directory exists on eagle, if not create one, and transfer contents
-    # delete local directory
-    python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
+#     #iterate through target directory and change names of cells
+#     # check if target directory exists on eagle, if not create one, and transfer contents
+#     # delete local directory
+#     python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
 
-    echo "image set $i segmented in $SECONDS seconds"
+#     echo "image set $i segmented in $SECONDS seconds"
 
 
-done
+# done
 
 # model
 
 # echo "time before running model: $SECONDS seconds"
 
-# echo "running vision transformer"
-# mpiexec -n 1 python ~/workspace/JUMP_vision_model/ViT.py
-# echo "model finished at $SECONDS seconds"
+echo "running vision transformer"
+python ~/workspace/JUMP_vision_model/ViT.py
+echo "model finished at $SECONDS seconds"
