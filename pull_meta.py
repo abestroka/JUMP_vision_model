@@ -83,121 +83,22 @@ def pull_meta(num_samples):
         load_data, ann_dframe, on=["Metadata_Source", "Metadata_Plate", "Metadata_Well"]
     )
 
-    linked.to_csv("/eagle/projects/APSDataAnalysis/LUCID/linked_metadata.csv", index=False)
+    linked.to_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv", index=False)
     
     return linked
 
-def create_dir(target):
-    cells_path = "/workspace/results/segmented_image_temp"
-    dst_dir = os.path.join(cells_path, target)
-    exists = os.path.exists(dst_dir)
-    if exists == False:
-        os.mkdir(dst_dir) 
-    
-def temp_to_dst(target):
-    cells_path = "/workspace/results/segmented_image_temp"
-    dst_dir = os.path.join(cells_path, target)
-    src_dir = os.path.join(cells_path, "temp")
-
-    dst_images = os.listdir(dst_dir)
-    src_images = os.listdir(src_dir)
-
-    for image in src_images:
-        curr_path = os.path.join(src_dir, image)
-    #         if image in dst_images:
-        # rename so no overwrite
-        new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-        new_name = new_name + ".png"
-        new_path = os.path.join(src_dir, new_name)
-        os.rename(curr_path, new_path)
-
-        #transfer image
-        shutil.copy(new_path, dst_dir)
-    
-    # delete temp directory
-    shutil.rmtree(src_dir)
-
-
-
-
-def find_treatment(s3path):
-    meta = pull_meta()
-    treatment = meta.query('PathName_OrigDNA=="{s3path}"')["Metadata_InChIKey"]
-
-    return treatment
-
-def pull_image(i, linked, temp_image_path):
-    s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
-
-
-    dna_path = linked["PathName_OrigDNA"][i]
-    dna_file = linked["FileName_OrigDNA"][i]
-    dna_key = dna_path+dna_file
-    dna_key = dna_key[26:]
-
-    er_path = linked["PathName_OrigER"][i]
-    er_file = linked["FileName_OrigER"][i]
-    er_key = er_path+er_file
-    er_key = er_key[26:]
-
-    rna_path = linked["PathName_OrigRNA"][i]
-    rna_file = linked["FileName_OrigRNA"][i]
-    rna_key = rna_path+rna_file
-    rna_key = rna_key[26:]
-
-    agp_path = linked["PathName_OrigAGP"][i]
-    agp_file = linked["FileName_OrigAGP"][i]
-    agp_key = agp_path+agp_file
-    agp_key = agp_key[26:]
-
-    mito_path = linked["PathName_OrigMito"][i]
-    mito_file = linked["FileName_OrigMito"][i]
-    mito_key = mito_path+mito_file
-    mito_key = mito_key[26:]
-
-
-    illum_dna_path = linked["PathName_IllumDNA"][i]
-    illum_dna_file = linked["FileName_IllumDNA"][i]
-    illum_dna_key = illum_dna_path+illum_dna_file
-    illum_dna_key = illum_dna_key[26:]
-
-    illum_er_path = linked["PathName_IllumER"][i]
-    illum_er_file = linked["FileName_IllumER"][i]
-    illum_er_key = illum_er_path+illum_er_file
-    illum_er_key = illum_er_key[26:]
-
-    illum_rna_path = linked["PathName_IllumRNA"][i]
-    illum_rna_file = linked["FileName_IllumRNA"][i]
-    illum_rna_key = illum_rna_path+illum_rna_file
-    illum_rna_key = illum_rna_key[26:]
-
-    illum_agp_path = linked["PathName_IllumAGP"][i]
-    illum_agp_file = linked["FileName_IllumAGP"][i]
-    illum_agp_key = illum_agp_path+illum_agp_file
-    illum_agp_key = illum_agp_key[26:]
-
-    illum_mito_path = linked["PathName_IllumMito"][i]
-    illum_mito_file = linked["FileName_IllumMito"][i]
-    illum_mito_key = illum_mito_path+illum_mito_file
-    illum_mito_key = illum_mito_key[26:]
-
-    target = linked["Metadata_InChIKey"][i]
-
-    s3.download_file('cellpainting-gallery', dna_key, temp_image_path+ "/dna.tiff")
-    s3.download_file('cellpainting-gallery', er_key, temp_image_path+ "/er.tiff")
-    s3.download_file('cellpainting-gallery', rna_key, temp_image_path+ "/rna.tiff")
-    s3.download_file('cellpainting-gallery', agp_key, temp_image_path+ "/agp.tiff")
-    s3.download_file('cellpainting-gallery', mito_key, temp_image_path+ "/mito.tiff")
-    s3.download_file('cellpainting-gallery', illum_dna_key, temp_image_path+ "/illum_dna.npy")
-    s3.download_file('cellpainting-gallery', illum_er_key, temp_image_path+ "/illum_er.npy")
-    s3.download_file('cellpainting-gallery', illum_rna_key, temp_image_path+ "/illum_rna.npy")
-    s3.download_file('cellpainting-gallery', illum_agp_key, temp_image_path+ "/illum_agp.npy")
-    s3.download_file('cellpainting-gallery', illum_mito_key, temp_image_path+ "/illum_mito.npy")
+def get_top_ten(linked):
+    n = 10
+    linked
+    top_ten = linked['"Metadata_InChIKey"'].value_counts()[:n].index.tolist()
+    print("TOP TEN")
+    print(top_ten)
 
 
 
 def main(num_samples):
     meta = pull_meta(num_samples)
+    get_top_ten(meta)
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     # for i in range(num_image_sets):
     #     pull_image(i, meta, temp_image_path)
