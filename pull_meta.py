@@ -57,7 +57,7 @@ def pull_meta(num_samples):
             pd.read_parquet(s3_path, storage_options={"anon": True}, columns=columns)
         )
         i+=1
-        # print("profile " + str(i) + " of " + str(u) + " complete")
+        print("profile " + str(i) + " of " + str(u) + " complete")
         
     dframes = pd.concat(dframes)
 
@@ -74,7 +74,7 @@ def pull_meta(num_samples):
         s3_path = loaddata_formatter.format(**row.to_dict())
         load_data.append(pd.read_parquet(s3_path, storage_options={"anon": True}))
         i+=1
-        # print("profile " + str(i) + " of " + str(u) + " complete")
+        print("profile " + str(i) + " of " + str(u) + " complete")
 
     load_data = pd.concat(load_data)
 
@@ -90,14 +90,16 @@ def pull_meta(num_samples):
 def get_top_ten(linked):
     n = 10
     linked
-    top_ten = linked['"Metadata_InChIKey"'].value_counts()[:n].index.tolist()
+    top_ten = linked["Metadata_InChIKey"].value_counts()[:n].index.tolist()
     print("TOP TEN")
     print(top_ten)
 
 
 
 def main(num_samples):
-    meta = pull_meta(num_samples)
+    # meta = pull_meta(num_samples)
+    meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
+
     get_top_ten(meta)
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
     # for i in range(num_image_sets):
