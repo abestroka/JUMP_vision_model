@@ -94,7 +94,7 @@ def get_top_ten(linked):
     print("TOP TEN")
     print(top_ten)
     # Filter rows based on whether the specified column contains any of the names in the list
-    filtered_df = linked[linked['Metadata_InChiKey'].isin(top_ten)]
+    filtered_df = linked[linked['Metadata_InChIKey'].isin(top_ten)]
     filtered_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_ten_metadata.csv", index=False)
 
     # Display the filtered DataFrame
