@@ -93,6 +93,8 @@ def get_top_ten(linked):
     top_ten = linked["Metadata_InChIKey"].value_counts()[:n].index.tolist()
     print("TOP TEN")
     print(top_ten)
+    for value, count in top_ten.items():
+        print(f"{value}: {count}")
 
 
 
