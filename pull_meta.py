@@ -84,7 +84,7 @@ def pull_meta(num_samples):
     )
 
     linked.to_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv", index=False)
-    
+    print(linked)
     return linked
 
 def get_top_ten(linked):
