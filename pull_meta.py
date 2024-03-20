@@ -88,14 +88,14 @@ def pull_meta(num_samples):
     return linked
 
 def get_top_ten(linked):
-    n = 10
+    n = 5
     # linked
     top_ten = linked["Metadata_InChIKey"].value_counts()[:n].index.tolist()
-    print("TOP TEN")
+    print("TOP FIVE")
     print(top_ten)
     # Filter rows based on whether the specified column contains any of the names in the list
     filtered_df = linked[linked['Metadata_InChIKey'].isin(top_ten)]
-    filtered_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_ten_metadata.csv", index=False)
+    filtered_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_five_metadata.csv", index=False)
 
     # Display the filtered DataFrame
     print(filtered_df)
