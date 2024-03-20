@@ -88,6 +88,9 @@ def pull_meta(num_samples):
     return linked
 
 def get_top_ten(linked):
+    num_unique_values = linked['Metadata_InChIKey'].nunique()
+    print("NUMBER OF TOTAL TARGETS")
+    print(num_unique_values)
     n = 5
     # linked
     top_ten = linked["Metadata_InChIKey"].value_counts()[:n].index.tolist()
