@@ -108,7 +108,7 @@ def ViT(cells_path):
 
 
 def main():
-    cells_path = '/eagle/projects/APSDataAnalysis/LUCID/segmented_images'
+    cells_path = '/eagle/projects/FoundEpidem/astroka/segmented_images'
     ViT(cells_path)
 
 if __name__ == "__main__":
