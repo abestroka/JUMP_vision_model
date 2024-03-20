@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=1:00:00
-#PBS -q debug
+#PBS -l walltime=72:00:00
+#PBS -q preemptable
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -36,7 +36,7 @@ SECONDS=0
 # echo "metadata pulled at $SECONDS seconds"
 image_set=1
 echo "pulling images from aws"
-for i in {1..3}
+for i in {1..1000}
 do
     # echo "image set"
     # echo "$i"
