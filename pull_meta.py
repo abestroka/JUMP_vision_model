@@ -105,6 +105,8 @@ def get_top_ten(linked):
 def main(num_samples):
     # meta = pull_meta(num_samples)
     meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
+    print("META")
+    print(meta)
 
     get_top_ten(meta)
     # temp_image_path = "~/workspace/JUMP_vision_model/image_temp"
