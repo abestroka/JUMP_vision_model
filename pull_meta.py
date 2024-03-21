@@ -91,22 +91,37 @@ def get_top_ten(linked):
     num_unique_values = linked['Metadata_InChIKey'].nunique()
     print("NUMBER OF TOTAL TARGETS")
     print(num_unique_values)
-    n = 5
+    n = 10
     # linked
     top_ten = linked["Metadata_InChIKey"].value_counts()[:n].index.tolist()
-    print("TOP FIVE")
+    print("TOP TEN")
     print(top_ten)
     # Filter rows based on whether the specified column contains any of the names in the list
     filtered_df = linked[linked['Metadata_InChIKey'].isin(top_ten)]
-    filtered_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_five_metadata.csv", index=False)
+    filtered_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_ten_metadata.csv", index=False)
+
+    #get 100 of each
+    result_df = pd.DataFrame()
+    # Iterate over each unique item
+    for target in filtered_df['Metadata_InChIKey'].unique():
+        # Filter the DataFrame for rows containing the current item and select the first 100 rows
+        item_rows = filtered_df[filtered_df['Metadata_InChIKey'] == target].head(100)
+        # Concatenate the filtered rows to the result DataFrame
+        result_df = pd.concat([result_df, item_rows])
+
+    # Display the result DataFrame
+    print("100 EACH")
+    print(result_df)
+    result_df.to_csv("/eagle/projects/FoundEpidem/astroka/top_ten_100_each_metadata.csv", index=False)
+
 
     # Display the filtered DataFrame
     print(filtered_df)
 
 
 
-def main(num_samples):
-    # meta = pull_meta(num_samples)
+def main():
+    # meta = pull_meta()
     meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
     print("META")
     print(meta)
@@ -121,15 +136,5 @@ def main(num_samples):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-    "-s",
-    "--num_samples",
-    help="number of samples to be taken from metadata",
-    type=int,
-    required=True,
-    )
 
-
-    args = parser.parse_args()
-
-    main(args)
+    main()
