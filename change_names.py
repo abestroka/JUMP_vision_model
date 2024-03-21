@@ -26,7 +26,7 @@ def change_names(target, dst_dir, src_dir):
 def main(args):
     target = vars(args)["target"]
     src_dir = '/home/astroka/workspace/results/segmented_image_temp/'+target
-    dst_path = "/eagle/projects/FoundEpidem/astroka/segmented_images/"+target + "/"
+    dst_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images/"+target + "/"
     if os.path.isdir(dst_path) == False:
         os.mkdir(dst_path)
     change_names(target, dst_path, src_dir)

@@ -102,9 +102,9 @@ def pull_image(i, linked, temp_image_path):
 
 
 def main(args):
-    meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
+    meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/top_ten_100_each_metadata.csv")
     temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/image_temp"
-    segmented_image_path = "/eagle/projects/FoundEpidem/astroka/segmented_images"
+    segmented_image_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images"
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
     index = vars(args)["index"]
