@@ -1,8 +1,8 @@
 #!/bin/bash -l
-#PBS -l select=10:system=polaris
+#PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=72:00:00
-#PBS -q preemptable
+#PBS -l walltime=1:00:00
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
