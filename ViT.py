@@ -101,7 +101,7 @@ def ViT(cells_path):
 
     pl.seed_everything(42)
     classifier = Classifier(model, lr=2e-5)
-    trainer = pl.Trainer(accelerator="gpu", devices=-1, precision=16, max_epochs=8)
+    trainer = pl.Trainer(accelerator="gpu", devices=-1, precision=16, max_epochs=12)
     # trainer = pl.Trainer(accelerator='mps', devices=1, precision=16, max_epochs=4)
     # trainer = pl.Trainer()
     trainer.fit(classifier, train_loader, val_loader)
