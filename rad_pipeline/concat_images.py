@@ -54,7 +54,7 @@ def pull_image(image_path, plate):
                 print(p)
                 new_row = {'index': str(p), 'dna': str(dna), 'rna': str(rna), 'agp': str(agp), 'er': str(er), 'mito': str(mito), 'brightfield': str(brightfield), 'treatment': str(treatment)}
                 new_row_df = pd.DataFrame([new_row])
-                all_imgs = all_imgs.concat([all_imgs, new_row_df], ignore_index=True)
+                all_imgs = pd.concat([all_imgs, new_row_df], ignore_index=True)
                 p+=1
 
     export_path = image_path[:-6]+"all_images.xlsx"
