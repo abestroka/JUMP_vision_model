@@ -6,6 +6,7 @@
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
+module use /soft/modulefiles 
 module load singularity
 module load conda
 # conda activate cellprofiler
