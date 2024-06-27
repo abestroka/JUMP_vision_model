@@ -40,7 +40,11 @@ def pull_image(image_path, plate):
         #iterate through fields
         for field in range(9):
             for stack in range(5):
-                curr_images = [file for file in well_images if "f0"+str(field) in file and "p0"+str(stack) in file]
+                curr_images = []
+                # curr_images = [file for file in well_images if "f0"+str(field) in file and "p0"+str(stack) in file]
+                for file in well_images:
+                    if "f0"+str(field) in file and "p0"+str(stack) in file:
+                        curr_images.append(file)
                 print("CURRENT IMAGES")
                 print(curr_images)
                 # all_imgs[p, 'index'] = p
