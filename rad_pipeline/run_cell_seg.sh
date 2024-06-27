@@ -31,31 +31,39 @@ export no_proxy="admin,polaris-adminvm-01,localhost,*.cm.polaris.alcf.anl.gov,po
 
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 SECONDS=0
-# echo "pulling metadata"
-# # pull metadata, save to csv (TODO pare down into just filenames and targets, then export as lists)
-# python ~/workspace/JUMP_vision_model/pull_meta.py
-# echo "metadata pulled at $SECONDS seconds"
-# echo "pulling images from aws"
-for i in {1406..3000}
-do
-    # echo "image set"
-    # echo "$i"
-    python ~/workspace/JUMP_vision_model/pull_images.py --index $i
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
-
-    # cellprofiler into target directory
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/FoundEpidem/astroka/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
-
-    #iterate through target directory and change names of cells
-    # check if target directory exists on eagle, if not create one, and transfer contents
-    # delete local directory
-    python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
-
-    echo "image set $i segmented in $SECONDS seconds"
 
 
-done
+# concatenate all images into a single excel file, and get length, then iterate through
+images="/eagle/FoundEpidem/astroka/pilot_imgs/Test1/20240517_OSU_HTSC_MW_ANL_CellPainting_P3_2__2024-05-17T15_59_05-Measurement 1/Images"
+plate="Plate3"
+python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
+# for loc in {2..21}
+# do
+
+
+
+# done
+
+#     images="/eagle/FoundEpidem/astroka/pilot_imgs/Test1/20240517_OSU_HTSC_MW_ANL_CellPainting_P3_2__2024-05-17T15_59_05-Measurement 1/Images"
+#     plate="Plate3"
+#     # echo "get next image set, and id target name from excel file"
+#     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i
+#     # python ~/workspace/JUMP_vision_model/pull_images.py --index $i
+#     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
+
+#     # cellprofiler into target directory
+#     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i /eagle/projects/FoundEpidem/astroka/image_temp -o /eagle/projects/APSDataAnalysis/LUCID/segmented_images/"$i"/
+#     singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
+
+#     #iterate through target directory and change names of cells
+#     # check if target directory exists on eagle, if not create one, and transfer contents
+#     # delete local directory
+#     python ~/workspace/JUMP_vision_model/change_names.py --target "$target"
+
+#     echo "image set $i segmented in $SECONDS seconds"
+
+
+# done
 
 # model
 
