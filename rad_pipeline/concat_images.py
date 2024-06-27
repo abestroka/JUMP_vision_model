@@ -15,15 +15,21 @@ def pull_image(image_path, plate):
 
     treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/pilot_cells_layout.xlsx'
     treatments = pd.read_excel(treatment_file, sheet_name=plate)
+    print("TREATMENTS")
+    print(treatments)
     p = 1
     for index, row in treatments.iterrows():
         location = row['Location']
         treatment = row['Treatment']
-
+        print('LOCATION')
+        print(location)
         # pull the every image set at this location
         well_images = [file for file in image_path if location in file]
 
         #iterate through, first by field, then by stack
+
+        print("WELL IMAGES")
+        print(well_images)
 
         #iterate through fields
         for field in range(9):
