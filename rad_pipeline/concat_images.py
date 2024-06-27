@@ -24,7 +24,13 @@ def pull_image(image_path, plate):
         print('LOCATION')
         print(location)
         # pull the every image set at this location
-        well_images = [file for file in image_path if location in file]
+        well_images = []
+        # well_images = [file for file in image_path if location in file]
+        for file in os.listdir(image_path):
+            if str(location) in str(file):
+                well_images.append(file)
+
+
 
         #iterate through, first by field, then by stack
 
