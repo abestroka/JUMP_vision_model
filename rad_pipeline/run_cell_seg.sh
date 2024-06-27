@@ -35,7 +35,7 @@ SECONDS=0
 
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/pilot_imgs/Test1/20240517_OSU_HTSC_MW_ANL_CellPainting_P3_2__2024-05-17T15_59_05-Measurement 1/Images"
+images="/eagle/FoundEpidem/astroka/pilot_imgs/Test1/20240517_OSU_HTSC_MW_ANL_CellPainting_P3_2__2024-05-17T15_59_05-Measurement1/Images"
 plate="Plate3"
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 # for loc in {2..21}
