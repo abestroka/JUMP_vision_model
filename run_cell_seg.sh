@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=24:00:00
-#PBS -q preemptable
+#PBS -l walltime=1:00:00
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -36,7 +36,7 @@ SECONDS=0
 # python ~/workspace/JUMP_vision_model/pull_meta.py
 # echo "metadata pulled at $SECONDS seconds"
 # echo "pulling images from aws"
-for i in {1001..2000}
+for i in {1..10}
 do
     # echo "image set"
     # echo "$i"
