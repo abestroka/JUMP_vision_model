@@ -108,6 +108,13 @@ if __name__ == "__main__":
     type=int,
     required=True,
     )
+    parser.add_argument(
+    "-p",
+    "--path",
+    help="number of samples to be taken from metadata",
+    type=str,
+    required=True,
+    )
 
 
     args = parser.parse_args()
