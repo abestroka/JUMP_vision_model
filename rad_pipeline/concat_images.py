@@ -53,7 +53,8 @@ def pull_image(image_path, plate):
                         mito = img
                 print(p)
                 new_row = {'index': str(p), 'dna': str(dna), 'rna': str(rna), 'agp': str(agp), 'er': str(er), 'mito': str(mito), 'brightfield': str(brightfield), 'treatment': str(treatment)}
-                all_imgs = all_imgs.append(new_row, ignore_index=True)
+                new_row_df = pd.DataFrame([new_row])
+                all_imgs = all_imgs.concat([all_imgs, new_row_df], ignore_index=True)
                 p+=1
 
     export_path = image_path[:-6]+"all_images.xlsx"
@@ -63,7 +64,7 @@ def pull_image(image_path, plate):
     num_rows = all_imgs.shape[0]
     f = open('/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt', 'w')
     f.truncate(0)
-    f.write(num_rows)
+    f.write(str(num_rows))
     f.close()
 
 
