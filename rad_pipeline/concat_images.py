@@ -38,8 +38,8 @@ def pull_image(image_path, plate):
         print(well_images)
 
         #iterate through fields
-        for field in range(9):
-            for stack in range(5):
+        for field in range(1, 10):
+            for stack in range(1, 6):
                 curr_images = []
                 # curr_images = [file for file in well_images if "f0"+str(field) in file and "p0"+str(stack) in file]
                 for file in well_images:
