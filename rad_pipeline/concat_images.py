@@ -32,6 +32,12 @@ def pull_image(image_path, plate):
 
                 # all_imgs[p, 'index'] = p
                 #iterate through images of this set
+                dna = 'NA'
+                rna = 'NA'
+                agp = 'NA'
+                er = 'NA'
+                brightfield = 'NA'
+                mito = 'NA'
                 for img in curr_images:
                     if 'ch2' in img:
                         dna = img
@@ -45,7 +51,7 @@ def pull_image(image_path, plate):
                         brightfield = img
                     elif 'ch8' in img:
                         mito = img
-                
+                print(p)
                 new_row = {'index': str(p), 'dna': str(dna), 'rna': str(rna), 'agp': str(agp), 'er': str(er), 'mito': str(mito), 'brightfield': str(brightfield), 'treatment': str(treatment)}
                 all_imgs = all_imgs.append(new_row, ignore_index=True)
                 p+=1
