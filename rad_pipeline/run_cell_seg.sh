@@ -6,8 +6,11 @@
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
+# module load singularity
+module use /soft/spack/gcc/0.6.1/install/modulefiles/Core
+module load apptainer
+
 module use /soft/modulefiles 
-module load singularity
 module load conda
 # conda activate cellprofiler
 conda activate cellseg

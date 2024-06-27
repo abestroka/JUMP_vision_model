@@ -29,7 +29,8 @@ def pull_image(image_path, plate):
         for field in range(9):
             for stack in range(5):
                 curr_images = [file for file in well_images if "f0"+field in file and "p0"+stack in file]
-
+                print("CURRENT IMAGES")
+                print(curr_images)
                 # all_imgs[p, 'index'] = p
                 #iterate through images of this set
                 dna = 'NA'
@@ -39,6 +40,8 @@ def pull_image(image_path, plate):
                 brightfield = 'NA'
                 mito = 'NA'
                 for img in curr_images:
+                    print("IMAGE")
+                    print(img)
                     if 'ch2' in img:
                         dna = img
                     elif 'ch4' in img:
