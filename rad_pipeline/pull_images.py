@@ -20,28 +20,28 @@ def pull_image(i, image_path, temp_image_path):
     dna = sheet.loc[i, 'dna']
     print("DNA")
     print(dna)
-    shutil.copy(image_path+str(dna), temp_image_path)
+    shutil.copy(image_path+"/"+str(dna), temp_image_path)
     # TODO: RENAME?
 
     rna = sheet.loc[i, 'rna']
     print("RNA")
     print(rna)
-    shutil.copy(image_path+str(rna), temp_image_path)
+    shutil.copy(image_path+"/"+str(rna), temp_image_path)
 
     er = sheet.loc[i, 'er']
     print("ER")
     print(er)
-    shutil.copy(image_path+str(er), temp_image_path)
+    shutil.copy(image_path+"/"+str(er), temp_image_path)
 
     agp = sheet.loc[i, 'agp']
     print("AGP")
     print(agp)
-    shutil.copy(image_path+str(agp), temp_image_path)
+    shutil.copy(image_path+"/"+str(agp), temp_image_path)
 
     mito = sheet.loc[i, 'mito']
     print("MITO")
     print(mito)
-    shutil.copy(image_path+str(mito), temp_image_path)
+    shutil.copy(image_path+"/"+str(mito), temp_image_path)
 
     # dna_path = linked["PathName_OrigDNA"][i]
     # dna_file = linked["FileName_OrigDNA"][i]
