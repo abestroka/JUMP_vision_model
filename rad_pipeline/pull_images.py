@@ -11,8 +11,8 @@ import numpy as np
 
 def pull_image(i, image_path, temp_image_path):
 
-    # sheet_path =  image_path[:-6]+"all_images.xlsx"
-    sheet_path = image_path
+    sheet_path =  image_path[:-6]+"all_images.xlsx"
+    # sheet_path = image_path
     print(sheet_path)
     sheet = pd.read_excel(sheet_path)
 
