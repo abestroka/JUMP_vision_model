@@ -21,31 +21,31 @@ def pull_image(i, image_path, temp_image_path):
     print("DNA")
     print(dna)
     shutil.copy(image_path+"/"+str(dna), temp_image_path)
-    # os.rename(temp_image_path+"/"+str(dna), "dna.tiff")
+    os.rename(temp_image_path+"/"+str(dna), temp_image_path+"/"+"dna.tiff")
 
     rna = sheet.loc[i, 'rna']
     print("RNA")
     print(rna)
     shutil.copy(image_path+"/"+str(rna), temp_image_path)
-    os.rename(temp_image_path+"/"+str(rna), "rna.tiff")
+    os.rename(temp_image_path+"/"+str(rna), temp_image_path+"/"+"rna.tiff")
 
     er = sheet.loc[i, 'er']
     print("ER")
     print(er)
     shutil.copy(image_path+"/"+str(er), temp_image_path)
-    os.rename(temp_image_path+"/"+str(er), "er.tiff")
+    os.rename(temp_image_path+"/"+str(er), temp_image_path+"/"+"er.tiff")
 
     agp = sheet.loc[i, 'agp']
     print("AGP")
     print(agp)
     shutil.copy(image_path+"/"+str(agp), temp_image_path)
-    os.rename(temp_image_path+"/"+str(agp), "agp.tiff")
+    os.rename(temp_image_path+"/"+str(agp), temp_image_path+"/"+"agp.tiff")
 
     mito = sheet.loc[i, 'mito']
     print("MITO")
     print(mito)
     shutil.copy(image_path+"/"+str(mito), temp_image_path)
-    os.rename(temp_image_path+"/"+str(mito), "mito.tiff")
+    os.rename(temp_image_path+"/"+str(mito), temp_image_path+"/"+"dna.tiff")
 
 
 
