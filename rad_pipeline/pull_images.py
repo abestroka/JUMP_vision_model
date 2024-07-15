@@ -21,8 +21,7 @@ def pull_image(i, image_path, temp_image_path):
     print("DNA")
     print(dna)
     shutil.copy(image_path+"/"+str(dna), temp_image_path)
-    os.rename(temp_image_path+"/"+str(dna), "dna.tiff")
-    # TODO: RENAME?
+    # os.rename(temp_image_path+"/"+str(dna), "dna.tiff")
 
     rna = sheet.loc[i, 'rna']
     print("RNA")
