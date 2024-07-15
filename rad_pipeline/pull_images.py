@@ -45,7 +45,7 @@ def pull_image(i, image_path, temp_image_path):
     print("MITO")
     print(mito)
     shutil.copy(image_path+"/"+str(mito), temp_image_path)
-    os.rename(temp_image_path+"/"+str(mito), temp_image_path+"/"+"dna.tiff")
+    os.rename(temp_image_path+"/"+str(mito), temp_image_path+"/"+"mito.tiff")
 
 
 
