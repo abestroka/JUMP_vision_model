@@ -49,10 +49,10 @@ do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images
 
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/target_name.txt')
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt')
 
     # cellprofiler into target directory
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/my_project_421.cppipe -i ~/workspace/JUMP_vision_model/image_temp -o ~/workspace/results/segmented_image_temp/"$target"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/"$target"/
 
     #iterate through target directory and change names of cells
     # check if target directory exists on eagle, if not create one, and transfer contents
