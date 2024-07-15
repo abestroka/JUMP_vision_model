@@ -431,7 +431,7 @@ OverlayOutlines:[module_num:25|svn_version:'Unknown'|variable_revision_number:4|
 
 MeasureImageAreaOccupied:[module_num:26|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Measure the area occupied by:Both
-    Select binary images to measure:OrigOverlay2
+    Select binary images to measure:CorrAGP
     Select object sets to measure:Cells
 
 SaveImages:[module_num:27|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
