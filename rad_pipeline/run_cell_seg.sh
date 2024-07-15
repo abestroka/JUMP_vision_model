@@ -44,7 +44,7 @@ images="/eagle/FoundEpidem/astroka/pilot_imgs/Test1/20240517_OSU_HTSC_MW_ANL_Cel
 # python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad/pipeline/num_images.txt')
 #TODO: extra function for extracting desired samples ie 1 of each well
-for i in {1..2}
+for i in {1..1}
 do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images
