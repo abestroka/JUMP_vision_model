@@ -9,7 +9,7 @@ import numpy as np
 # import path
 
 
-def pull_image(i, image_path, temp_image_path):
+def pull_image(i, image_path, temp_image_path, target_name_path):
 
     sheet_path =  image_path[:-6]+"all_images.xlsx"
     # sheet_path = image_path
@@ -47,6 +47,14 @@ def pull_image(i, image_path, temp_image_path):
     shutil.copy(image_path+"/"+str(mito), temp_image_path)
     os.rename(temp_image_path+"/"+str(mito), temp_image_path+"/"+"mito.tiff")
 
+    treatment = sheet.loc[i, 'treatment']
+    print(treatment)
+    with open(target_name_path, 'w') as file:
+        file.write(treatment)
+    file.close()
+
+
+
 
 
 
@@ -56,14 +64,16 @@ def main(args):
     # meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
 
     temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_temp"
+    target_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt"
     # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images"
     segmented_image_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images"
 
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
+    
     index = vars(args)["index"]
     image_path = vars(args)["path"]
-    pull_image(index, image_path, temp_image_path)
+    pull_image(index, image_path, temp_image_path, target_name_path)
     if os.path.isdir(segmented_image_path) == False:
         os.mkdir(segmented_image_path)
 
