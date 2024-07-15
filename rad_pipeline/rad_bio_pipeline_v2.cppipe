@@ -429,7 +429,7 @@ OverlayOutlines:[module_num:25|svn_version:'Unknown'|variable_revision_number:4|
     Select outline color:#FFFF0A
     Select objects to display:Cells
 
-SaveImages:[module_num:26|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+SaveImages:[module_num:26|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Select the type of image to save:Image
     Select the image to save:OrigOverlay2
     Select method for constructing file names:From image filename
@@ -441,7 +441,7 @@ SaveImages:[module_num:26|svn_version:'Unknown'|variable_revision_number:16|show
     Saved file format:png
     Output file location:Default Input Folder sub-folder|Argonne/git_repos/JUMP_vision_model/rad_pipeline
     Image bit depth:8-bit integer
-    Overwrite existing files without warning?:No
+    Overwrite existing files without warning?:Yes
     When to save:Every cycle
     Record the file and path information to the saved image?:No
     Create subfolders in the output folder?:No
