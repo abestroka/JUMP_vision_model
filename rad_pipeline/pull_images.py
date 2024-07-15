@@ -50,7 +50,7 @@ def pull_image(i, image_path, temp_image_path, target_name_path):
     treatment = sheet.loc[i, 'treatment']
     print(treatment)
     with open(target_name_path, 'w') as file:
-        file.write(treatment)
+        file.write(str(treatment))
     file.close()
 
 
