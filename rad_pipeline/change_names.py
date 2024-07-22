@@ -21,7 +21,7 @@ def change_names(target, dst_dir, src_dir):
             os.rename(curr_path, new_path)
 
             shutil.copy(new_path, dst_dir)
-        else:
+        elif 'Image' in image:
             curr_path = os.path.join(src_dir, image)
         #         if image in dst_images:
             # rename so no overwrite
