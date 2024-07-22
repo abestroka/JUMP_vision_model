@@ -15,14 +15,10 @@ def pull_image(image_path, plate):
 
     treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/pilot_cells_layout.xlsx'
     treatments = pd.read_excel(treatment_file, sheet_name=plate)
-    print("TREATMENTS")
-    print(treatments)
     p = 1
     for index, row in treatments.iterrows():
         location = row['Location']
         treatment = row['Treatment']
-        print('LOCATION')
-        print(location)
         # pull the every image set at this location
         well_images = []
         # well_images = [file for file in image_path if location in file]
@@ -34,8 +30,6 @@ def pull_image(image_path, plate):
 
         #iterate through, first by field, then by stack
 
-        print("WELL IMAGES")
-        print(well_images)
 
         #iterate through fields
         for field in range(1, 10):
@@ -48,8 +42,6 @@ def pull_image(image_path, plate):
                     print('F', field)
                     if "f0"+str(field) in file and "p0"+str(stack) in file:
                         curr_images.append(file)
-                print("CURRENT IMAGES")
-                print(curr_images)
                 # all_imgs[p, 'index'] = p
                 #iterate through images of this set
                 # dna = 'NA'
@@ -59,8 +51,6 @@ def pull_image(image_path, plate):
                 # brightfield = 'NA'
                 # mito = 'NA'
                 for img in curr_images:
-                    print("IMAGE")
-                    print(img)
                     if 'ch2' in img:
                         dna = img
                     elif 'ch4' in img:
@@ -73,7 +63,6 @@ def pull_image(image_path, plate):
                         brightfield = img
                     elif 'ch8' in img:
                         mito = img
-                print(p)
                 new_row = {'index': str(p), 'dna': str(dna), 'rna': str(rna), 'agp': str(agp), 'er': str(er), 'mito': str(mito), 'brightfield': str(brightfield), 'treatment': str(treatment)}
                 new_row_df = pd.DataFrame([new_row])
                 all_imgs = pd.concat([all_imgs, new_row_df], ignore_index=True)

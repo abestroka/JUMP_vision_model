@@ -444,7 +444,7 @@ SaveImages:[module_num:27|svn_version:'Unknown'|variable_revision_number:16|show
     Append a suffix to the image file name?:No
     Text to append to the image name:
     Saved file format:png
-    Output file location:Default Input Folder sub-folder|Argonne/LUCID/pilot_imgs/imgs
+    Output file location:Default Output Folder|Argonne/LUCID/pilot_imgs/imgs
     Image bit depth:8-bit integer
     Overwrite existing files without warning?:Yes
     When to save:Every cycle
@@ -472,7 +472,7 @@ ExportToSpreadsheet:[module_num:29|svn_version:'Unknown'|variable_revision_numbe
     Calculate the per-image mean values for object measurements?:No
     Calculate the per-image median values for object measurements?:No
     Calculate the per-image standard deviation values for object measurements?:No
-    Output file location:Default Input Folder sub-folder|Argonne/LUCID/pilot_imgs/imgs
+    Output file location:Default Output Folder|Argonne/LUCID/pilot_imgs/imgs
     Create a GenePattern GCT file?:No
     Select source of sample row name:Metadata
     Select the image to use as the identifier:None
