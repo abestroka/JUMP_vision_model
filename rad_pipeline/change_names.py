@@ -11,15 +11,16 @@ def change_names(target, dst_dir, src_dir):
     src_images = os.listdir(src_dir)
 
     for image in src_images:
-        curr_path = os.path.join(src_dir, image)
-    #         if image in dst_images:
-        # rename so no overwrite
-        new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-        new_name = new_name + ".png"
-        new_path = os.path.join(src_dir, new_name)
-        os.rename(curr_path, new_path)
+        if '.png' in image:
+            curr_path = os.path.join(src_dir, image)
+        #         if image in dst_images:
+            # rename so no overwrite
+            new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+            new_name = new_name + ".png"
+            new_path = os.path.join(src_dir, new_name)
+            os.rename(curr_path, new_path)
 
-        shutil.copy(new_path, dst_dir)
+            shutil.copy(new_path, dst_dir)
 
 
 
