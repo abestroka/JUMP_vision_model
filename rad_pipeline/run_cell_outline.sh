@@ -59,7 +59,7 @@ do
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
 
-    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target"
+    # python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target"
 
     echo "image set $i segmented in $SECONDS seconds"
 
