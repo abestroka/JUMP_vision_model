@@ -42,7 +42,7 @@ images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU
 # plate="HUVEC_Control"
 plate="Plate3"
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad/pipeline/num_images.txt')
+num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
 #TODO: extra function for extracting desired samples ie 1 of each well
 for i in {1..1}
 do
@@ -52,8 +52,8 @@ do
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt')
 
     # cellprofiler into target directory
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/"$target"/
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o /eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/"$target"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/"$target"/
+    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o /eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/"$target"/
 
     # iterate through target directory and change names of cells
     # check if target directory exists on eagle, if not create one, and transfer contents
