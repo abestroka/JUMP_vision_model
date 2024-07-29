@@ -19,7 +19,8 @@ def change_names(target, dst_dir, src_dir, name):
             # new_name = new_name + ".png"
             # new_path = os.path.join(src_dir, new_name)
             # os.rename(curr_path, new_path)
-            new_path = os.path.join(src_dir, name)
+            new_name = name + ".png"
+            new_path = os.path.join(src_dir, new_name)
             os.rename(curr_path, new_path)
 
 
@@ -32,7 +33,7 @@ def change_names(target, dst_dir, src_dir, name):
             # new_name = new_name + ".csv"
             # new_path = os.path.join(src_dir, new_name)
             # os.rename(curr_path, new_path)
-
+            new_name = name + ".csv"
             new_path = os.path.join(src_dir, name)
             os.rename(curr_path, new_path)
 
