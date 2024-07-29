@@ -6,7 +6,7 @@ import shutil
 import argparse
 import numpy as np
 
-def change_names(target, dst_dir, src_dir):
+def change_names(target, dst_dir, src_dir, name):
     
     src_images = os.listdir(src_dir)
 
@@ -15,19 +15,25 @@ def change_names(target, dst_dir, src_dir):
             curr_path = os.path.join(src_dir, image)
         #         if image in dst_images:
             # rename so no overwrite
-            new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-            new_name = new_name + ".png"
-            new_path = os.path.join(src_dir, new_name)
+            # new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+            # new_name = new_name + ".png"
+            # new_path = os.path.join(src_dir, new_name)
+            # os.rename(curr_path, new_path)
+            new_path = os.path.join(src_dir, name)
             os.rename(curr_path, new_path)
+
 
             shutil.copy(new_path, dst_dir)
         elif 'Image' in image:
             curr_path = os.path.join(src_dir, image)
         #         if image in dst_images:
             # rename so no overwrite
-            new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-            new_name = new_name + ".csv"
-            new_path = os.path.join(src_dir, new_name)
+            # new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+            # new_name = new_name + ".csv"
+            # new_path = os.path.join(src_dir, new_name)
+            # os.rename(curr_path, new_path)
+
+            new_path = os.path.join(src_dir, name)
             os.rename(curr_path, new_path)
 
             shutil.copy(new_path, dst_dir)
@@ -37,6 +43,7 @@ def change_names(target, dst_dir, src_dir):
 
 def main(args):
     target = vars(args)["target"]
+    name = vars(args)["name"]
     src_dir = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/'+target
     # src_dir = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target
     # dst_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images/"+target + "/"
@@ -45,7 +52,7 @@ def main(args):
 
     if os.path.isdir(dst_path) == False:
         os.mkdir(dst_path)
-    change_names(target, dst_path, src_dir)
+    change_names(target, dst_path, src_dir, name)
     shutil.rmtree(src_dir)
 
 
@@ -59,6 +66,13 @@ if __name__ == "__main__":
     parser.add_argument(
     "-t",
     "--target",
+    help="target folder name",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-n",
+    "--name",
     help="target folder name",
     type=str,
     required=True,

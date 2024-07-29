@@ -50,6 +50,8 @@ do
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images
 
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt')
+    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt')
+
 
     # cellprofiler into target directory
     singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/"$target"/
@@ -59,7 +61,7 @@ do
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
 
-    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target"
+    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name"
 
     echo "image set $i segmented in $SECONDS seconds"
 
