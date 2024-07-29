@@ -17,6 +17,7 @@ def pull_image(i, image_path, temp_image_path, target_name_path):
 
 
     dna = sheet.loc[i, 'dna']
+    print(dna)
     shutil.copy(image_path+"/"+str(dna), temp_image_path)
     os.rename(temp_image_path+"/"+str(dna), temp_image_path+"/"+"dna.tiff")
 
@@ -41,6 +42,8 @@ def pull_image(i, image_path, temp_image_path, target_name_path):
         file.write(str(treatment))
     file.close()
 
+    # name = 
+
 
 
 
@@ -53,6 +56,7 @@ def main(args):
 
     temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_temp"
     target_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt"
+    image_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt"
     # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images"
     segmented_image_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images"
 
