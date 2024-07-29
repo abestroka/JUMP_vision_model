@@ -17,7 +17,7 @@ def pull_image(i, image_path, temp_image_path, target_name_path):
 
 
     dna = sheet.loc[i, 'dna']
-    print(dna)
+    print(dna[:12])
     shutil.copy(image_path+"/"+str(dna), temp_image_path)
     os.rename(temp_image_path+"/"+str(dna), temp_image_path+"/"+"dna.tiff")
 
