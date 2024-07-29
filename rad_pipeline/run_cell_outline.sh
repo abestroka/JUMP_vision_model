@@ -43,6 +43,7 @@ images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU
 plate="Plate3"
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
+echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 for i in {1..1}
 do
