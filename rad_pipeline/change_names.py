@@ -48,8 +48,11 @@ def main(args):
     src_dir = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/'+target
     # src_dir = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target
     # dst_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images/"+target + "/"
+    
     # dst_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images/"+target + "/"
-    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target +"/"
+    # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target +"/"
+    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_rad/'+target +"/"
+
 
     if os.path.isdir(dst_path) == False:
         os.mkdir(dst_path)
