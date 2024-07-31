@@ -70,6 +70,7 @@ def pull_image(image_path, plate):
     all_imgs.to_excel(export_path, index=False)
 
     num_rows = all_imgs.shape[0]
+    num_rows = num_rows - 1
     f = open('/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt', 'w')
     f.truncate(0)
     f.write(str(num_rows))
