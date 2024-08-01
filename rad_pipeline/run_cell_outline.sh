@@ -39,9 +39,9 @@ SECONDS=0
 
 # concatenate all images into a single excel file, and get length, then iterate through
 # images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
-images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_C1_8Stacks_1__2024-07-17T18_59_02-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_C2_8Stacks_1__2024-07-17T20_00_59-Measurement1/Images"
 
-plate="HUVEC_Control"
+plate="Fibroblast_Control"
 # plate="Plate8"
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
