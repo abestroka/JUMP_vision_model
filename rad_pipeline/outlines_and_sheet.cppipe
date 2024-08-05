@@ -318,7 +318,7 @@ IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_
     Thresholding method:Otsu
     Threshold smoothing scale:0.0
     Threshold correction factor:0.7
-    Lower and upper bounds on threshold:0.00005,.06
+    Lower and upper bounds on threshold:0.0007,.06
     Manual threshold:0.0
     Select the measurement to threshold with:None
     Two-class or three-class thresholding?:Three classes
