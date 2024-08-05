@@ -52,8 +52,8 @@ def main(args):
     # dst_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images/"+target + "/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_rad/'+target +"/"
-    # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_control/'+target +"/"
-    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_control/'+target +"/"
+    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_control/'+target +"/"
+    # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_control/'+target +"/"
 
 
 
