@@ -25,6 +25,8 @@ def pull_image(image_path, plate):
         for file in os.listdir(image_path):
             if str(location) in str(file):
                 well_images.append(file)
+        
+        print("WELL IMAGES", well_images)
 
 
 
