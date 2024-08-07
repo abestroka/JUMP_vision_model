@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=24:00:00
-#PBS -q preemptable
+#PBS -l walltime=1:00:00
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -39,18 +39,26 @@ SECONDS=0
 
 # concatenate all images into a single excel file, and get length, then iterate through
 # images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
-images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_C2_8Stacks_1__2024-07-17T20_00_59-Measurement1/Images"
 
 # plate="HUVEC_Control"
-# plate="Fibroblast_Control"
+plate="Fibroblast_Control"
 # plate="Plate8"
-plate="Plate3"
+# plate="Plate3"
+
+# seg_image_temp="huvec_rad_seg_temp"
+# seg_image_temp="fib_rad_seg_temp"
+# seg_image_temp="huvec_control_seg_temp"
+seg_image_temp="fib_control_seg_temp"
+
+
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
-for i in $( eval echo {0..$num} )
+# for i in $( eval echo {0..$num} )
+for i in {1..10}
 do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images
@@ -60,14 +68,14 @@ do
 
 
     # cellprofiler into target directory
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/"$target"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o /eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/"$target"/
 
     # iterate through target directory and change names of cells
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
 
-    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name"
+    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp"
 
     echo "image set $i segmented in $SECONDS seconds"
 
