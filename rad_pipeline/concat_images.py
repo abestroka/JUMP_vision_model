@@ -17,6 +17,7 @@ def pull_image(image_path, plate):
     treatments = pd.read_excel(treatment_file, sheet_name=plate)
     p = 1
     for index, row in treatments.iterrows():
+        print("ROW", row)
         location = row['Location']
         treatment = row['Treatment']
         # pull the every image set at this location
