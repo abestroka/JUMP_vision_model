@@ -25,8 +25,6 @@ def pull_image(image_path, plate):
         for file in os.listdir(image_path):
             if str(location) in str(file):
                 well_images.append(file)
-        
-        print("WELL IMAGES", well_images)
 
 
 
@@ -41,6 +39,7 @@ def pull_image(image_path, plate):
                 for file in well_images:
                     if "f0"+str(field) in file and "p0"+str(stack) in file:
                         curr_images.append(file)
+                print("CURR_IMAGES", curr_images)
                 # all_imgs[p, 'index'] = p
                 #iterate through images of this set
                 # dna = 'NA'
