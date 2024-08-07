@@ -14,6 +14,7 @@ def pull_image(i, image_path, temp_image_path, target_name_path, image_name_path
     sheet_path =  image_path[:-6]+"all_images.xlsx"
     # sheet_path = image_path
     sheet = pd.read_excel(sheet_path)
+    print(sheet)
 
 
     dna = sheet.loc[i, 'dna']
