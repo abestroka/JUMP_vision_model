@@ -57,18 +57,20 @@ def pull_image(i, image_path, temp_image_path, target_name_path, image_name_path
 def main(args):
     # meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/top_ten_100_each_metadata.csv")
     # meta = pd.read_csv("/eagle/projects/FoundEpidem/astroka/linked_metadata.csv")
-
-    temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_temp"
+    index = vars(args)["index"]
+    image_path = vars(args)["path"]
+    temp = vars(args)["temp"]
+    seg = vars(args)["seg"]
+    temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+temp
     target_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt"
     image_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt"
     # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images"
-    segmented_image_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images"
+    # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images"
+    segmented_image_path = "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+seg
 
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
     
-    index = vars(args)["index"]
-    image_path = vars(args)["path"]
     pull_image(index, image_path, temp_image_path, target_name_path, image_name_path)
     if os.path.isdir(segmented_image_path) == False:
         os.mkdir(segmented_image_path)
@@ -86,6 +88,20 @@ if __name__ == "__main__":
     parser.add_argument(
     "-p",
     "--path",
+    help="number of samples to be taken from metadata",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-t",
+    "--temp",
+    help="number of samples to be taken from metadata",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-s",
+    "--seg",
     help="number of samples to be taken from metadata",
     type=str,
     required=True,

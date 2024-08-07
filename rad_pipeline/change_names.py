@@ -49,6 +49,7 @@ def main(args):
     target = vars(args)["target"]
     name = vars(args)["name"]
     seg_image_temp = vars(args)["src"]
+    dst_image_path = vars(args)["dst"]
     # src_dir = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/segmented_image_temp/'+target
     src_dir = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/'+seg_image_temp+'/'+target
     # src_dir = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target
@@ -58,7 +59,7 @@ def main(args):
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_rad/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_control/'+target +"/"
-    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_control/'+target +"/"
+    dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/'+dst_image_path+'/'+target +"/"
 
 
 
@@ -94,6 +95,13 @@ if __name__ == "__main__":
     parser.add_argument(
     "-s",
     "--src",
+    help="target folder name",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-d",
+    "--dst",
     help="target folder name",
     type=str,
     required=True,

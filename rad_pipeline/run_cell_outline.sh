@@ -51,6 +51,16 @@ plate="Fibroblast_Control"
 # seg_image_temp="huvec_control_seg_temp"
 seg_image_temp="fib_control_seg_temp"
 
+# image_temp="huvec_rad_temp"
+# image_temp="huvec_control_temp"
+# image_temp="fib_rad_temp"
+image_temp="fib_control_temp"
+
+results="fib_control"
+# results="huvec_control"
+# results="fib_rad"
+# results="huvec_rad"
+
 
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
@@ -61,7 +71,7 @@ echo $num
 for i in {1..10}
 do
     # echo "get next image set, and id target name from excel file"
-    python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images
+    python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp
 
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt')
     name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt')
@@ -75,7 +85,7 @@ do
     # check if target directory exists on eagle, if not create one, and transfer contents
     # delete local directory
 
-    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp"
+    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp" --dst "$results"
 
     echo "image set $i segmented in $SECONDS seconds"
 
