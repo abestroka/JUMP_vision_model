@@ -13,7 +13,9 @@ def pull_image(image_path, plate):
     columns = ['index', 'dna', 'rna', 'agp', 'er', 'mito', 'brightfield', 'treatment']
     all_imgs = pd.DataFrame(columns=columns)
 
-    treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/pilot_cells_layout.xlsx'
+    # treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/pilot_cells_layout.xlsx'
+    treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_cells_layout.xlsx'
+
     treatments = pd.read_excel(treatment_file, sheet_name=plate)
     p = 1
     for index, row in treatments.iterrows():
