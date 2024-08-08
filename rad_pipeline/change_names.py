@@ -41,7 +41,7 @@ def change_names(target, dst_dir, src_dir, name):
             confluency = float(cellarea/totalarea)
 
 
-            with open(dst_dir+"_"+name+"_"+"confluency.txt", 'w') as file:
+            with open(dst_dir+name+"_"+"confluency.txt", 'w') as file:
                 file.write(str(confluency))
             file.close()
 

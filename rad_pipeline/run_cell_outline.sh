@@ -64,12 +64,11 @@ results="fib_control"
 
 
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
+num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
-# for i in $( eval echo {0..$num} )
-for i in {1..10}
+for i in $( eval echo {0..$num} )
 do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
