@@ -39,34 +39,35 @@ SECONDS=0
 
 # concatenate all images into a single excel file, and get length, then iterate through
 # images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
-images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P8_8Stacks_1__2024-07-17T18_17_02-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
 
 # plate="HUVEC_Control"
 # plate="Fibroblast_Control"
-plate="Plate8"
-# plate="Plate3"
+# plate="Plate8"
+plate="Plate3"
 
-# seg_image_temp="huvec_rad_seg_temp"
-seg_image_temp="fib_rad_seg_temp"
+seg_image_temp="huvec_rad_seg_temp"
+# seg_image_temp="fib_rad_seg_temp"
 # seg_image_temp="huvec_control_seg_temp"
 # seg_image_temp="fib_control_seg_temp"
 
-# image_temp="huvec_rad_temp"
+image_temp="huvec_rad_temp"
 # image_temp="huvec_control_temp"
-image_temp="fib_rad_temp"
+# image_temp="fib_rad_temp"
 # image_temp="fib_control_temp"
 
 # results="fib_control"
 # results="huvec_control"
-results="fib_rad"
-# results="huvec_rad"
+# results="fib_rad"
+results="huvec_rad"
 
 
 
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
+# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
+num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate3_num_images.txt')
 
 
 echo $num
@@ -82,8 +83,10 @@ do
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
-    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
+    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
+    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_target_name.txt')
+    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_image_name.txt')
 
 
     # cellprofiler into target directory
