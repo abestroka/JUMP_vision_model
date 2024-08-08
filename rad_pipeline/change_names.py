@@ -35,7 +35,7 @@ def change_names(target, dst_dir, src_dir, name):
             # new_name = new_name + ".csv"
             # new_path = os.path.join(src_dir, new_name)
             # os.rename(curr_path, new_path)
-            df = pd.read_csv(image)
+            df = pd.read_csv(curr_path)
             totalarea = df['AreaOccupied_TotalArea_Cells'][0]
             cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
             confluency = float(cellarea/totalarea)
