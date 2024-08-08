@@ -65,15 +65,20 @@ def main(args):
     image_path = vars(args)["path"]
     temp = vars(args)["temp"]
     seg = vars(args)["seg"]
+    res = vars(args)["res"]
     temp_image_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+temp
-    target_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt"
-    image_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt"
+    target_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+res+"_"+"target_name.txt"
+    image_name_path =  "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+res+"_"+"image_name.txt"
     # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/top_10/segmented_images"
     # segmented_image_path = "/eagle/projects/FoundEpidem/astroka/pilot_imgs/segmented_images"
     segmented_image_path = "/home/astroka/workspace/JUMP_vision_model/rad_pipeline/"+seg
 
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
+    if os.path.isdir(target_name_path) == False:
+        os.mkdir(target_name_path)
+    if os.path.isdir(image_name_path) == False:
+        os.mkdir(image_name_path)
     
     pull_image(index, image_path, temp_image_path, target_name_path, image_name_path)
     if os.path.isdir(segmented_image_path) == False:
@@ -106,6 +111,13 @@ if __name__ == "__main__":
     parser.add_argument(
     "-s",
     "--seg",
+    help="number of samples to be taken from metadata",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-r",
+    "--res",
     help="number of samples to be taken from metadata",
     type=str,
     required=True,

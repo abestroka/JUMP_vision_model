@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=1:00:00
-#PBS -q debug
+#PBS -l walltime=24:00:00
+#PBS -q preemptable
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -62,35 +62,36 @@ results="fib_control"
 # results="huvec_rad"
 
 
+
 python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/num_images.txt')
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
 # for i in $( eval echo {0..$num} )
-# for i in {1..100}
-# do
-#     # echo "get next image set, and id target name from excel file"
-#     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp
+for i in $(1..200)
+do
+    # echo "get next image set, and id target name from excel file"
+    python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
 
-#     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/target_name.txt')
-#     name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/image_name.txt')
-
-
-#     # cellprofiler into target directory
-#     singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
-#     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o /eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/"$target"/
-
-#     # iterate through target directory and change names of cells
-#     # check if target directory exists on eagle, if not create one, and transfer contents
-#     # delete local directory
-
-#     python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp" --dst "$results"
-
-#     echo "image set $i segmented in $SECONDS seconds"
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
+    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
 
 
-# done
+    # cellprofiler into target directory
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/rad_bio_pipeline_v2.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/image_temp -o /eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_rad/"$target"/
+
+    # iterate through target directory and change names of cells
+    # check if target directory exists on eagle, if not create one, and transfer contents
+    # delete local directory
+
+    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp" --dst "$results"
+
+    echo "image set $i segmented in $SECONDS seconds"
+
+
+done
 
 # model
 
