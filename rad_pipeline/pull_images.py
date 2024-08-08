@@ -14,12 +14,9 @@ def pull_image(i, image_path, temp_image_path, target_name_path, image_name_path
     sheet_path =  image_path[:-6]+"all_images.xlsx"
     # sheet_path = image_path
     sheet = pd.read_excel(sheet_path)
-    print(sheet)
 
 
     dna = sheet.loc[i, 'dna']
-    print("i", i)
-    print("DNA", dna)
     # print(dna[:12])
     shutil.copy(image_path+"/"+str(dna), temp_image_path)
     os.rename(temp_image_path+"/"+str(dna), temp_image_path+"/"+"dna.tiff")
@@ -46,7 +43,6 @@ def pull_image(i, image_path, temp_image_path, target_name_path, image_name_path
     file.close()
 
     name = dna[:12]
-    print("PULL NAME", name)
     with open(image_name_path, 'w') as file:
         file.write(str(name))
     file.close()

@@ -17,7 +17,6 @@ def pull_image(image_path, plate):
     treatments = pd.read_excel(treatment_file, sheet_name=plate)
     p = 1
     for index, row in treatments.iterrows():
-        print("ROW", row)
         location = row['Location']
         treatment = row['Treatment']
         # pull the every image set at this location
@@ -30,21 +29,16 @@ def pull_image(image_path, plate):
 
 
         #iterate through, first by field, then by stack
-        print("WELL IMAGES1", well_images)
 
         #iterate through fields
         for field in range(1, 10):
             for stack in range(1, 6):
                 curr_images = []
-                print("WELL IMAGES2", well_images)
                 # curr_images = [file for file in well_images if "f0"+str(field) in file and "p0"+str(stack) in file]
                 for file in well_images:
                     if "f0"+str(field) in file and "p0"+str(stack) in file:
                         curr_images.append(file)
                 
-                print("FIELD", field)
-                print("STACK", stack)
-                print("CURR_IMAGES", curr_images)
                 # all_imgs[p, 'index'] = p
                 #iterate through images of this set
                 # dna = 'NA'
