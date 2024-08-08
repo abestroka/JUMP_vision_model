@@ -71,10 +71,10 @@ def main(args):
 
     if os.path.isdir(temp_image_path) == False:
         os.mkdir(temp_image_path)
-    if os.path.isdir(target_name_path) == False:
-        os.mkdir(target_name_path)
-    if os.path.isdir(image_name_path) == False:
-        os.mkdir(image_name_path)
+    # if os.path.isdir(target_name_path) == False:
+    #     os.mkdir(target_name_path)
+    # if os.path.isdir(image_name_path) == False:
+    #     os.mkdir(image_name_path)
     
     pull_image(index, image_path, temp_image_path, target_name_path, image_name_path)
     if os.path.isdir(segmented_image_path) == False:
