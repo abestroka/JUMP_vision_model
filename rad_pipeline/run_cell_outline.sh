@@ -37,9 +37,14 @@ echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NR
 SECONDS=0
 
 
+#TODO: Change
+week='week_one'
+
 # concatenate all images into a single excel file, and get length, then iterate through
 # images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
 images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-17T17_38_31-Measurement1/Images"
+
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_cells_layout.xlsx"
 
 # plate="HUVEC_Control"
 # plate="Fibroblast_Control"
@@ -63,7 +68,9 @@ results="huvec_rad"
 
 
 
-python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate
+python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate --treatment $treatment_file
+
+#TODO: CHANGE
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')

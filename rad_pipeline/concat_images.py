@@ -8,15 +8,15 @@ import numpy as np
 
 
 
-def pull_image(image_path, plate):
+def pull_image(image_path, plate, treatment_path):
 
     columns = ['index', 'dna', 'rna', 'agp', 'er', 'mito', 'brightfield', 'treatment']
     all_imgs = pd.DataFrame(columns=columns)
 
     # treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/pilot_cells_layout.xlsx'
-    treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_cells_layout.xlsx'
+    # treatment_file = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_cells_layout.xlsx'
 
-    treatments = pd.read_excel(treatment_file, sheet_name=plate)
+    treatments = pd.read_excel(treatment_path, sheet_name=plate)
     p = 1
     for index, row in treatments.iterrows():
         location = row['Location']
@@ -83,7 +83,8 @@ def pull_image(image_path, plate):
 def main(args):
     path = vars(args)["image_path"]
     plate = vars(args)["plate"]
-    pull_image(path, plate)
+    treatment_path = vars(args)["treatment"]
+    pull_image(path, plate, treatment_path)
 
 
 if __name__ == "__main__":
@@ -100,6 +101,13 @@ if __name__ == "__main__":
     "-p",
     "--plate",
     help="plate number",
+    type=str,
+    required=True,
+    )
+    parser.add_argument(
+    "-t",
+    "--treatment",
+    help="treatment file path",
     type=str,
     required=True,
     )
