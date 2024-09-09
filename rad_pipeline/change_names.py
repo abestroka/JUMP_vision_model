@@ -50,6 +50,14 @@ def change_names(target, dst_dir, src_dir, name):
             os.rename(curr_path, new_path)
             shutil.copy(new_path, dst_dir)
 
+        elif 'Cells' in image:
+            curr_path = os.path.join(src_dir, image)
+
+            new_name = name + "_data" + ".csv"
+            new_path = os.path.join(src_dir, new_name)
+            os.rename(curr_path, new_path)
+            shutil.copy(new_path, dst_dir)
+
 
 
 
