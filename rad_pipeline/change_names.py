@@ -10,10 +10,6 @@ def change_names(target, dst_dir, src_dir, name):
     
     src_images = os.listdir(src_dir)
 
-    print("SEGMENTED IMAGES")
-    print(len(src_images))
-    print(src_images)
-
     for image in src_images:
         if '.png' in image:
             curr_path = os.path.join(src_dir, image)
@@ -81,7 +77,7 @@ def main(args):
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/fib_rad/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/huvec_control/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/'+dst_image_path+'/'+target +"/"
-    dst_path = '/eagle/FoundEpidem/astroka/ten_week/'+week+'/results/'+dst_image_path+'/'+target +"/"
+    dst_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/'+dst_image_path+'/'+target +"/"
 
 
 
