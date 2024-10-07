@@ -81,7 +81,6 @@ python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path 
 num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_num_images.txt')
 
 
-
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}

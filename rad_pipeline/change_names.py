@@ -10,6 +10,9 @@ def change_names(target, dst_dir, src_dir, name):
     
     src_images = os.listdir(src_dir)
 
+    print("SEGMENTED IMAGES")
+    print(len(src_images))
+
     for image in src_images:
         if '.png' in image:
             curr_path = os.path.join(src_dir, image)
