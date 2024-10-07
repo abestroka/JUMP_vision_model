@@ -12,6 +12,7 @@ def change_names(target, dst_dir, src_dir, name):
 
     print("SEGMENTED IMAGES")
     print(len(src_images))
+    print(src_images)
 
     for image in src_images:
         if '.png' in image:
