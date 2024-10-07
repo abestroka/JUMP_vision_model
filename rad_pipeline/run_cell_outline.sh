@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=24:00:00
-#PBS -q preemptable
+#PBS -l walltime=1:00:00
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -38,32 +38,36 @@ SECONDS=0
 
 
 #TODO: Change
-week='week_two'
+week='week_one'
 
 # concatenate all images into a single excel file, and get length, then iterate through
 images="/eagle/FoundEpidem/astroka/ten_week/week_two/20240725_Week2/20240725_OSU_HTSC_MW_ANL_CellPainting_Ctl_8Stacks_1__2024-07-25T19_59_06-Measurement1/Images"
 
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_two_cells_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_test.xlsx"
 
-plate="HUVEC_Control"
+# plate="HUVEC_Control"
 # plate="Fibroblast_Control"
 # plate="Plate8"
 # plate="Plate3"
+plate="htert"
 
 # seg_image_temp="huvec_rad_seg_temp"
 # seg_image_temp="fib_rad_seg_temp"
-seg_image_temp="huvec_control_seg_temp"
+# seg_image_temp="huvec_control_seg_temp"
 # seg_image_temp="fib_control_seg_temp"
+seg_image_temp="htert_control_seg_temp"
 
 # image_temp="huvec_rad_temp"
-image_temp="huvec_control_temp"
+# image_temp="huvec_control_temp"
 # image_temp="fib_rad_temp"
 # image_temp="fib_control_temp"
+image_temp="htert_control_temp"
 
 # results="fib_control"
-results="huvec_control"
+# results="huvec_control"
 # results="fib_rad"
 # results="huvec_rad"
+results="htert_control"
 
 
 
@@ -71,15 +75,18 @@ python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path 
 
 #TODO: CHANGE
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
+# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate3_num_images.txt')
+num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_num_images.txt')
+
 
 
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
-for i in $( eval echo {0..$num} )
+# for i in $( eval echo {0..$num} )
+for i in {1..10}
 do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
@@ -88,8 +95,11 @@ do
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
 
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
-    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
+    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
+    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
+
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_target_name.txt')
+    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_image_name.txt')
 
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
