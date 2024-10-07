@@ -101,6 +101,11 @@ do
     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_target_name.txt')
     name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_image_name.txt')
 
+    echo "TARGET"
+    echo $target
+    echo "NAME"
+    echo $name
+
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
 
