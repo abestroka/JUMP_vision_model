@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=1:00:00
-#PBS -q debug
+#PBS -l walltime=24:00:00
+#PBS -q preemptable
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -84,8 +84,7 @@ num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_nu
 echo $num
 #TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
-# for i in $( eval echo {0..$num} )
-for i in {1..10}
+for i in $( eval echo {0..$num} )
 do
     # echo "get next image set, and id target name from excel file"
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
