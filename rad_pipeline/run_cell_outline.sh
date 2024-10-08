@@ -38,10 +38,10 @@ SECONDS=0
 
 
 #TODO: Change
-week='week_one'
+week='week_two'
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1C1_2__2024-10-02T16_23_27-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/fib_and_htert/week_two/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W2C1_4__2024-10-03T09_51_35-Measurement1/Images"
 
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
 
