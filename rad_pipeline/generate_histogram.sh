@@ -39,5 +39,5 @@ SECONDS=0
 
 results="/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_control"
 echo "HERE"
-python ~/workspace/JUMP_vision_model/rad_pipeline/generate_histograms.py --source $results
+python ~/workspace/JUMP_vision_model/rad_pipeline/generate_histograms.py --source "$results"
 echo "DONE"
