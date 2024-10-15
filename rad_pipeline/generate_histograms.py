@@ -50,18 +50,18 @@ def main(args):
     print("DONE WITH GEN GRAPH")
 
 
-    if __name__ == "__main__":
-        parser = argparse.ArgumentParser()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
 
-        parser.add_argument(
-        "-s",
-        "--source",
-        help="source folder name",
-        type=str,
-        required=True,
-        )
+    parser.add_argument(
+    "-s",
+    "--source",
+    help="source folder name",
+    type=str,
+    required=True,
+    )
 
-        print("IN NAME = MAIN")
+    print("IN NAME = MAIN")
 
-        args = parser.parse_args()
-        main(args)
+    args = parser.parse_args()
+    main(args)
