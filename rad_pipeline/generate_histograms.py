@@ -51,7 +51,7 @@ def generate_graph(src_dir):
         if average_df is None:
             average_df = average_row
         else:
-            average_df = pd.concat([average_df, average_row], ignore_index=True)
+            average_df = pd.concat([average_df, average_row], ignore_index=False)
         print("FINAL")
         print(average_df)
 
