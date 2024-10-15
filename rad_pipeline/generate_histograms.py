@@ -47,7 +47,7 @@ def main(args):
     src_dir = vars(args)["source"]
     generate_graph(src_dir)
 
-    [print("DONE WITH GEN GRAPH")]
+    print("DONE WITH GEN GRAPH")
 
 
     if __name__ == "__main__":
@@ -60,6 +60,8 @@ def main(args):
         type=str,
         required=True,
         )
-        
+
+        print("IN NAME = MAIN")
+
         args = parser.parse_args()
         main(args)
