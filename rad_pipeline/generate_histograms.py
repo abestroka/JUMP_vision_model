@@ -20,6 +20,8 @@ def generate_graph(src_dir):
             row = df.iloc[0]
             print(row)
 
+            global all_sum, num_files
+
             if all_sum is None:
                 all_sum = row
             else:
