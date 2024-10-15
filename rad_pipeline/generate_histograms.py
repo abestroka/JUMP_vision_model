@@ -13,7 +13,7 @@ def generate_graph(src_dir):
     num_files = 0 
     # images = os.listdir(src_dir)
     to_remove = ['ImageNumber', 'ObjectNumber']
-    average_df = pd.DataFrame()
+    average_df = None
 
     treatments = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
     for treatment in treatments:
@@ -48,7 +48,10 @@ def generate_graph(src_dir):
         print("AVG ROW", average_row)
         print("AVG DF", average_df)
         # average_df = pd.DataFrame([average_row])
-        average_df = pd.concat([average_df, average_row], ignore_index=True)
+        if average_df is None:
+            average_df = average_row
+        else:
+            average_df = pd.concat([average_df, average_row], ignore_index=True)
         print("FINAL")
         print(average_df)
 
