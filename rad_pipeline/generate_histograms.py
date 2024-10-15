@@ -14,13 +14,10 @@ def generate_graph(src_dir):
     images = os.listdir(src_dir)
 
     for image in images:
-        print("IMAGE")
-        print(image)
         if "data" in image: #new data found
             curr_path = os.path.join(src_dir, image)
             df = pd.read_csv(curr_path)
             row = df.iloc[0]
-            print(row)
 
             if all_sum is None:
                 all_sum = row
@@ -34,6 +31,7 @@ def generate_graph(src_dir):
     
     average_row = all_sum/num_files
     average_df = pd.DataFrame([average_row])
+    print("FINAL")
     print(average_df)
 
 
