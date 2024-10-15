@@ -53,13 +53,9 @@ def generate_graph(src_dir):
         average_row_df = pd.DataFrame([average_row])
         # average_df = pd.DataFrame([average_row])
         average_df = pd.concat([average_df, average_row_df], ignore_index=True)
-        if average_df is None:
-            average_df = average_row
-        else:
-            average_df = pd.concat([average_df, average_row], ignore_index=False)
         print("FINAL")
         print(average_df)
-        
+
     average_df.set_index('Treatment', inplace=True)
 
     # Plotting the bar chart for all treatments' average values
