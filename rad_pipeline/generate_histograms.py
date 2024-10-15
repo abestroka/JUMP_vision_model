@@ -5,6 +5,7 @@ import string
 import shutil
 import argparse
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 
@@ -46,7 +47,8 @@ def generate_graph(src_dir):
     plt.ylabel('Frequency')
 
     # Save the histogram to a file
-    output_file = 'histogram.png'  # You can change the file name or extension
+    # output_file = '~/workspace/JUMP_vision_model/rad_pipeline/histogram.png'  # You can change the file name or extension
+    output_file = 'histogram.png'
     plt.savefig(output_file)  # Save the plot as an image file
     plt.close() 
 
