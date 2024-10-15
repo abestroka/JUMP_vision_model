@@ -18,6 +18,7 @@ def generate_graph(src_dir):
     treatments = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
     for treatment in treatments:
         base_dir = src_dir + treatment + '/'
+        images = os.listdir(base_dir)
         for image in images:
             if "data" in image: #new data found
                 curr_path = os.path.join(base_dir, image)
