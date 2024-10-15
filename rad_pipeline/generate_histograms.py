@@ -36,12 +36,17 @@ def generate_graph(src_dir):
                 else:
                     all_sum += row
                 
+                print("ALL SUM", all_sum)
+                
                 num_files += 1
             
             if num_files == 10:
                 break
-    
+        print("ALL SUM 2", all_sum)
+        print(num_files)
         average_row = all_sum/num_files
+        print("AVG ROW", average_row)
+        print("AVG DF", average_df)
         # average_df = pd.DataFrame([average_row])
         average_df.append(average_row, ignore_index=True)
         print("FINAL")
