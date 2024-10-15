@@ -6,21 +6,21 @@ import shutil
 import argparse
 import numpy as np
 
-all_sum = None
-num_files = 0 
+
 
 def generate_graph(src_dir):
-    print("IN FUNCTION")
+    all_sum = None
+    num_files = 0 
     images = os.listdir(src_dir)
 
     for image in images:
+        print("IMAGE")
+        print(image)
         if "data" in image: #new data found
             curr_path = os.path.join(src_dir, image)
             df = pd.read_csv(curr_path)
             row = df.iloc[0]
             print(row)
-
-            global all_sum, num_files
 
             if all_sum is None:
                 all_sum = row
