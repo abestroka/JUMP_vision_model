@@ -10,6 +10,7 @@ all_sum = None
 num_files = 0 
 
 def generate_graph(src_dir):
+    print("IN FUNCTION")
     images = os.listdir(src_dir)
 
     for image in images:
@@ -41,8 +42,12 @@ def generate_graph(src_dir):
 
 def main(args):
 
+    print("IN MAIN")
+
     src_dir = vars(args)["source"]
     generate_graph(src_dir)
+
+    [print("DONE WITH GEN GRAPH")]
 
 
     if __name__ == "__main__":
