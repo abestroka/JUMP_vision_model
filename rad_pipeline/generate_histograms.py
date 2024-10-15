@@ -48,7 +48,7 @@ def generate_graph(src_dir):
         print("AVG ROW", average_row)
         print("AVG DF", average_df)
         # average_df = pd.DataFrame([average_row])
-        average_df.append(average_row, ignore_index=True)
+        average_df = pd.concat([average_df, average_row], ignore_index=True)
         print("FINAL")
         print(average_df)
 
