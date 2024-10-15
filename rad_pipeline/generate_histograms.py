@@ -30,6 +30,7 @@ def generate_graph(src_dir):
                 print('CURR_PATH', curr_path)
                 df = pd.read_csv(curr_path)
                 df = df.drop(columns=to_remove, errors='ignore')
+                print("DF", df)
                 row = df.iloc[0]
                 
 
