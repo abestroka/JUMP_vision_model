@@ -15,7 +15,8 @@ def generate_graph(src_dir):
     to_remove = ['ImageNumber', 'ObjectNumber']
     average_df = pd.DataFrame()
 
-    treatments = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
+    # treatments = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
+    treatments = ['0.001', '0.01', '0.1', '1.0', '2.0']
     for treatment in treatments:
         all_sum = None
         num_files = 0 
