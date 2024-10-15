@@ -39,17 +39,29 @@ def generate_graph(src_dir):
     print(average_df)
 
     # Generate histogram from the values in average_df
-    average_values = average_df.iloc[0].values  # Get the values from the DataFrame
+    # average_values = average_df.iloc[0].values  # Get the values from the DataFrame
 
-    plt.hist(average_values, bins=10, edgecolor='black')
-    plt.title('Histogram of Averages')
-    plt.xlabel('Values')
-    plt.ylabel('Frequency')
+    # plt.hist(average_values, bins=10, edgecolor='black')
+    # plt.title('Histogram of Averages')
+    # plt.xlabel('Values')
+    # plt.ylabel('Frequency')
+
+    # Generate bar chart from the values in average_df
+    columns = average_df.columns  # Get column names
+    values = average_df.iloc[0].values  # Get the values from the first row
+
+    plt.bar(columns, values)  # Create a bar chart with columns on the x-axis and values on the y-axis
+    plt.title('Bar Chart of Averages')
+    plt.xlabel('Columns')
+    plt.ylabel('Values')
+    plt.xticks(rotation=45, ha='right')  # Rotate column labels for better readability
+
 
     # Save the histogram to a file
     # output_file = '~/workspace/JUMP_vision_model/rad_pipeline/histogram.png'  # You can change the file name or extension
     # output_file = 'histogram.png'
-    output_file = '/eagle/FoundEpidem/astroka/graphs/histogram.png'
+    output_file = '/eagle/FoundEpidem/astroka/graphs/chart.png'
+    plt.tight_layout()  
     plt.savefig(output_file)  # Save the plot as an image file
     plt.close() 
 
