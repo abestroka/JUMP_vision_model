@@ -29,6 +29,8 @@ def generate_graph(src_dir):
                 curr_path = os.path.join(base_dir, image)
                 print('CURR_PATH', curr_path)
                 df = pd.read_csv(curr_path)
+
+                print("DF2", df)
                 df = df.drop(columns=to_remove, errors='ignore')
                 print("DF", df)
                 row = df.iloc[0]
