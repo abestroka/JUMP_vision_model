@@ -60,3 +60,6 @@ def main(args):
         type=str,
         required=True,
         )
+        
+        args = parser.parse_args()
+        main(args)
