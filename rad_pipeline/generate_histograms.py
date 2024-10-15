@@ -12,12 +12,15 @@ def generate_graph(src_dir):
     all_sum = None
     num_files = 0 
     images = os.listdir(src_dir)
+    to_remove = ['ImageNumber', 'ObjectNumber']
 
     for image in images:
         if "data" in image: #new data found
             curr_path = os.path.join(src_dir, image)
             df = pd.read_csv(curr_path)
+            df = df.drop(columns=to_remove, errors='ignore')
             row = df.iloc[0]
+            
 
             if all_sum is None:
                 all_sum = row
@@ -34,6 +37,19 @@ def generate_graph(src_dir):
     print("FINAL")
     print(average_df)
 
+    # Generate histogram from the values in average_df
+    average_values = average_df.iloc[0].values  # Get the values from the DataFrame
+
+    plt.hist(average_values, bins=10, edgecolor='black')
+    plt.title('Histogram of Averages')
+    plt.xlabel('Values')
+    plt.ylabel('Frequency')
+
+    # Save the histogram to a file
+    output_file = 'histogram.png'  # You can change the file name or extension
+    plt.savefig(output_file)  # Save the plot as an image file
+    plt.close() 
+
 
 
 
@@ -42,12 +58,9 @@ def generate_graph(src_dir):
 
 def main(args):
 
-    print("IN MAIN")
-
     src_dir = vars(args)["source"]
     generate_graph(src_dir)
 
-    print("DONE WITH GEN GRAPH")
 
 
 if __name__ == "__main__":
@@ -61,7 +74,6 @@ if __name__ == "__main__":
     required=True,
     )
 
-    print("IN NAME = MAIN")
 
     args = parser.parse_args()
     main(args)
