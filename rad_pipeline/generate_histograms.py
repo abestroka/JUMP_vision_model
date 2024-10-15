@@ -58,21 +58,35 @@ def generate_graph(src_dir):
 
     average_df.set_index('Treatment', inplace=True)
 
+    for column in average_df.columns:
+        plt.figure(figsize=(10, 6))
+        plt.bar(average_df.index, average_df[column])  
+        plt.title(f'Bar Chart of {column} Across Treatments')
+        plt.xlabel('Treatments')
+        plt.ylabel(f'Average {column} Value')
+        plt.xticks(rotation=45, ha='right')
+
+        # Save each plot as a separate image
+        output_file = f'/eagle/FoundEpidem/astroka/graphs/{column}_chart.png'
+        plt.tight_layout()  
+        plt.savefig(output_file)
+        plt.close()
+
     # Plotting the bar chart for all treatments' average values
-    average_df.T.plot(kind='bar', figsize=(15, 8))  # Transpose to have features on x-axis
-    plt.title('Bar Chart of Averages for Each Treatment')
-    plt.xlabel('Features')
-    plt.ylabel('Average Values')
-    plt.xticks(rotation=45, ha='right') # Rotate column labels for better readability
+    # average_df.T.plot(kind='bar', figsize=(15, 8))  # Transpose to have features on x-axis
+    # plt.title('Bar Chart of Averages for Each Treatment')
+    # plt.xlabel('Features')
+    # plt.ylabel('Average Values')
+    # plt.xticks(rotation=45, ha='right') # Rotate column labels for better readability
 
 
-    # Save the histogram to a file
-    # output_file = '~/workspace/JUMP_vision_model/rad_pipeline/histogram.png'  # You can change the file name or extension
-    # output_file = 'histogram.png'
-    output_file = '/eagle/FoundEpidem/astroka/graphs/chart.png'
-    # plt.tight_layout()  
-    plt.savefig(output_file)  # Save the plot as an image file
-    plt.close() 
+    # # Save the histogram to a file
+    # # output_file = '~/workspace/JUMP_vision_model/rad_pipeline/histogram.png'  # You can change the file name or extension
+    # # output_file = 'histogram.png'
+    # output_file = '/eagle/FoundEpidem/astroka/graphs/chart.png'
+    # # plt.tight_layout()  
+    # plt.savefig(output_file)  # Save the plot as an image file
+    # plt.close() 
 
 
 
