@@ -25,6 +25,9 @@ def generate_graph(src_dir):
                 all_sum += row
             
             num_files += 1
+        
+        if num_files == 10:
+            break
     
     average_row = all_sum/num_files
     average_df = pd.DataFrame([average_row])
@@ -42,12 +45,12 @@ def main(args):
 
 
     if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-    "-s",
-    "--source",
-    help="source folder name",
-    type=str,
-    required=True,
-    )
+        parser.add_argument(
+        "-s",
+        "--source",
+        help="source folder name",
+        type=str,
+        required=True,
+        )
