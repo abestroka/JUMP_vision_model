@@ -42,6 +42,7 @@ def generate_graph(src_dir):
 def main(args):
 
     src_dir = vars(args)["source"]
+    generate_graph(src_dir)
 
 
     if __name__ == "__main__":
