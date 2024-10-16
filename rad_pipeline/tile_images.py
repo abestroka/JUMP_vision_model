@@ -30,7 +30,7 @@ def segment_image(image_path, output_folder, rows, cols):
 
 
 
-image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_rad/0.1/r08c09f02p01.png'  # Path to your image
+image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_rad/0.01/r08c09f02p01.png'  # Path to your image
 output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
