@@ -34,7 +34,7 @@ image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_rad/
 output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-rows, cols = 10, 10
+rows, cols = 6, 6
 
 # Segment the image
 segment_image(image_path, output_folder, rows, cols)
