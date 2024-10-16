@@ -37,5 +37,5 @@ echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NR
 SECONDS=0
 
 
-results="/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_rad/"
+results="/eagle/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_control/"
 python ~/workspace/JUMP_vision_model/rad_pipeline/generate_histograms.py --source "$results"
