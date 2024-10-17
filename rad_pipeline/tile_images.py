@@ -6,7 +6,8 @@ def is_tile_yellow(tile, threshold, percentage_required):
     yellow_pixels = 0
     total_pixels = tile.width * tile.height
 
-    yellow_rgb = (255, 255, 0)
+    # yellow_rgb = (255, 255, 0)
+    yellow_rgb = (255, 255, 255)
     tolerance = 50 
 
     for y in range(tile.height):
