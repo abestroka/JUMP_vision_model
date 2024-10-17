@@ -18,6 +18,7 @@ def is_tile_yellow(tile, threshold, percentage_required):
 
 
     yellow_percentage = (yellow_pixels / total_pixels) * 100
+    print("YELLOW PERCENTAGE", yellow_percentage)
     return yellow_percentage >= percentage_required
 
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage):
