@@ -66,7 +66,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 rows, cols = 6, 6
 
 yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
-yellow_percentage = 1.0        # Minimum percentage of yellow pixels required to save the tile
+yellow_percentage = 0.2        # Minimum percentage of yellow pixels required to save the tile
 
 rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
 weeks = ['week_one', 'week_two', 'week_three']
