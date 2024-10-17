@@ -22,6 +22,7 @@ def is_tile_yellow(tile, threshold, percentage_required):
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage):
 
     images = os.listdir(image_path)
+    tile_num = 0
     for image in images:
         if '.png' in image:
             curr_path = os.path.join(image_path, image)
@@ -33,8 +34,6 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 
             if not os.path.exists(output_folder):
                 os.makedirs(output_folder)
-
-            tile_num = 0
             for row in range(rows):
                 for col in range(cols):
                     
