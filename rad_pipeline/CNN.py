@@ -14,10 +14,26 @@ transform = transforms.Compose([
 test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/week_one/fib_rad', transform=transform)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
+print("CLASSES")
+print(test_dataset.class_to_idx)
+
+print("")
+
+num_classes = len(test_dataset.classes)
+print(f"Number of classes: {num_classes}")
+print(f"Class-to-index mapping: {test_dataset.class_to_idx}")
+
+
 model = models.resnet50(pretrained=True)
+
+# num_classes = 5
+
+model.fc = nn.Linear(model.fc.in_features, num_classes)
 
 model = model.to(device)
 model.eval()  
+
+
 
 correct = 0
 total = 0
