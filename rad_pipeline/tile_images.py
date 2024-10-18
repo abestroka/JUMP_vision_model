@@ -63,7 +63,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 # output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-rows, cols = 6, 6
+rows, cols = 10, 10
 
 yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
 yellow_percentage = 0.2        # Minimum percentage of yellow pixels required to save the tile
