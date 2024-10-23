@@ -11,6 +11,8 @@ def change_names(target, dst_dir, src_dir, name):
     src_images = os.listdir(src_dir)
 
     for image in src_images:
+        print("IMAGE NAME")
+        print(image)
         if '.png' in image:
             curr_path = os.path.join(src_dir, image)
             # print('CURRPATH', curr_path)
