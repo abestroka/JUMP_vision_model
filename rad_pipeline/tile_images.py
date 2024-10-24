@@ -43,7 +43,7 @@ def threshold_images(image_path, confluency):
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage):
 
     # images = os.listdir(image_path)
-    confluency = 0.5
+    confluency = 0.2
     images = threshold_images(image_path, confluency)
     tile_num = 0
     for image in images:
@@ -90,13 +90,16 @@ rows, cols = 10, 10
 yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
 yellow_percentage = 1.0       # Minimum percentage of yellow pixels required to save the tile
 
-rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
+# rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
+rads = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
 weeks = ['week_one', 'week_two', 'week_three']
 
 for week in weeks:
     for rad in rads:
-        image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
-        output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
+        # image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
+        # output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
+        image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_control/'+rad+'/'
+        output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'+rad+'/'
         # if os.path.isdir(output_folder) == False:
         #     os.mkdir(output_folder)
             
