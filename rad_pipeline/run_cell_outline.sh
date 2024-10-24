@@ -38,12 +38,12 @@ SECONDS=0
 
 
 #TODO: Change
-week='week_four'
+week='week_one'
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4P3_1__2024-10-15T16_29_06-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/fib_no_outline/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1P3_1__2024-10-02T15_35_53-Measurement1/Images"
 
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_four_fib_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
 
 # plate="HUVEC_Control"
 # plate="Fibroblast_Control"
@@ -114,7 +114,7 @@ do
 
 
     # cellprofiler into target directory
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/no_outlines.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
 
     # iterate through target directory and change names of cells
     # check if target directory exists on eagle, if not create one, and transfer contents
