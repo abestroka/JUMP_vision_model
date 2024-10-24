@@ -30,7 +30,7 @@ def threshold_images(image_path, confluency):
             with open(curr_path, 'r') as f:
                 val = f.read()
                 print("VAL", val)
-            if val >= confluency:
+            if float(val) >= confluency:
                 print("PASS")
                 img = str(file[:12]) + '.png'
                 print('IMG', img)
