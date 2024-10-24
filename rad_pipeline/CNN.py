@@ -13,7 +13,7 @@ transform = transforms.Compose([
 
 # test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/week_one/fib_rad', transform=transform)
 test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/week_three/fib_control', transform=transform)
-test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False)
 
 print("CLASSES")
 print(test_dataset.class_to_idx)
