@@ -29,9 +29,12 @@ def threshold_images(image_path, confluency):
             curr_path = os.path.join(image_path, file)
             with open(curr_path, 'r') as f:
                 val = f.read()
-            if val >= conflency:
+                print("VAL", val)
+            if val >= confluency:
+                print("PASS")
                 img = str(file[:12]) + '.png'
-                images.append(file)
+                print('IMG', img)
+                images.append(img)
     
     return images
 
@@ -44,6 +47,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
     images = threshold_images(image_path, confluency)
     tile_num = 0
     for image in images:
+        print("IMAGE", image)
         if '.png' in image:
             curr_path = os.path.join(image_path, image)
 
