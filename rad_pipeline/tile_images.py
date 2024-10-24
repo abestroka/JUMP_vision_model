@@ -21,9 +21,27 @@ def is_tile_yellow(tile, threshold, percentage_required):
     print("YELLOW PERCENTAGE", yellow_percentage)
     return yellow_percentage >= percentage_required
 
+def threshold_images(image_path, confluency):
+    files = os.listdir(image_path)
+    images = []
+    for file in files:
+        if '.txt' in file:
+            curr_path = os.path.join(image_path, file)
+            with open(curr_path, 'r') as f:
+                val = f.read()
+            if val >= conflency:
+                img = str(file[:12]) + '.png'
+                images.append(file)
+    
+    return images
+
+            
+
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage):
 
-    images = os.listdir(image_path)
+    # images = os.listdir(image_path)
+    confluency = 0.5
+    images = threshold_images(image_path, confluency)
     tile_num = 0
     for image in images:
         if '.png' in image:

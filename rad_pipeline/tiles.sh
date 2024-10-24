@@ -36,6 +36,6 @@ export no_proxy="admin,polaris-adminvm-01,localhost,*.cm.polaris.alcf.anl.gov,po
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 SECONDS=0
 
-# python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
-python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
+python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
+# python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
 
