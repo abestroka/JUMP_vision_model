@@ -6,8 +6,8 @@ def is_tile_yellow(tile, threshold, percentage_required):
     yellow_pixels = 0
     total_pixels = tile.width * tile.height
 
-    # yellow_rgb = (255, 255, 0)
-    yellow_rgb = (255, 255, 255)
+    yellow_rgb = (255, 255, 0)
+    # yellow_rgb = (255, 255, 255)
     tolerance = 50 
 
     for y in range(tile.height):
@@ -85,7 +85,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 # output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-rows, cols = 10, 10
+rows, cols = 6, 6
 
 yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
 yellow_percentage = 1.0       # Minimum percentage of yellow pixels required to save the tile
