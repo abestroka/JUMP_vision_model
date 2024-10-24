@@ -2,7 +2,7 @@
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
 #PBS -l walltime=1:00:00
-#PBS -q preemptable
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
