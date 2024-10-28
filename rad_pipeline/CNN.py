@@ -11,7 +11,7 @@ transform = transforms.Compose([
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # ImageNet mean and std
 ])
 
-test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/week_one/fib_control', transform=transform)
+test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/week_two/fib_control', transform=transform)
 # test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/week_one/results/fib_control', transform=transform)
 test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False)
 
