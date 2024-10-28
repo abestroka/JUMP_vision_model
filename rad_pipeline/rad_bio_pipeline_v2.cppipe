@@ -306,7 +306,7 @@ IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_
     Select the input objects:Nuclei
     Name the objects to be identified:Cells
     Select the method to identify the secondary objects:Watershed - Image
-    Select the input image:CorrRNA
+    Select the input image:CorrAGP
     Number of pixels by which to expand the primary objects:10
     Regularization factor:0.05
     Discard secondary objects touching the border of the image?:No
