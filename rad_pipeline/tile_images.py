@@ -30,7 +30,7 @@ def threshold_images(image_path, confluency):
             with open(curr_path, 'r') as f:
                 val = f.read()
                 print("VAL", val)
-            if float(val) >= confluency:
+            if float(val) >= confluency and float(val) <= 0.75:
                 print("PASS")
                 img = str(file[:12]) + '.png'
                 print('IMG', img)
@@ -43,7 +43,7 @@ def threshold_images(image_path, confluency):
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage):
 
     # images = os.listdir(image_path)
-    confluency = 0.2
+    confluency = 0.25
     images = threshold_images(image_path, confluency)
     tile_num = 0
     for image in images:
@@ -85,7 +85,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 # output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-rows, cols = 6, 6
+rows, cols = 10, 10
 
 yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
 yellow_percentage = 1.0       # Minimum percentage of yellow pixels required to save the tile
