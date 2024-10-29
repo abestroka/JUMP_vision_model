@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
+import argparse
 
 def cnn(tiles, color, percent, batch):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

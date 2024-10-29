@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+import argparse
 
 def is_tile_yellow(tile, threshold, percentage_required, curr_color):
     tile = tile.convert('RGB')
@@ -113,6 +114,15 @@ def main(args):
             output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'+rad+'/'
             # if os.path.isdir(output_folder) == False:
             #     os.mkdir(output_folder)
+
+            # remove contents of directory
+            dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
+            if os.path.isdir(dir_path):
+                for item in os.listdir(dir_path):
+                    item_path = os.path.join(dir_path, item)
+                    if os.path.isdir(item_path):
+                        shutil.rmtree(item_path)
+
                 
             segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage, curr_color)
 
