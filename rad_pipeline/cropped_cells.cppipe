@@ -408,16 +408,16 @@ ImageMath:[module_num:22|svn_version:'Unknown'|variable_revision_number:5|show_w
     Multiply the second image by:1.0
     Measurement:
 
-MeasureObjectIntensity:[module_num:23|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureObjectIntensity:[module_num:23|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Select images to measure:CorrAGP, CorrDNA, CorrMito, CorrRNA
     Select objects to measure:Cells, Cytoplasm, Nuclei
 
-MeasureObjectSizeShape:[module_num:24|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureObjectSizeShape:[module_num:24|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Select object sets to measure:Cells, Cytoplasm, Nuclei
     Calculate the Zernike features?:Yes
     Calculate the advanced features?:No
 
-OverlayOutlines:[module_num:25|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+OverlayOutlines:[module_num:25|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Display outlines on a blank image?:No
     Select image on which to display outlines:ImageAfterMath
     Name the output image:OrigOverlay2
@@ -429,7 +429,7 @@ OverlayOutlines:[module_num:25|svn_version:'Unknown'|variable_revision_number:4|
     Select outline color:#FFFF0A
     Select objects to display:Cells
 
-MeasureImageAreaOccupied:[module_num:26|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureImageAreaOccupied:[module_num:26|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Measure the area occupied by:Objects
     Select binary images to measure:CorrAGP
     Select object sets to measure:Cells
@@ -462,7 +462,7 @@ SaveCroppedObjects:[module_num:28|svn_version:'Unknown'|variable_revision_number
     Select image name to use as a prefix:None
     Save output crops in nested folders?:No
     Saved file format:png
-    Image to crop:OrigOverlay2
+    Image to crop:ImageAfterMath
 
 ExportToSpreadsheet:[module_num:29|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
     Select the column delimiter:Comma (",")
