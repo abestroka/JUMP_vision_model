@@ -40,7 +40,7 @@ SECONDS=0
 # python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
 for c in {1..2} # color white or yellow
 do
-    for t in {1..10} # num of tiles 1-10
+    for t in {2..10} # num of tiles 1-10
     do
         for p in {1..10} # percentage of color 0.1-1%
         do

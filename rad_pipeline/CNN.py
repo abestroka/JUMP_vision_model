@@ -17,10 +17,10 @@ def cnn(tiles, color, percent, batch):
     # test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/week_one/results/fib_control', transform=transform)
     test_loader = DataLoader(test_dataset, batch_size=batch, shuffle=False)
 
-    print("CLASSES")
-    print(test_dataset.class_to_idx)
+    # print("CLASSES")
+    # print(test_dataset.class_to_idx)
 
-    print("")
+    # print("")
 
     num_classes = len(test_dataset.classes)
     print(f"Number of classes: {num_classes}")
@@ -56,6 +56,7 @@ def cnn(tiles, color, percent, batch):
     accuracy = 100 * correct / total
     print(f'TILES NUMBER: {tiles:.2f}%', f'COLOR: {color:.2f}%', f'THRESHOLD: {percent:.2f}%', f'BATCH: {batch:.2f}%')
     print(f'Accuracy of the pre-trained model on the test dataset: {accuracy:.2f}%')
+    print("")
 
 
 def main(args):

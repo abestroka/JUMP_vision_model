@@ -21,7 +21,7 @@ def is_tile_yellow(tile, threshold, percentage_required, curr_color):
 
 
     yellow_percentage = (yellow_pixels / total_pixels) * 100
-    print("YELLOW PERCENTAGE", yellow_percentage)
+    # print("YELLOW PERCENTAGE", yellow_percentage)
     return yellow_percentage >= percentage_required
 
 def threshold_images(image_path, confluency):
@@ -32,11 +32,11 @@ def threshold_images(image_path, confluency):
             curr_path = os.path.join(image_path, file)
             with open(curr_path, 'r') as f:
                 val = f.read()
-                print("VAL", val)
+                # print("VAL", val)
             if float(val) >= confluency and float(val):
-                print("PASS")
+                # print("PASS")
                 img = str(file[:12]) + '.png'
-                print('IMG', img)
+                # print('IMG', img)
                 images.append(img)
     
     return images
@@ -50,7 +50,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
     images = threshold_images(image_path, confluency)
     tile_num = 0
     for image in images:
-        print("IMAGE", image)
+        # print("IMAGE", image)
         if '.png' in image:
             curr_path = os.path.join(image_path, image)
 
@@ -78,7 +78,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
                         tile.save(os.path.join(output_folder, f'tile_{tile_num}.png'))
                         tile_num += 1
 
-            print(f"Segmented the image into {rows*cols} tiles.")
+            # print(f"Segmented the image into {rows*cols} tiles.")
 
 
 
