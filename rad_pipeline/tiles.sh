@@ -49,11 +49,11 @@ do
 
             for b in {1..6} # batch size for cnn
             do
-                python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --batch $b
+                python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --color $c --tiles $t --percent $p --batch $b
 
             done
 
-            
+
 
 
         done

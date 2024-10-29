@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 import argparse
+import shutil
 
 def is_tile_yellow(tile, threshold, percentage_required, curr_color):
     tile = tile.convert('RGB')
