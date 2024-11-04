@@ -23,11 +23,11 @@ def change_names(target, dst_dir, src_dir, name):
             new_path = os.path.join(src_dir, new_name)
             print('NEWPATH', new_path)
             os.rename(curr_path, new_path)
-            new_name = name + ".png"
-            new_path = os.path.join(src_dir, new_name)
-            print("NEWPATH", new_path)
-            os.rename(curr_path, new_path)
-            print("NEWPATH", new_path)
+            # new_name = name + ".png"
+            # new_path = os.path.join(src_dir, new_name)
+            # print("NEWPATH", new_path)
+            # os.rename(curr_path, new_path)
+            # print("NEWPATH", new_path)
             shutil.copy(new_path, dst_dir)
 
         elif 'Image' in image:
