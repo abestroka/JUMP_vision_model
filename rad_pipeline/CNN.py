@@ -13,7 +13,7 @@ def cnn(tiles, color, percent, batch):
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # ImageNet mean and std
     ])
 
-    test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_segmented/week_four', transform=transform)
+    test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_segmented/week_four/fib_rad', transform=transform)
     # test_dataset = datasets.ImageFolder(root='/eagle/FoundEpidem/astroka/fib_and_htert/week_one/results/fib_control', transform=transform)
     test_loader = DataLoader(test_dataset, batch_size=batch, shuffle=False)
 
