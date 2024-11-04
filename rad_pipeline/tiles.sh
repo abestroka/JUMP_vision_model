@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #PBS -l select=1:system=polaris
 #PBS -l place=scatter
-#PBS -l walltime=72:00:00
-#PBS -q preemptable
+#PBS -l walltime=1:00:00
+#PBS -q debug
 #PBS -A FoundEpidem
 #PBS -l filesystems=home:eagle
 
@@ -38,26 +38,28 @@ SECONDS=0
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
 # python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
-for c in {1..2} # color white or yellow
-do
-    for t in {2..10} # num of tiles 1-10
-    do
-        for p in {1..10} # percentage of color 0.1-1%
-        do
 
-            python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py --color $c --tiles $t --percent $p
+python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --color '1' --tiles '10' --percent '20' --batch '4'
+# for c in {1..2} # color white or yellow
+# do
+#     for t in {2..10} # num of tiles 1-10
+#     do
+#         for p in {1..10} # percentage of color 0.1-1%
+#         do
 
-            for b in {1..6} # batch size for cnn
-            do
-                python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --color $c --tiles $t --percent $p --batch $b
+#             python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py --color $c --tiles $t --percent $p
 
-            done
+#             for b in {1..6} # batch size for cnn
+#             do
+#                 python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --color $c --tiles $t --percent $p --batch $b
 
-
-
-
-        done
+#             done
 
 
-    done
-done
+
+
+#         done
+
+
+#     done
+# done
