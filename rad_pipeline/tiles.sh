@@ -39,7 +39,7 @@ SECONDS=0
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
 # python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
 
-python ~/workspace/JUMP_vision_model_rad_pipeline/pull_pngs.py
+python ~/workspace/JUMP_vision_model/rad_pipeline/pull_pngs.py
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py --color '1' --tiles '10' --percent '20' --batch '4'
 # for c in {1..2} # color white or yellow
