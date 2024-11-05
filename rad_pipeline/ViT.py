@@ -108,7 +108,7 @@ def ViT(cells_path):
 
 
 def main():
-    cells_path = '/eagle/projects/FoundEpidem/astroka/segmented_images'
+    cells_path = '/eagle/projects/FoundEpidem/astroka/fib_and_htert/week_three/results_png_only/fib_control'
     ViT(cells_path)
 
 if __name__ == "__main__":
