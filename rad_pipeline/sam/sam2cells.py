@@ -1,64 +1,108 @@
+import os
+# if using Apple MPS, fall back to CPU for unsupported ops
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+import numpy as np
 import torch
-import sys
-# from sam2 import SamPredictor, build_sam_vit_h
+import matplotlib.pyplot as plt
+from PIL import Image
+
+
+# select the device for computation
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+else:
+    device = torch.device("cpu")
+print(f"using device: {device}")
+
+if device.type == "cuda":
+    # use bfloat16 for the entire notebook
+    torch.autocast("cuda", dtype=torch.bfloat16).__enter__()
+    # turn on tfloat32 for Ampere GPUs (https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-devices)
+    if torch.cuda.get_device_properties(0).major >= 8:
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+elif device.type == "mps":
+    print(
+        "\nSupport for MPS devices is preliminary. SAM 2 is trained with CUDA and might "
+        "give numerically different outputs and sometimes degraded performance on MPS. "
+        "See e.g. https://github.com/pytorch/pytorch/issues/84936 for a discussion."
+    )
+
+
+np.random.seed(3)
+
+def show_mask(mask, ax, random_color=False, borders = True):
+    if random_color:
+        color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
+    else:
+        color = np.array([30/255, 144/255, 255/255, 0.6])
+    h, w = mask.shape[-2:]
+    mask = mask.astype(np.uint8)
+    mask_image =  mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
+    if borders:
+        import cv2
+        contours, _ = cv2.findContours(mask,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
+        # Try to smooth contours
+        contours = [cv2.approxPolyDP(contour, epsilon=0.01, closed=True) for contour in contours]
+        mask_image = cv2.drawContours(mask_image, contours, -1, (1, 1, 1, 0.5), thickness=2) 
+    ax.imshow(mask_image)
+
+def show_points(coords, labels, ax, marker_size=375):
+    pos_points = coords[labels==1]
+    neg_points = coords[labels==0]
+    ax.scatter(pos_points[:, 0], pos_points[:, 1], color='green', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)
+    ax.scatter(neg_points[:, 0], neg_points[:, 1], color='red', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)   
+
+def show_box(box, ax):
+    x0, y0 = box[0], box[1]
+    w, h = box[2] - box[0], box[3] - box[1]
+    ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0, 0, 0, 0), lw=2))    
+
+def show_masks(image, masks, scores, point_coords=None, box_coords=None, input_labels=None, borders=True):
+    for i, (mask, score) in enumerate(zip(masks, scores)):
+        plt.figure(figsize=(10, 10))
+        plt.imshow(image)
+        show_mask(mask, plt.gca(), borders=borders)
+        if point_coords is not None:
+            assert input_labels is not None
+            show_points(point_coords, input_labels, plt.gca())
+        if box_coords is not None:
+            # boxes
+            show_box(box_coords, plt.gca())
+        if len(scores) > 1:
+            plt.title(f"Mask {i+1}, Score: {score:.3f}", fontsize=18)
+        plt.axis('off')
+        plt.show()
+
+
+image = Image.open('dna.png')
+image = np.array(image.convert("RGB"))
+
+######
+
+# plt.figure(figsize=(10, 10))
+# plt.imshow(image)
+# plt.axis('on')
+# plt.show()
+
+######
+
 
 from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
-from PIL import Image
-import tifffile
-import numpy as np
-import matplotlib.pyplot as plt
+sam2_checkpoint = "sam2/checkpoints/sam2.1_hiera_large.pt"
+model_cfg = "Users/abestroka/Argonne/git_repos/JUMP_vision_model/rad_pipeline/sam/sam2/sam2/configs/sam2.1/sam2.1_hiera_l.yaml"
 
-# Load the SAM model with the appropriate checkpoint
-def load_model():
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    # device = 'cpu'
-    model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
-    model = build_sam2(model_cfg, checkpoint="path/to/sam2/checkpoint.pth")  # specify the checkpoint path
-    model.to(device)
-    predictor = Sam2ImagePredictor(model)
-    return predictor, device
+config_dir = "sam2/sam2/configs/sam2.1/"
+print(os.listdir(config_dir))
 
-# Load TIFF image file
-def load_tiff_image(file_path):
-    with tifffile.TiffFile(file_path) as tif:
-        image = tif.asarray()
-    # Ensure the image is in the correct format
-    if len(image.shape) == 2:  # Grayscale image
-        image = np.stack([image] * 3, axis=-1)  # Convert to RGB format for SAM if needed
-    return image
 
-# Run SAM to get masks for cells
-def apply_masks(image, predictor, device):
-    predictor.set_image(image)
-    # Assume we want masks across the entire image without specifying points
-    masks, _, _ = predictor.predict(
-        point_coords=None,
-        point_labels=None,
-        box=None,
-        mask_input=None,
-        multimask_output=False,
-    )
-    return masks
+print("Loading model configuration from:", model_cfg)
 
-# Display masks over the image
-def display_masks(image, masks):
-    plt.imshow(image)
-    for mask in masks:
-        plt.imshow(mask, alpha=0.5)  # Overlay each mask with transparency
-    plt.axis('off')
-    plt.show()
+sam2_model = build_sam2(model_cfg, sam2_checkpoint, device=device)
 
-# Main function to load image, predict masks, and display
-def main(file_path):
-    predictor, device = load_model()
-    image = load_tiff_image(file_path)
-    masks = apply_masks(image, predictor, device)
-    display_masks(image, masks)
-
-# Provide the path to your TIFF file here
-# file_path = "/Users/abestroka/Argonne/LUCID/raw_week_3/r01c02f04p01-ch3sk1fk1fl1.tiff"
-file_path = "/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4C1_1__2024-10-15T17_13_38-Measurement1/Images/r05c01f09p01-ch3sk1fk1fl1.tiff"
-main(file_path)
+predictor = SAM2ImagePredictor(sam2_model)
 
