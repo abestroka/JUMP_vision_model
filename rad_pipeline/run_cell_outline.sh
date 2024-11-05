@@ -41,7 +41,7 @@ SECONDS=0
 week='week_four'
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4P3_1__2024-10-15T16_29_06-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4C1_1__2024-10-15T17_13_38-Measurement1/Images"
 
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_four_fib_layout.xlsx"
 
@@ -50,24 +50,24 @@ treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_four
 # plate="Plate8"
 # plate="Plate3"
 # plate="htert"
-plate="fib_rad"
-# plate="fib_control"
+# plate="fib_rad"
+plate="fib_control"
 
 # seg_image_temp="huvec_rad_seg_temp"
-seg_image_temp="fib_rad_seg_temp"
+# seg_image_temp="fib_rad_seg_temp"
 # seg_image_temp="huvec_control_seg_temp"
-# seg_image_temp="fib_control_seg_temp"
+seg_image_temp="fib_control_seg_temp"
 # seg_image_temp="htert_control_seg_temp"
 
 # image_temp="huvec_rad_temp"
 # image_temp="huvec_control_temp"
-image_temp="fib_rad_temp"
-# image_temp="fib_control_temp"
+# image_temp="fib_rad_temp"
+image_temp="fib_control_temp"
 # image_temp="htert_control_temp"
 
-# results="fib_control"
+results="fib_control"
 # results="huvec_control"
-results="fib_rad"
+# results="fib_rad"
 # results="huvec_rad"
 # results="htert_control"
 
@@ -81,8 +81,8 @@ python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path 
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate3_num_images.txt')
 # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_num_images.txt')
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_num_images.txt')
+# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_num_images.txt')
+num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_num_images.txt')
 
 
 
@@ -96,8 +96,8 @@ do
     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
 
     #TODO: CHANGE
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
+    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
+    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
 
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
@@ -106,8 +106,8 @@ do
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_image_name.txt')
 
 
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
-    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
+    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
+    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
 
     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_target_name.txt')
     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_image_name.txt')

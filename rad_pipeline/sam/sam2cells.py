@@ -58,6 +58,7 @@ def main(file_path):
     display_masks(image, masks)
 
 # Provide the path to your TIFF file here
-file_path = "/Users/abestroka/Argonne/LUCID/raw_week_3/r01c02f04p01-ch3sk1fk1fl1.tiff"
+# file_path = "/Users/abestroka/Argonne/LUCID/raw_week_3/r01c02f04p01-ch3sk1fk1fl1.tiff"
+file_path = "/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4C1_1__2024-10-15T17_13_38-Measurement1/Images/r05c01f09p01-ch3sk1fk1fl1.tiff"
 main(file_path)
 

@@ -13,7 +13,8 @@ module load apptainer
 module use /soft/modulefiles 
 module load conda
 # conda activate cellprofiler
-conda activate cellseg
+# conda activate cellseg
+conda activate sam
 cd ~/workspace
 
 # MPI example w/ 4 MPI ranks per node w/ threads spread evenly across cores (1 thread per core)
