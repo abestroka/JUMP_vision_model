@@ -1,34 +1,63 @@
 import torch
-from sam2 import Sam2Model  # Import SAM2 model
-from torch.utils.data import DataLoader
-import torchvision.transforms as transforms
-from torchvision.datasets import ImageFolder
+import sys
+# from sam2 import SamPredictor, build_sam_vit_h
 
-# Load dataset
-data_dir = "/eagle/FoundEpidem/astroka/fib_and_htert/week_one/results/fib_control"
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-])
-dataset = ImageFolder(root=data_dir, transform=transform)
-dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+from sam2.build_sam import build_sam2
+from sam2.sam2_image_predictor import SAM2ImagePredictor
 
-# Initialize model
-model = Sam2Model(pretrained=True)
-model.train()  # Set model to training mode
+from PIL import Image
+import tifffile
+import numpy as np
+import matplotlib.pyplot as plt
 
-# Define optimizer and loss function
-criterion = torch.nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+# Load the SAM model with the appropriate checkpoint
+def load_model():
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    # device = 'cpu'
+    model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
+    model = build_sam2(model_cfg, checkpoint="path/to/sam2/checkpoint.pth")  # specify the checkpoint path
+    model.to(device)
+    predictor = Sam2ImagePredictor(model)
+    return predictor, device
 
-# Training loop
-for epoch in range(num_epochs):
-    for images, labels in dataloader:
-        optimizer.zero_grad()
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
+# Load TIFF image file
+def load_tiff_image(file_path):
+    with tifffile.TiffFile(file_path) as tif:
+        image = tif.asarray()
+    # Ensure the image is in the correct format
+    if len(image.shape) == 2:  # Grayscale image
+        image = np.stack([image] * 3, axis=-1)  # Convert to RGB format for SAM if needed
+    return image
 
-# After training, use model.eval() for inference
-model.eval()
+# Run SAM to get masks for cells
+def apply_masks(image, predictor, device):
+    predictor.set_image(image)
+    # Assume we want masks across the entire image without specifying points
+    masks, _, _ = predictor.predict(
+        point_coords=None,
+        point_labels=None,
+        box=None,
+        mask_input=None,
+        multimask_output=False,
+    )
+    return masks
+
+# Display masks over the image
+def display_masks(image, masks):
+    plt.imshow(image)
+    for mask in masks:
+        plt.imshow(mask, alpha=0.5)  # Overlay each mask with transparency
+    plt.axis('off')
+    plt.show()
+
+# Main function to load image, predict masks, and display
+def main(file_path):
+    predictor, device = load_model()
+    image = load_tiff_image(file_path)
+    masks = apply_masks(image, predictor, device)
+    display_masks(image, masks)
+
+# Provide the path to your TIFF file here
+file_path = "/Users/abestroka/Argonne/LUCID/raw_week_3/r01c02f04p01-ch3sk1fk1fl1.tiff"
+main(file_path)
+
