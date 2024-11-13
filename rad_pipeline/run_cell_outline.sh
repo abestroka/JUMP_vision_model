@@ -41,7 +41,7 @@ SECONDS=0
 week='week_two'
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_four/20241015_NewWeek4/20241015_ANL_CellPainting_W4C1_1__2024-10-15T17_13_38-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/rpe/week_two/20241105_Week2_RPE-1/20241105_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W2C1__2024-11-06T07_43_59-Measurement1/Images"
 
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_two_rpe_layout.xlsx"
 
