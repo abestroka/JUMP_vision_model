@@ -18,15 +18,18 @@ def change_names(target, dst_dir, src_dir, name):
             # print('CURRPATH', curr_path)
         #         if image in dst_images:
             # rename so no overwrite
-            new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
-            new_name = new_name + ".png"
-            new_path = os.path.join(src_dir, new_name)
-            # print('NEWPATH', new_path)
-            os.rename(curr_path, new_path)
-            # new_name = name + ".png"
+            # new_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+            # new_name = new_name + ".png"
             # new_path = os.path.join(src_dir, new_name)
-            # print("NEWPATH", new_path)
+            # # print('NEWPATH', new_path)
             # os.rename(curr_path, new_path)
+
+
+
+            new_name = name + ".png"
+            new_path = os.path.join(src_dir, new_name)
+            # print("NEWPATH", new_path)
+            os.rename(curr_path, new_path)
             # print("NEWPATH", new_path)
             shutil.copy(new_path, dst_dir)
 
@@ -82,7 +85,9 @@ def main(args):
     # dst_path = '/eagle/FoundEpidem/astroka/ten_week/week_one/results/'+dst_image_path+'/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/'+dst_image_path+'/'+target +"/"
     # dst_path = '/eagle/FoundEpidem/astroka/fib_no_outline/'+week+'/results/'+dst_image_path+'/'+target +"/"
-    dst_path = '/eagle/FoundEpidem/astroka/fib_segmented/'+week+'/'+dst_image_path+'/'+target +"/"
+    # dst_path = '/eagle/FoundEpidem/astroka/fib_segmented/'+week+'/'+dst_image_path+'/'+target +"/"
+    dst_path = '/eagle/FoundEpidem/astroka/rpe/'+week+'/results/'+dst_image_path+'/'+target +"/"
+
 
 
 
