@@ -38,12 +38,12 @@ SECONDS=0
 
 
 #TODO: Change
-week='week_one'
+week='week_three'
 
 # concatenate all images into a single excel file, and get length, then iterate through
-images="/eagle/FoundEpidem/astroka/rpe/week_one/20241028_Week1_RPE-1/20241029_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W1C1_3__2024-10-30T10_30_01-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/rpe/week_three/20241114_Week3_RPE-1/20241113_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W3C1__2024-11-13T14_18_50-Measurement 1/Images"
 
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_rpe_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_three_rpe_layout.xlsx"
 
 # plate="HUVEC_Control"
 # plate="Fibroblast_Control"
