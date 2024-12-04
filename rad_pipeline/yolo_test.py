@@ -52,9 +52,9 @@ def stratified_split_with_groups(
         parts = filename.split('-')
         compound = parts[0]  # e.g., "Compound_10"
         group_id = parts[1]  # e.g., "r02c02f07"
-        print("COMPOUND", compound)
-        print("GROUP ID", group_id)
-        print(" ")
+        # print("COMPOUND", compound)
+        # print("GROUP ID", group_id)
+        # print(" ")
         
         if group_id not in compound_groups[compound]:
             compound_groups[compound][group_id] = []
@@ -154,13 +154,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/train'
+        '/eagle/FoundEpidem/astroka/yolo/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/val'
+    '/eagle/FoundEpidem/astroka/yolo/dataset/val'
 )
 
 # Define your class names
@@ -182,10 +182,10 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/datasets/config.yaml'
+    config_path = '/eagle/FoundEpidem/astroka/yolo/datasets/config.yaml'
     )
 
-g = glob.glob('/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/**/**/*.png')
+g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
 
 
 # # Load a COCO-pretrained YOLO11n model
