@@ -17,5 +17,5 @@ for root, dirs, files in os.walk(path):
         else:
             to_del = os.path.join(root, file_name)
             print(to_del)
-            del to_del
+            os.remove(to_del)
             # print(file_name[:9])
