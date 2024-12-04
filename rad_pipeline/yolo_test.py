@@ -154,13 +154,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        './yolo/dataset/train'
+        '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    './yolo/dataset/val'
+    '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/val'
 )
 
 # Define your class names
@@ -182,10 +182,10 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = './yolo/datasets/config.yaml'
+    config_path = '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/datasets/config.yaml'
     )
 
-g = glob.glob('./yolo/dataset/**/**/*.png')
+g = glob.glob('/home/astroka/workspace/JUMP_vision_model/rad_pipeline/yolo/dataset/**/**/*.png')
 
 
 # # Load a COCO-pretrained YOLO11n model
