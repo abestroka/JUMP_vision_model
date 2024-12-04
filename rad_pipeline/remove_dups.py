@@ -12,4 +12,6 @@ for root, dirs, files in os.walk(path):
 
     for file_name in files:
         # print(f"  File: {os.path.join(root, file_name)}")
-        print(file_name)
+        if ".png" in file_name:
+
+            print(file_name[:9])
