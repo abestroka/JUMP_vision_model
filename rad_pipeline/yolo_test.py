@@ -170,20 +170,20 @@ class_names = ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12',
        'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8',
        'Compound_9', 'untreated']
 
-# Setup configuration
-setup_classification_config(
-    train_dir=train_dir,
-    val_dir=val_dir,
-    class_names=class_names
-    )
-
 # # Setup configuration
 # setup_classification_config(
 #     train_dir=train_dir,
 #     val_dir=val_dir,
-#     class_names=class_names,
-#     config_path = './datasets/config.yaml'
+#     class_names=class_names
 #     )
+
+# Setup configuration
+setup_classification_config(
+    train_dir=train_dir,
+    val_dir=val_dir,
+    class_names=class_names,
+    config_path = './datasets/config.yaml'
+    )
 
 g = glob.glob('./dataset/**/**/*.png')
 
