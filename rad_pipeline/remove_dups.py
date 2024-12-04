@@ -1,6 +1,15 @@
 import numpy as np
+import os
 
-working_dir = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_2'
+path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_2'
 
-for folder in working_dir:
-    print(folder)
+for root, dirs, files in os.walk(path):
+    print(f"Current Directory: {root}")
+    
+    # List of directories in the current directory
+    for dir_name in dirs:
+        print(f"  Directory: {os.path.join(root, dir_name)}")
+    
+    # List of files in the current directory
+    for file_name in files:
+        print(f"  File: {os.path.join(root, file_name)}")
