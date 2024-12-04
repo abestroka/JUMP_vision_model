@@ -7,13 +7,14 @@
 #PBS -l filesystems=home:eagle
 
 # module load singularity
-module use /soft/spack/gcc/0.6.1/install/modulefiles/Core
-module load apptainer
+# module use /soft/spack/gcc/0.6.1/install/modulefiles/Core
+# module load apptainer
 
-# module use /soft/modulefiles 
-# module load conda
+module use /soft/modulefiles 
+module load conda
 # conda activate cellprofiler
 # conda activate cellseg
+conda activate yolo
 cd ~/workspace
 
 # MPI example w/ 4 MPI ranks per node w/ threads spread evenly across cores (1 thread per core)
