@@ -13,7 +13,7 @@ for root, dirs, files in os.walk(path):
     for file_name in files:
         # print(f"  File: {os.path.join(root, file_name)}")
         if ".png" in file_name and "p03" in file_name:
-            name =  filename[:9]
+            name =  file_name[:9]
         else:
             to_del = os.path.join(root, file_name)
             del to_del
