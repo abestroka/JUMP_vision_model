@@ -4,11 +4,7 @@ from collections import defaultdict
 import numpy as np
 from typing import List, Dict, Set, Tuple
 
-# from ultralytics import YOLO
-# import yaml
-# from pathlib import Path
-
-# from ultralytics import YOLO
+from ultralytics import YOLO
 import yaml
 from pathlib import Path
 import pandas as pd
