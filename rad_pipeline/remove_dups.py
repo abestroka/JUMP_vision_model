@@ -7,6 +7,7 @@ import argparse
 
 
 def remove_dups(path):
+    print("PATH", path)
     for root, dirs, files in os.walk(path):
         print(f"Current Directory: {root}")
         
@@ -27,6 +28,7 @@ def remove_dups(path):
 
 def main(args):
     img_path = vars(args)["path"]
+    print("MAIN")
     remove_dups(img_path)
 
 if __name__ == "__main__":
