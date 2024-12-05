@@ -167,6 +167,8 @@ import os
 #        'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8',
 #        'Compound_9', 'untreated']
 
+# class_names = ['0.001', '0.01', '0.1', '1.0', '2.0']
+
 # # # Setup configuration
 # # setup_classification_config(
 # #     train_dir=train_dir,
@@ -182,14 +184,15 @@ import os
 #     config_path = '/eagle/FoundEpidem/astroka/yolo/datasets/config.yaml'
 #     )
 
-# g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
+g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
 
-
+print("G", g)
 # Load a COCO-pretrained YOLO11n model
 model = YOLO("yolo11x-cls.pt")
 
-# Train the model on the COCO8 example dataset for 100 epochs
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/datasets/", epochs=100, imgsz=640)
+
+# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/dataset/", epochs=100, imgsz=640)
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='nocontrol', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
 
 
 
