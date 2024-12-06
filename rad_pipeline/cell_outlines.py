@@ -239,7 +239,7 @@ if __name__ == '__main__':
 
     # First collect the image sets
     image_sets = collect_image_sets(
-        image_path=args.image_path,
+        image_path=args.image_dir,
         plate=args.plate,
         treatment_path=args.treatment_path,
     )
