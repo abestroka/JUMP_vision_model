@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import argparse
+import functools
 import shutil
 import subprocess
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from uuid import uuid4
 
 import pandas as pd
+from tqdm import tqdm
 
 
 @dataclass
@@ -135,7 +138,7 @@ def run_cellprofiler(
     )
     # Run the command and check for errors
     try:
-        subprocess.run(command.split(), check=True)
+        subprocess.run(command.split(), check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f'An error occurred: {e}')
         return
@@ -222,19 +225,31 @@ if __name__ == '__main__':
         ),
         type=Path,
     )
+    parser.add_argument(
+        '--num_workers',
+        help='The number of workers to use for processing',
+        default=1,
+        type=int,
+    )
     args = parser.parse_args()
+
     # First collect the image sets
     image_sets = collect_image_sets(
         image_path=args.image_dir,
         plate=args.plate,
         treatment_path=args.treatment_file,
     )
-    # Run the cell profiler on each image set
-    for image_set in image_sets:
-        run_cellprofiler(
-            image_set=image_set,
-            output_dir=args.output_dir,
-            tmp_dir=args.tmp_dir,
-            cellprofiler=args.cellprofiler,
-            cellprofiler_pipeline=args.cellprofiler_pipeline,
-        )
+
+    # Define the worker function for quantization
+    worker_fn = functools.partial(
+        run_cellprofiler,
+        output_dir=args.output_dir,
+        tmp_dir=args.tmp_dir,
+        cellprofiler=args.cellprofiler,
+        cellprofiler_pipeline=args.cellprofiler_pipeline,
+    )
+
+    # Run the cell profiler on each image set in parallel
+    with ProcessPoolExecutor(max_workers=args.num_workers) as executor:
+        for _ in tqdm(executor.map(worker_fn, image_sets)):
+            pass
