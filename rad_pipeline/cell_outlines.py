@@ -44,22 +44,17 @@ def collect_image_sets(
     treatment_path: Path,
 ) -> list[ImageSet]:
     treatments = pd.read_excel(treatment_path, sheet_name=plate)
-
     image_sets = []
-
     for index, row in treatments.iterrows():
         location = row['Location']
         treatment = row['Treatment']
         # pull the every image set at this location
         well_images = list(map(str, image_path.glob(f'{location}*')))
-
         # iterate through, first by field, then by stack
-
         # r06c04f09p14
         # Location is r06c04 (row 6, column 4)
         # Field is f09 (field 9)
         # Stack is p14 (stack 14)
-
         # iterate through fields
         for field in range(1, 10):
             for stack in range(1, 6):
@@ -88,11 +83,9 @@ def collect_image_sets(
                         brightfield = img
                     elif 'ch8' in img:
                         mito = img
-
                 image_sets.append(
                     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
                 )
-
     return image_sets
 
 
@@ -122,22 +115,24 @@ def run_cellprofiler(
     -------
         None
     """
-    # Create the temporary image directory
-    image_set.copy(tmp_dir)
-
-    # Create an output directory for the segmented images
-    tmp_output_dir = tmp_dir / str(uuid4())
+    # Create temp directories for input and output
+    _tmp_dir = tmp_dir / str(uuid4())
+    tmp_input_dir = _tmp_dir / 'input'
+    tmp_output_dir = _tmp_dir / 'output'
+    tmp_input_dir.mkdir(exist_ok=True, parents=True)
     tmp_output_dir.mkdir(exist_ok=True, parents=True)
+
+    # Create the temporary image directory
+    image_set.copy(tmp_input_dir)
 
     # Create the command
     command = (
         f'singularity run --bind {tmp_dir}:{tmp_dir} '
         f'{cellprofiler} -c -r '
         f'-p {cellprofiler_pipeline} '
-        f'-i {tmp_dir} '
+        f'-i {tmp_input_dir} '
         f'-o {tmp_output_dir}'
     )
-
     # Run the command and check for errors
     try:
         subprocess.run(command, check=True)
@@ -147,24 +142,18 @@ def run_cellprofiler(
     except Exception as e:
         print(f'Unexpected error: {e}')
         return
-
     # Now we need to process and move the output files
-
     # TODO: See if we just rename files in the tmp directory,
     # then do bulk mv operation
-
     # Create the output directory
     output_dir = output_dir / image_set.treatment
     output_dir.mkdir(exist_ok=True, parents=True)
-
     # Handle the cells CSV file
     cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
     shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
-
     # Handle the image CSV file
     image_csv = next(tmp_output_dir.glob('*Image.csv'))
     shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
-
     # Calculate the confluency and write it to a file
     df = pd.read_csv(image_csv)
     totalarea = df['AreaOccupied_TotalArea_Cells'][0]
@@ -172,10 +161,8 @@ def run_cellprofiler(
     confluency = float(cellarea / totalarea)
     with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
         f.write(str(confluency))
-
     # Gather the segmented images and move them to the appropriate directory
     src_images = list(tmp_output_dir.glob('*.png'))
-
     # If there are more than one image, we need to assign unique names
     if len(src_images) > 1:
         for image in src_images:
@@ -185,7 +172,7 @@ def run_cellprofiler(
         shutil.copy(src_images[0], output_dir / f'{image_set.image_id}.png')
 
     # Clean up the temporary directory
-    shutil.rmtree(tmp_dir)
+    shutil.rmtree(_tmp_dir)
 
 
 if __name__ == '__main__':
@@ -224,7 +211,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--cellprofiler',
         help='The path to the cell profiler singularity image',
-        default='cellprofiler_4.2.6.sif',
+        default='~/workspace/cellprofiler_4.2.6.sif',
         type=Path,
     )
     parser.add_argument(
@@ -236,14 +223,12 @@ if __name__ == '__main__':
         type=Path,
     )
     args = parser.parse_args()
-
     # First collect the image sets
     image_sets = collect_image_sets(
         image_path=args.image_dir,
         plate=args.plate,
         treatment_path=args.treatment_file,
     )
-
     # Run the cell profiler on each image set
     for image_set in image_sets:
         run_cellprofiler(
