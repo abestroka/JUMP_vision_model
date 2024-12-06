@@ -241,7 +241,7 @@ if __name__ == '__main__':
     image_sets = collect_image_sets(
         image_path=args.image_dir,
         plate=args.plate,
-        treatment_path=args.treatment_path,
+        treatment_path=args.treatment_file,
     )
 
     # Run the cell profiler on each image set
