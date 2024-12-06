@@ -211,14 +211,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--cellprofiler',
         help='The path to the cell profiler singularity image',
-        default='~/workspace/cellprofiler_4.2.6.sif',
+        default='/home/astroka/workspace/cellprofiler_4.2.6.sif',
         type=Path,
     )
     parser.add_argument(
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '~/workspace/JUMP_vision_model/rad_pipeline/no_outlines.cppipe',
+            '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/no_outlines.cppipe',
         ),
         type=Path,
     )
