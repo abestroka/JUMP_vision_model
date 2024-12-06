@@ -37,7 +37,7 @@ echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NR
 SECONDS=0
 
 
-#TODO: Change
+
 week='week_three'
 
 # concatenate all images into a single excel file, and get length, then iterate through
@@ -98,7 +98,6 @@ num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_cont
 
 
 echo $num
-#TODO: extra function for extracting desired samples ie 1 of each well
 # for i in {1..$num}
 for i in $( eval echo {0..$num} )
 do
