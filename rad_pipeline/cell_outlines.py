@@ -131,6 +131,7 @@ def run_cellprofiler(
     # Create the command
     command = (
         f'singularity run --bind {tmp_dir} '
+        f'--bind /lus/eagle '
         f'{cellprofiler} -c -r '
         f'-p {cellprofiler_pipeline} '
         f'-i {tmp_input_dir} '
