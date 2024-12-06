@@ -215,14 +215,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--cellprofiler',
         help='The path to the cell profiler singularity image',
-        default='/eagle/FoundEpidem/astroka/cellprofiler_4.2.6.sif',
+        default='/lus/eagle/FoundEpidem/astroka/cellprofiler_4.2.6.sif',
         type=Path,
     )
     parser.add_argument(
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/eagle/FoundEpidem/astroka/no_outlines.cppipe',
+            '/lus/eagle/FoundEpidem/astroka/no_outlines.cppipe',
         ),
         type=Path,
     )
