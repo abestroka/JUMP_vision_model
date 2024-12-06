@@ -236,8 +236,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Set singularity environment variables
-    os.environ['SINGULARITY_TMPDIR'] = str(args.tmp_dir)
-    os.environ['SINGULARITY_CACHEDIR'] = str(args.tmp_dir)
+    # os.environ['SINGULARITY_TMPDIR'] = str(args.tmp_dir)
+    # os.environ['SINGULARITY_CACHEDIR'] = str(args.tmp_dir)
 
     # First collect the image sets
     image_sets = collect_image_sets(
