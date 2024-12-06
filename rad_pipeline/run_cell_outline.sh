@@ -38,13 +38,11 @@ SECONDS=0
 
 
 
+plate="rpe_control"
 week='week_three'
-
-# concatenate all images into a single excel file, and get length, then iterate through
 images="/eagle/FoundEpidem/astroka/rpe/week_three/20241114_Week3_RPE-1/20241113_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W3C1__2024-11-13T14_18_50-Measurement1/Images"
-
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_three_rpe_layout.xlsx"
-
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/FoundEpidem/astroka/rpe/week_three/temp --tmp_dir /dev/shm
 # plate="HUVEC_Control"
 # plate="Fibroblast_Control"
 # plate="Plate8"
@@ -52,97 +50,97 @@ treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_thre
 # plate="htert"
 # plate="fib_rad"
 # plate="fib_control"
-plate="rpe_control"
-# plate="rpe_rad"
 
-# seg_image_temp="huvec_rad_seg_temp"
-# seg_image_temp="fib_rad_seg_temp"
-# seg_image_temp="huvec_control_seg_temp"
-# seg_image_temp="fib_control_seg_temp"
-# seg_image_temp="htert_control_seg_temp"
-seg_image_temp="rpe_control_seg_temp"
-# seg_image_temp="rpe_rad_seg_temp"
+# # plate="rpe_rad"
 
-# image_temp="huvec_rad_temp"
-# image_temp="huvec_control_temp"
-# image_temp="fib_rad_temp"
-# image_temp="fib_control_temp"
-# image_temp="htert_control_temp"
-image_temp="rpe_control_temp"
-# image_temp="rpe_rad_temp"
+# # seg_image_temp="huvec_rad_seg_temp"
+# # seg_image_temp="fib_rad_seg_temp"
+# # seg_image_temp="huvec_control_seg_temp"
+# # seg_image_temp="fib_control_seg_temp"
+# # seg_image_temp="htert_control_seg_temp"
+# seg_image_temp="rpe_control_seg_temp"
+# # seg_image_temp="rpe_rad_seg_temp"
 
-# results="fib_control"
-# results="huvec_control"
-# results="fib_rad"
-# results="huvec_rad"
-# results="htert_control"
-results="rpe_control"
-# results="rpe_rad"
+# # image_temp="huvec_rad_temp"
+# # image_temp="huvec_control_temp"
+# # image_temp="fib_rad_temp"
+# # image_temp="fib_control_temp"
+# # image_temp="htert_control_temp"
+# image_temp="rpe_control_temp"
+# # image_temp="rpe_rad_temp"
 
-
-
-python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate --treatment $treatment_file
-
-#TODO: CHANGE
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate3_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_num_images.txt')
-num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_num_images.txt')
-# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_num_images.txt')
+# # results="fib_control"
+# # results="huvec_control"
+# # results="fib_rad"
+# # results="huvec_rad"
+# # results="htert_control"
+# results="rpe_control"
+# # results="rpe_rad"
 
 
 
+# python ~/workspace/JUMP_vision_model/rad_pipeline/concat_images.py --image_path $images --plate $plate --treatment $treatment_file
 
-echo $num
-# for i in {1..$num}
-for i in $( eval echo {0..$num} )
-do
-    # echo "get next image set, and id target name from excel file"
-    python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
-
-    #TODO: CHANGE
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
-
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
-
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_image_name.txt')
+# #TODO: CHANGE
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Fibroblast_Control_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/HUVEC_Control_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate8_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/Plate3_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_num_images.txt')
+# num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_num_images.txt')
+# # num=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_num_images.txt')
 
 
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
-
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_image_name.txt')
-
-    target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_target_name.txt')
-    name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_image_name.txt')
-
-    # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_target_name.txt')
-    # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_image_name.txt')
 
 
-    # cellprofiler into target directory
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
-    singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/no_outlines.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
-    # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+# echo $num
+# # for i in {1..$num}
+# for i in $( eval echo {0..$num} )
+# do
+#     # echo "get next image set, and id target name from excel file"
+#     python ~/workspace/JUMP_vision_model/rad_pipeline/pull_images.py --index $i --path $images --temp $image_temp --seg $seg_image_temp --res $results
 
-    # iterate through target directory and change names of cells
-    # check if target directory exists on eagle, if not create one, and transfer contents
-    # delete local directory
+#     #TODO: CHANGE
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_control_image_name.txt')
 
-    python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp" --dst "$results" --week "$week"
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_control_image_name.txt')
 
-    echo "image set $i segmented in $SECONDS seconds"
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/htert_control_image_name.txt')
 
 
-done
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/fib_rad_image_name.txt')
+
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_rad_image_name.txt')
+
+#     target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_target_name.txt')
+#     name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_control_image_name.txt')
+
+#     # target=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_target_name.txt')
+#     # name=$(head -n 1 '/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_rad_image_name.txt')
+
+
+#     # cellprofiler into target directory
+#     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/outlines_and_sheet.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+#     singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/no_outlines.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+#     # singularity run cellprofiler_4.2.6.sif -c -r -p ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.cppipe -i ~/workspace/JUMP_vision_model/rad_pipeline/"$image_temp" -o ~/workspace/JUMP_vision_model/rad_pipeline/"$seg_image_temp"/"$target"/
+
+#     # iterate through target directory and change names of cells
+#     # check if target directory exists on eagle, if not create one, and transfer contents
+#     # delete local directory
+
+#     python ~/workspace/JUMP_vision_model/rad_pipeline/change_names.py --target "$target" --name "$name" --src "$seg_image_temp" --dst "$results" --week "$week"
+
+#     echo "image set $i segmented in $SECONDS seconds"
+
+
+# done
 
 # model
 
