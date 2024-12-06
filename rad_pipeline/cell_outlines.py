@@ -8,6 +8,7 @@ from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from uuid import uuid4
+import os
 
 import pandas as pd
 from tqdm import tqdm
@@ -233,6 +234,10 @@ if __name__ == '__main__':
         type=int,
     )
     args = parser.parse_args()
+
+    # Set singularity environment variables
+    os.environ['SINGULARITY_TMPDIR'] = str(args.tmp_dir)
+    os.environ['SINGULARITY_CACHEDIR'] = str(args.tmp_dir)
 
     # First collect the image sets
     image_sets = collect_image_sets(
