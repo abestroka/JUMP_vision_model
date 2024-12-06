@@ -138,7 +138,7 @@ def run_cellprofiler(
     )
     # Run the command and check for errors
     try:
-        subprocess.run(command.split(), check=True, capture_output=True)
+        subprocess.run(command.split(), check=True)
     except subprocess.CalledProcessError as e:
         print(f'An error occurred: {e}')
         return
