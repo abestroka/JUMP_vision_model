@@ -97,6 +97,7 @@ def run_cellprofiler(
     image_set: ImageSet,
     output_dir: Path,
     tmp_dir: Path,
+    scratch_dir: Path,
     cellprofiler: str,
     cellprofiler_pipeline: Path,
 ) -> None:
@@ -110,6 +111,8 @@ def run_cellprofiler(
         The directory to write the output files to.
     tmp_dir : Path
         The temporary directory to use for processing.
+    scratch_dir : Path
+        The scratch directory to use for temporary files.
     cellprofiler : str
         The path to the cell profiler singularity image.
     cellprofiler_pipeline : Path
@@ -132,7 +135,7 @@ def run_cellprofiler(
     # Create the command
     command = (
         f'singularity run --bind {tmp_dir} '
-        f'--bind /lus/eagle '
+        f'--bind {scratch_dir} '
         f'{cellprofiler} -c -r '
         f'-p {cellprofiler_pipeline} '
         f'-i {tmp_input_dir} '
