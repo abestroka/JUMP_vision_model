@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import argparse
 import functools
+import os
 import shutil
 import subprocess
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from uuid import uuid4
-import os
 
 import pandas as pd
 from tqdm import tqdm
@@ -214,6 +214,13 @@ if __name__ == '__main__':
         '--tmp_dir',
         help='The working directory for temporary files',
         type=Path,
+        default=Path('/dev/shm'),
+    )
+    parser.add_argument(
+        '--scratch_dir',
+        help='The scratch directory for temporary files',
+        type=Path,
+        default=Path('/local/scratch'),
     )
     parser.add_argument(
         '--cellprofiler',
@@ -237,9 +244,15 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    # Set singularity environment variables
-    # os.environ['SINGULARITY_TMPDIR'] = str(args.tmp_dir)
-    # os.environ['SINGULARITY_CACHEDIR'] = str(args.tmp_dir)
+    # Set singularity environment variables to use the scratch directory
+    os.environ['SINGULARITY_TMPDIR'] = str(args.scratch_dir)
+    os.environ['SINGULARITY_CACHEDIR'] = str(args.scratch_dir)
+
+    # Stage the cell profiler pipeline in the scratch directory
+    scratch_cellprofiler = args.scratch_dir / args.cellprofiler.name
+    scratch_pipeline = args.scratch_dir / args.cellprofiler_pipeline.name
+    shutil.copy(args.cellprofiler, scratch_cellprofiler)
+    shutil.copy(args.cellprofiler_pipeline, scratch_pipeline)
 
     # First collect the image sets
     image_sets = collect_image_sets(
@@ -253,8 +266,8 @@ if __name__ == '__main__':
         run_cellprofiler,
         output_dir=args.output_dir,
         tmp_dir=args.tmp_dir,
-        cellprofiler=args.cellprofiler,
-        cellprofiler_pipeline=args.cellprofiler_pipeline,
+        cellprofiler=scratch_cellprofiler,
+        cellprofiler_pipeline=scratch_pipeline,
     )
 
     # Run the cell profiler on each image set in parallel
