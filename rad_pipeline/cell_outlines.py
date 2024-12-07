@@ -271,6 +271,7 @@ if __name__ == '__main__':
         tmp_dir=args.tmp_dir,
         cellprofiler=scratch_cellprofiler,
         cellprofiler_pipeline=scratch_pipeline,
+        scratch_dir=args.scratch_dir
     )
 
     # Run the cell profiler on each image set in parallel
