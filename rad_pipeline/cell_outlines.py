@@ -156,7 +156,7 @@ def run_cellprofiler(
     # TODO: See if we just rename files in the tmp directory,
     # then do bulk mv operation
     # Create the output directory
-    output_dir = output_dir / image_set.treatment
+    output_dir = output_dir / str(image_set.treatment)
     output_dir.mkdir(exist_ok=True, parents=True)
     # Handle the cells CSV file
     cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
