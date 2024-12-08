@@ -178,8 +178,9 @@ def run_cellprofiler(
         for image in src_images:
             new_name = f'{image_set.image_id}_{uuid4()}.png'
             shutil.copy(image, output_dir / new_name)
-    else:
+    elif len(src_images) == 1: 
         shutil.copy(src_images[0], output_dir / f'{image_set.image_id}.png')
+
 
     # Clean up the temporary directory
     shutil.rmtree(_tmp_dir)
