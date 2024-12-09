@@ -18,106 +18,106 @@ print("NUM FILES")
 print(len(files))
 print(" ")
 
-# def stratified_split_with_groups(
-#     filenames: List[str], 
-#     test_size: float = 0.25,
-#     random_state: int = 42
-# ) -> Tuple[np.ndarray, np.ndarray]:
-#     """
-#     Create a stratified train/test split while keeping samples with the same ID in the same split.
-#     Returns indexes that can be used to split both filenames and labels.
+def stratified_split_with_groups(
+    filenames: List[str], 
+    test_size: float = 0.25,
+    random_state: int = 42
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Create a stratified train/test split while keeping samples with the same ID in the same split.
+    Returns indexes that can be used to split both filenames and labels.
     
-#     Args:
-#         filenames: List of filenames in format 'Compound_X_rXXcXXfXX'
-#         test_size: Proportion of data to use for test set
-#         random_state: Random seed for reproducibility
+    Args:
+        filenames: List of filenames in format 'Compound_X_rXXcXXfXX'
+        test_size: Proportion of data to use for test set
+        random_state: Random seed for reproducibility
         
-#     Returns:
-#         Tuple of (train_indices, test_indices) as numpy arrays
-#     """
-#     np.random.seed(random_state)
+    Returns:
+        Tuple of (train_indices, test_indices) as numpy arrays
+    """
+    np.random.seed(random_state)
     
-#     # Extract compound numbers and IDs
-#     compound_groups = defaultdict(dict)
+    # Extract compound numbers and IDs
+    compound_groups = defaultdict(dict)
 
     
-#     # Create mapping of groups to their indices
-#     for idx, filename in enumerate(filenames):
-#         parts = filename.split('-')
-#         compound = parts[0]  # e.g., "Compound_10"
-#         group_id = parts[1]  # e.g., "r02c02f07"
-#         # print("COMPOUND", compound)
-#         # print("GROUP ID", group_id)
-#         # print(" ")
+    # Create mapping of groups to their indices
+    for idx, filename in enumerate(filenames):
+        parts = filename.split('-')
+        compound = parts[0]  # e.g., "Compound_10"
+        group_id = parts[1]  # e.g., "r02c02f07"
+        # print("COMPOUND", compound)
+        # print("GROUP ID", group_id)
+        # print(" ")
         
-#         if group_id not in compound_groups[compound]:
-#             compound_groups[compound][group_id] = []
-#         compound_groups[compound][group_id].append(idx)
+        if group_id not in compound_groups[compound]:
+            compound_groups[compound][group_id] = []
+        compound_groups[compound][group_id].append(idx)
     
-#     # print('COMPOUND GROUPS')
-#     # print(compound_groups)
-#     # print(" ")
-#     # Calculate target number of groups per compound in test set
-#     test_groups_target = {
-#         compound: max(1, int(len(groups) * test_size))
-#         for compound, groups in compound_groups.items()
-#     }
+    # print('COMPOUND GROUPS')
+    # print(compound_groups)
+    # print(" ")
+    # Calculate target number of groups per compound in test set
+    test_groups_target = {
+        compound: max(1, int(len(groups) * test_size))
+        for compound, groups in compound_groups.items()
+    }
     
-#     # Randomly select groups for test and train sets
-#     train_indices = []
-#     test_indices = []
+    # Randomly select groups for test and train sets
+    train_indices = []
+    test_indices = []
     
-#     for compound, groups in compound_groups.items():
-#         group_ids = list(groups.keys())
-#         np.random.shuffle(group_ids)
+    for compound, groups in compound_groups.items():
+        group_ids = list(groups.keys())
+        np.random.shuffle(group_ids)
         
-#         n_test = test_groups_target[compound]
+        n_test = test_groups_target[compound]
         
-#         # Add all indices from test groups
-#         for group_id in group_ids[:n_test]:
-#             test_indices.extend(compound_groups[compound][group_id])
+        # Add all indices from test groups
+        for group_id in group_ids[:n_test]:
+            test_indices.extend(compound_groups[compound][group_id])
             
-#         # Add all indices from train groups
-#         for group_id in group_ids[n_test:]:
-#             train_indices.extend(compound_groups[compound][group_id])
+        # Add all indices from train groups
+        for group_id in group_ids[n_test:]:
+            train_indices.extend(compound_groups[compound][group_id])
     
-#     return np.array(train_indices), np.array(test_indices)
+    return np.array(train_indices), np.array(test_indices)
 
 fields = [x.split('/')[-2] + '-' + x.split('/')[-1][:9] for x in files]
 
-# # print("FIELDS[0]")
-# # print(fields[0])
+# print("FIELDS[0]")
+# print(fields[0])
 
 
-# train_idx, test_idx = stratified_split_with_groups(fields)
+train_idx, test_idx = stratified_split_with_groups(fields)
 
 
-# def prepare_classification_data(images, labels, output_dir):
-#     """
-#     Organize images into class folders based on external label list
+def prepare_classification_data(images, labels, output_dir):
+    """
+    Organize images into class folders based on external label list
     
-#     Args:
-#         image_list (str): Path to file containing image paths
-#         label_list (str): Path to file containing corresponding labels
-#         output_dir (str): Directory to store organized dataset
-#     Returns:
-#         str: Path to organized dataset directory
-#     """
-#     # Create output directory
-#     os.makedirs(output_dir, exist_ok=True)
+    Args:
+        image_list (str): Path to file containing image paths
+        label_list (str): Path to file containing corresponding labels
+        output_dir (str): Directory to store organized dataset
+    Returns:
+        str: Path to organized dataset directory
+    """
+    # Create output directory
+    os.makedirs(output_dir, exist_ok=True)
         
-#     # Create class directories and copy images
-#     for img_path, label in zip(images, labels):
-#         # Create class directory if it doesn't exist
-#         class_dir = os.path.join(output_dir, str(label))
-#         os.makedirs(class_dir, exist_ok=True)
+    # Create class directories and copy images
+    for img_path, label in zip(images, labels):
+        # Create class directory if it doesn't exist
+        class_dir = os.path.join(output_dir, str(label))
+        os.makedirs(class_dir, exist_ok=True)
         
-#         wk = img_path.split('/')[-4]
-#         # Copy image to class directory
-#         img_name = wk + '_' + os.path.basename(img_path)
-#         shutil.copy2(img_path, os.path.join(class_dir, img_name))
+        wk = img_path.split('/')[-4]
+        # Copy image to class directory
+        img_name = wk + '_' + os.path.basename(img_path)
+        shutil.copy2(img_path, os.path.join(class_dir, img_name))
     
-#     return output_dir
+    return output_dir
 
 def setup_classification_config(train_dir, val_dir, class_names, config_path):
     """
