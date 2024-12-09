@@ -12,11 +12,11 @@ import shutil
 import os
 
 
-# # files = glob.glob('/homes/ngetty/data/LUCID/fib_and_htert_results/**/fib_control/**/*.png')
-# files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*.png')
-# print("NUM FILES")
-# print(len(files))
-# print(" ")
+# files = glob.glob('/homes/ngetty/data/LUCID/fib_and_htert_results/**/fib_control/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*.png')
+print("NUM FILES")
+print(len(files))
+print(" ")
 
 # def stratified_split_with_groups(
 #     filenames: List[str], 
@@ -83,7 +83,7 @@ import os
     
 #     return np.array(train_indices), np.array(test_indices)
 
-# fields = [x.split('/')[-2] + '-' + x.split('/')[-1][:9] for x in files]
+fields = [x.split('/')[-2] + '-' + x.split('/')[-1][:9] for x in files]
 
 # # print("FIELDS[0]")
 # # print(fields[0])
@@ -119,46 +119,46 @@ import os
     
 #     return output_dir
 
-# def setup_classification_config(train_dir, val_dir, class_names, config_path):
-#     """
-#     Create YAML configuration for YOLO classification
+def setup_classification_config(train_dir, val_dir, class_names, config_path):
+    """
+    Create YAML configuration for YOLO classification
     
-#     Args:
-#         train_dir (str): Path to organized training data directory
-#         val_dir (str): Path to organized validation data directory
-#         class_names (list): List of class names
-#         config_path (str): Path where to save the YAML config
-#     """
-#     # Convert to absolute paths
-#     train_dir = os.path.abspath(train_dir)
-#     val_dir = os.path.abspath(val_dir)
+    Args:
+        train_dir (str): Path to organized training data directory
+        val_dir (str): Path to organized validation data directory
+        class_names (list): List of class names
+        config_path (str): Path where to save the YAML config
+    """
+    # Convert to absolute paths
+    train_dir = os.path.abspath(train_dir)
+    val_dir = os.path.abspath(val_dir)
     
-#     data_yaml = {
-#         'path': os.path.dirname(train_dir),  # Base path for relative references
-#         'train': os.path.join(train_dir),  # Full path to train directory
-#         'val': os.path.join(val_dir),      # Full path to val directory
-#         'nc': len(class_names),
-#         'names': class_names
-#     }
+    data_yaml = {
+        'path': os.path.dirname(train_dir),  # Base path for relative references
+        'train': os.path.join(train_dir),  # Full path to train directory
+        'val': os.path.join(val_dir),      # Full path to val directory
+        'nc': len(class_names),
+        'names': class_names
+    }
     
-#     # Save YAML configuration
-#     with open(config_path, 'w') as f:
-#         yaml.dump(data_yaml, f, default_flow_style=False)
+    # Save YAML configuration
+    with open(config_path, 'w') as f:
+        yaml.dump(data_yaml, f, default_flow_style=False)
 
 
-# labels = [x.split('/')[-2] for x in files]
+labels = [x.split('/')[-2] for x in files]
 
-# train_dir = prepare_classification_data(
-#         np.array(files)[train_idx],
-#         np.array(labels)[train_idx],
-#         '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/train'
-#     )
+train_dir = prepare_classification_data(
+        np.array(files)[train_idx],
+        np.array(labels)[train_idx],
+        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/train'
+    )
     
-# val_dir = prepare_classification_data(
-#     np.array(files)[test_idx],
-#     np.array(labels)[test_idx],
-#     '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/val'
-# )
+val_dir = prepare_classification_data(
+    np.array(files)[test_idx],
+    np.array(labels)[test_idx],
+    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/val'
+)
 
 # Define your class names
 # class_names = ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12',
