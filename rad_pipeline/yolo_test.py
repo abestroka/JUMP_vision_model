@@ -213,7 +213,7 @@ model = YOLO("yolo11x-cls.pt")
 
 
 # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/dataset/", epochs=100, imgsz=640)
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_1', classes= ['0.001', '0.1', '1.0', '2.0'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_2', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
 
 
 
