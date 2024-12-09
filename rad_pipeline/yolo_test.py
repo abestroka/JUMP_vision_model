@@ -11,18 +11,42 @@ import pandas as pd
 import shutil
 import os
 
+import random
+
+# Path to the images directory
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images'
+
+# Number of files to keep in each subdirectory
+num_files_to_keep = 3000
+
+# Find all subdirectories under the images directory
+subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
+
+for subdir in subdirs:
+    # Find all PNG files in the current subdirectory
+    files = glob.glob(os.path.join(subdir, '*.png'))
+    
+    # If the number of files exceeds the limit, delete extras
+    if len(files) > num_files_to_keep:
+        files_to_delete = random.sample(files, len(files) - num_files_to_keep)
+        for file in files_to_delete:
+            os.remove(file)
+        print(f"Deleted {len(files_to_delete)} files from {subdir}")
+    else:
+        print(f"{subdir} has {len(files)} files, no files deleted.")
+
 
 
 # files = glob.glob('/homes/ngetty/data/LUCID/fib_and_htert_results/**/fib_control/**/*.png')
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/**/*.png')
-print("NUM FILES")
-print(len(files))
-print(" ")
+# files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/**/*.png')
+# print("NUM FILES")
+# print(len(files))
+# print(" ")
 
-files2 = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/1.0/*.png')
-print("NUM FILES2")
-print(len(files2))
-print(" ")
+# files2 = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/1.0/*.png')
+# print("NUM FILES2")
+# print(len(files2))
+# print(" ")
 
 # def stratified_split_with_groups(
 #     filenames: List[str], 
