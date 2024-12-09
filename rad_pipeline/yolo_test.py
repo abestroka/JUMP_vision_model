@@ -12,11 +12,17 @@ import shutil
 import os
 
 
-# # files = glob.glob('/homes/ngetty/data/LUCID/fib_and_htert_results/**/fib_control/**/*.png')
-# files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*.png')
-# print("NUM FILES")
-# print(len(files))
-# print(" ")
+
+# files = glob.glob('/homes/ngetty/data/LUCID/fib_and_htert_results/**/fib_control/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/**/*.png')
+print("NUM FILES")
+print(len(files))
+print(" ")
+
+files2 = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/1.0/*.png')
+print("NUM FILES2")
+print(len(files2))
+print(" ")
 
 # def stratified_split_with_groups(
 #     filenames: List[str], 
@@ -184,11 +190,11 @@ import os
 
 # print("G", g)
 # Load a COCO-pretrained YOLO11n model
-model = YOLO("yolo11x-cls.pt")
+# model = YOLO("yolo11x-cls.pt")
 
 
-# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/dataset/", epochs=100, imgsz=640)
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_1', classes= ['0.001', '0.1', '1.0', '2.0'])
+# # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/dataset/", epochs=100, imgsz=640)
+# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_1', classes= ['0.001', '0.1', '1.0', '2.0'])
 
 
 
