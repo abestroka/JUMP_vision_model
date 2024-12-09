@@ -39,7 +39,7 @@ import random
 ###########
 
 
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_3/images/**/*.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
@@ -178,13 +178,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/dataset/train'
+        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_3/data/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/dataset/val'
+    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_3/data/dataset/val'
 )
 
 # Define your class names
@@ -204,7 +204,7 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/datasets/config.yaml'
+    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_3/data/datasets/config.yaml'
     )
 
 # g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
