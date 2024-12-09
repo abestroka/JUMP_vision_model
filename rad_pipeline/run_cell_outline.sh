@@ -40,7 +40,7 @@ SECONDS=0
 plate="rpe_rad"
 week='week_four'
 images="/eagle/FoundEpidem/astroka/rpe/week_four/20241120_Weel4_RPE-1/20241119_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W4P3B__2024-11-20T09_07_12-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_rpe_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_four_rpe_layout.xlsx"
 # export SINGULARITY_TMPDIR=/eagle/projects/FoundEpidem/astroka
 # export SINGULARITY_CACHEDIR=/eagle/projects/FoundEpidem/astroka
 # python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/rpe/week_one/temp --tmp_dir /dev/shm --num_workers 32
