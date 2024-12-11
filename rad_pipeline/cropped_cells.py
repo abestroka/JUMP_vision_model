@@ -141,7 +141,6 @@ def run_cellprofiler(
         f'-i {tmp_input_dir} '
         f'-o {tmp_output_dir}'
     )
-    # print(" BEFORE SUBPROCESS")
     # Run the command and check for errors
     try:
         subprocess.run(command.split(), check=True)
@@ -151,7 +150,6 @@ def run_cellprofiler(
     except Exception as e:
         print(f'Unexpected error: {e}')
         return
-    # print("AFTER")
     # Now we need to process and move the output files
     # TODO: See if we just rename files in the tmp directory,
     # then do bulk mv operation

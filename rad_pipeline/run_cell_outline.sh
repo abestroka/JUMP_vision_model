@@ -37,11 +37,11 @@ SECONDS=0
 
 
 
-plate="rpe_rad"
+plate="fib_rad"
 week='week_one'
-images="/eagle/FoundEpidem/astroka/rpe/week_one/20241028_Week1_RPE-1/20241029_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W1P3_1__2024-10-29T17_02_33-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_rpe_layout.xlsx"
+images="/eagle/FoundEpidem/astroka/fib_and_htert/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1P3_1__2024-10-02T15_35_53-Measurement1/Images"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
 # export SINGULARITY_TMPDIR=/eagle/projects/FoundEpidem/astroka
 # export SINGULARITY_CACHEDIR=/eagle/projects/FoundEpidem/astroka
 # python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/rpe/week_one/temp --tmp_dir /dev/shm --num_workers 32
-python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/rpe/week_one/temp --tmp_dir /dev/shm --num_workers 32
+python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/fib_and_htert/week_one/temp --tmp_dir /dev/shm --num_workers 32
