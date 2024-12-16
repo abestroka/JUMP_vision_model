@@ -14,26 +14,26 @@ import os
 import random
 
 # # Path to the images directory
-# base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_4/images'
+base_path = '/eagle/FoundEpidem/astroka/yolo/fib_control_seg_1/images'
 
-# # Number of files to keep in each subdirectory
-# num_files_to_keep = 2000
+# Number of files to keep in each subdirectory
+num_files_to_keep = 2000
 
-# # Find all subdirectories under the images directory
-# subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
+# Find all subdirectories under the images directory
+subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
 
-# for subdir in subdirs:
-#     # Find all PNG files in the current subdirectory
-#     files = glob.glob(os.path.join(subdir, '*.png'))
+for subdir in subdirs:
+    # Find all PNG files in the current subdirectory
+    files = glob.glob(os.path.join(subdir, '*.png'))
     
-#     # If the number of files exceeds the limit, delete extras
-#     if len(files) > num_files_to_keep:
-#         files_to_delete = random.sample(files, len(files) - num_files_to_keep)
-#         for file in files_to_delete:
-#             os.remove(file)
-#         print(f"Deleted {len(files_to_delete)} files from {subdir}")
-#     else:
-#         print(f"{subdir} has {len(files)} files, no files deleted.")
+    # If the number of files exceeds the limit, delete extras
+    if len(files) > num_files_to_keep:
+        files_to_delete = random.sample(files, len(files) - num_files_to_keep)
+        for file in files_to_delete:
+            os.remove(file)
+        print(f"Deleted {len(files_to_delete)} files from {subdir}")
+    else:
+        print(f"{subdir} has {len(files)} files, no files deleted.")
 
 ###############
 ###########
@@ -210,11 +210,13 @@ import random
 # g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
 
 # print("G", g)
+
+
 # Load a COCO-pretrained YOLO11n model
-model = YOLO("yolo11x-cls.pt")
+# model = YOLO("yolo11x-cls.pt")
 
 
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_4/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_4', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
+# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_4/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_4', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
 
 
 
