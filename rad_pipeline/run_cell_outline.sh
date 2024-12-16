@@ -37,9 +37,9 @@ SECONDS=0
 
 
 
-plate="fib_rad"
+plate="fib_control"
 week='week_three'
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_three/20241009_NewWeek3/20241009_ANL_CellPainting_W3P3_1__2024-10-09T22_29_20-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/fib_and_htert/week_three/20241009_NewWeek3/20241009_ANL_CellPainting_W3C1_1__2024-10-09T23_18_33-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_three_fib_layout.xlsx"
 # export SINGULARITY_TMPDIR=/eagle/projects/FoundEpidem/astroka
 # export SINGULARITY_CACHEDIR=/eagle/projects/FoundEpidem/astroka
