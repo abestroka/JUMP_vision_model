@@ -216,7 +216,7 @@ import random
 model = YOLO("yolo11x-cls.pt")
 
 
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_4/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_4', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/fib_control_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='fib_control_seg_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
 
 
 
