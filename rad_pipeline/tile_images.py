@@ -116,12 +116,12 @@ def main(args):
     weeks = ['week_one', 'week_two', 'week_three', 'week_four']
 
     # remove contents of directory
-    dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
-    if os.path.isdir(dir_path):
-        for item in os.listdir(dir_path):
-            item_path = os.path.join(dir_path, item)
-            if os.path.isdir(item_path):
-                shutil.rmtree(item_path)
+    # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
+    # if os.path.isdir(dir_path):
+    #     for item in os.listdir(dir_path):
+    #         item_path = os.path.join(dir_path, item)
+    #         if os.path.isdir(item_path):
+    #             shutil.rmtree(item_path)
 
     for week in weeks:
         for rad in rads:
