@@ -115,6 +115,14 @@ def main(args):
     rads = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
     weeks = ['week_one', 'week_two', 'week_three', 'week_four']
 
+    # remove contents of directory
+    dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
+    if os.path.isdir(dir_path):
+        for item in os.listdir(dir_path):
+            item_path = os.path.join(dir_path, item)
+            if os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+
     for week in weeks:
         for rad in rads:
             # image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
@@ -125,12 +133,12 @@ def main(args):
             #     os.mkdir(output_folder)
 
             # remove contents of directory
-            dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
-            if os.path.isdir(dir_path):
-                for item in os.listdir(dir_path):
-                    item_path = os.path.join(dir_path, item)
-                    if os.path.isdir(item_path):
-                        shutil.rmtree(item_path)
+            # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
+            # if os.path.isdir(dir_path):
+            #     for item in os.listdir(dir_path):
+            #         item_path = os.path.join(dir_path, item)
+            #         if os.path.isdir(item_path):
+            #             shutil.rmtree(item_path)
 
                 
             segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage, curr_color)
