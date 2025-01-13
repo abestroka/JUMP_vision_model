@@ -7,6 +7,7 @@ def is_tile_yellow(tile, threshold, percentage_required, curr_color):
     tile = tile.convert('RGB')
     yellow_pixels = 0
     total_pixels = tile.width * tile.height
+    print("CURR COLOR", curr_color)
     if curr_color == "yellow":
         yellow_rgb = (255, 255, 0)
     elif curr_color == "green":
@@ -101,6 +102,7 @@ def main(args):
     yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
     # yellow_percentage = 1.0       # Minimum percentage of yellow pixels required to save the tile
     yellow_percentage = 0.1 * float(percent)
+    print("COLOR", color)
     if color == "1":
         curr_color = "white"
     elif color == "3":
