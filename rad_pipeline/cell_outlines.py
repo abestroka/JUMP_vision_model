@@ -90,7 +90,7 @@ def collect_image_sets(
                         mito = img
                     else:
                         good_set = False
-                if good_set == True:
+                if dna and rna and agp and er and brightfield and mito:
                     image_sets.append(
                         ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
                     )
