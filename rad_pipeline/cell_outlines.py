@@ -68,12 +68,12 @@ def collect_image_sets(
                     if f'f0{field}' in file and f'p0{stack}' in file
                 ]
                 # iterate through images of this set
-                dna = 'NA'
-                rna = 'NA'
-                agp = 'NA'
-                er = 'NA'
-                brightfield = 'NA'
-                mito = 'NA'
+                # dna = 'NA'
+                # rna = 'NA'
+                # agp = 'NA'
+                # er = 'NA'
+                # brightfield = 'NA'
+                # mito = 'NA'
                 good_set = True
                 for img in curr_images:
                     if 'ch2' in img:
@@ -90,10 +90,9 @@ def collect_image_sets(
                         mito = img
                     else:
                         good_set = False
-                if dna != 'NA' and rna != 'NA' and mito != 'NA' and agp != 'NA' and er != 'NA' and brightfield != 'NA':
-                    image_sets.append(
-                        ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
-                    )
+                image_sets.append(
+                    ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
+                )
     return image_sets
 
 
