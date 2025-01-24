@@ -74,6 +74,7 @@ def collect_image_sets(
                 # er = 'NA'
                 # brightfield = 'NA'
                 # mito = 'NA'
+                good_set = True
                 for img in curr_images:
                     if 'ch2' in img:
                         dna = img
@@ -87,9 +88,12 @@ def collect_image_sets(
                         brightfield = img
                     elif 'ch8' in img:
                         mito = img
-                image_sets.append(
-                    ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
-                )
+                    else:
+                        good_set = False
+                if good_set == True:
+                    image_sets.append(
+                        ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
+                    )
     return image_sets
 
 
