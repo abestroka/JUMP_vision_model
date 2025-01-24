@@ -74,7 +74,8 @@ def collect_image_sets(
                 # er = 'NA'
                 # brightfield = 'NA'
                 # mito = 'NA'
-                good_set = True
+                dna, rna, agp, er, mito, brightfield = None, None, None, None, None, None
+
                 for img in curr_images:
                     if 'ch2' in img:
                         dna = img
@@ -89,10 +90,15 @@ def collect_image_sets(
                     elif 'ch8' in img:
                         mito = img
                     else:
-                        good_set = False
-                image_sets.append(
-                    ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
-                )
+                if all([dna, rna, agp, er, mito, brightfield]):
+                    image_sets.append(
+                        ImageSet(dna, rna, agp, er, mito, brightfield, treatment)
+                    )
+                else:
+                    print("Incomplete image set. Skipping.")
+                # image_sets.append(
+                #     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
+                # )
     return image_sets
 
 
