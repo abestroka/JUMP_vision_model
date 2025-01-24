@@ -37,9 +37,9 @@ SECONDS=0
 
 
 
-plate="rpe_control"
+plate="rpe_rad"
 week='week_five'
-images="/eagle/FoundEpidem/astroka/rpe/week_five/20241206_Week5-6_RPE-1/20241205_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W5C1__2024-12-06T05_59_28-Measurement1/Images"
+images="/eagle/FoundEpidem/astroka/rpe/week_five/20241206_Week5-6_RPE-1/20241205_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W5P3__2024-12-05T17_45_23-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_five_rpe_layout.xlsx"
 # export SINGULARITY_TMPDIR=/eagle/projects/FoundEpidem/astroka
 # export SINGULARITY_CACHEDIR=/eagle/projects/FoundEpidem/astroka
