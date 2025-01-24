@@ -159,23 +159,22 @@ def run_cellprofiler(
     output_dir = output_dir / str(image_set.treatment)
     output_dir.mkdir(exist_ok=True, parents=True)
     # Handle the cells CSV file
-    #TODO
 
-    # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
-    # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
+    cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
+    shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
     
     # Handle the image CSV file
-    # image_csv = next(tmp_output_dir.glob('*Image.csv'))
-    # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
+    image_csv = next(tmp_output_dir.glob('*Image.csv'))
+    shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
     # Calculate the confluency and write it to a file
-    # df = pd.read_csv(image_csv)
-    # totalarea = df['AreaOccupied_TotalArea_Cells'][0]
-    # cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
-    # confluency = float(cellarea / totalarea)
-    # with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
-    #     f.write(str(confluency))
-    
+    df = pd.read_csv(image_csv)
+    totalarea = df['AreaOccupied_TotalArea_Cells'][0]
+    cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
+    confluency = float(cellarea / totalarea)
+    with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
+        f.write(str(confluency))
+
     # Gather the segmented images and move them to the appropriate directory
     src_images = list(tmp_output_dir.glob('*.png'))
     # If there are more than one image, we need to assign unique names
@@ -240,7 +239,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/no_outlines.cppipe',
         ),
         type=Path,
     )
