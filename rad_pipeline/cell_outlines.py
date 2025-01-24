@@ -67,6 +67,8 @@ def collect_image_sets(
                     for file in well_images
                     if f'f0{field}' in file and f'p0{stack}' in file
                 ]
+                print("CURR_IMAGES")
+                print(curr_images)
                 # iterate through images of this set
                 # dna = 'NA'
                 # rna = 'NA'
@@ -97,7 +99,7 @@ def collect_image_sets(
                         ImageSet(dna, rna, agp, er, mito, brightfield, treatment)
                     )
                 else:
-                    print("Incomplete image set. Skipping.")
+                    print("")
                 # image_sets.append(
                 #     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
                 # )
