@@ -62,6 +62,7 @@ def collect_image_sets(
         # iterate through fields
         for field in range(1, 10):
             for stack in range(1, 6):
+                print("field:", field, "stack:", stack)
                 curr_images = [
                     file
                     for file in well_images
