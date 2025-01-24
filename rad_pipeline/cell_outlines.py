@@ -89,7 +89,9 @@ def collect_image_sets(
                         brightfield = img
                     elif 'ch8' in img:
                         mito = img
-                        
+                    
+                    print(img)
+
                 if all([dna, rna, agp, er, mito, brightfield]):
                     image_sets.append(
                         ImageSet(dna, rna, agp, er, mito, brightfield, treatment)
