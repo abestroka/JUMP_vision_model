@@ -60,7 +60,6 @@ def collect_image_sets(
         # Field is f09 (field 9)
         # Stack is p14 (stack 14)
         # iterate through fields
-        print("LOCATION", location)
         for field in range(1, 10):
             for stack in range(1, 6):
                 # print("field:", field, "stack:", stack)
@@ -69,8 +68,6 @@ def collect_image_sets(
                     for file in well_images
                     if f'f0{field}' in file and f'p0{stack}' in file
                 ]
-                print("CURR_IMAGES")
-                print(curr_images)
                 # iterate through images of this set
                 # dna = 'NA'
                 # rna = 'NA'
@@ -94,14 +91,11 @@ def collect_image_sets(
                     elif 'ch8' in img:
                         mito = img
                     
-                    print(img)
-
                 if all([dna, rna, agp, er, mito, brightfield]):
                     image_sets.append(
                         ImageSet(dna, rna, agp, er, mito, brightfield, treatment)
                     )
                 else:
-                    print("")
                 # image_sets.append(
                 #     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
                 # )
