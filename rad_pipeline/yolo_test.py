@@ -14,10 +14,10 @@ import os
 import random
 
 # Path to the images directory
-base_path = '/eagle/FoundEpidem/astroka/yolo/fib_control_tiles_4/images'
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/images'
 
 # Number of files to keep in each subdirectory
-num_files_to_keep = 200
+num_files_to_keep = 2000
 
 # Find all subdirectories under the images directory
 subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
@@ -215,10 +215,10 @@ for subdir in subdirs:
 #############
 
 # Load a COCO-pretrained YOLO11n model
-model = YOLO("yolo11x-cls.pt")
+# model = YOLO("yolo11x-cls.pt")
 
 
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/fib_control_seg_4/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='fib_control_seg_4', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
+# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/fib_control_seg_4/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='fib_control_seg_4', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
 
 
 
