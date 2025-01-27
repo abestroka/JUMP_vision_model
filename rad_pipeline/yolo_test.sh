@@ -37,8 +37,8 @@ export no_proxy="admin,polaris-adminvm-01,localhost,*.cm.polaris.alcf.anl.gov,po
 echo "NUM_OF_NODES= ${NNODES} TOTAL_NUM_RANKS= ${NTOTRANKS} RANKS_PER_NODE= ${NRANKS_PER_NODE} THREADS_PER_RANK= ${NTHREADS}"
 
 
-# python ~/workspace/JUMP_vision_model/rad_pipeline/yolo_test.py
-python ~/workspace/JUMP_vision_model/rad_pipeline/yolo_compare.py
+python ~/workspace/JUMP_vision_model/rad_pipeline/yolo_test.py
+# python ~/workspace/JUMP_vision_model/rad_pipeline/yolo_compare.py
 
 # path1="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images"
 # path2="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images"
