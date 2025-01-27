@@ -39,7 +39,7 @@ import random
 ###########
 
 
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/images/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/images/**/*p03.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
@@ -112,8 +112,8 @@ def stratified_split_with_groups(
 
 fields = [x.split('/')[-2] + '-' + x.split('/')[-1][:9] for x in files]
 
-# print("FIELDS[0]")
-# print(fields[0])
+print("FIELDS[0]")
+print(fields[0])
 
 
 train_idx, test_idx = stratified_split_with_groups(fields)
@@ -219,7 +219,7 @@ model = YOLO("yolo11x-cls.pt")
 
 
 # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_whole_2_vs_9', classes= ['week_two', 'week_nine'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_whole_2_vs_9_p03', classes= ['week_two', 'week_nine'])
 
 
 
