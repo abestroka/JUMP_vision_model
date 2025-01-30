@@ -140,7 +140,7 @@ def main(args):
                 os.mkdir(output_folder)
             
             print("IMAGE_PATH", image_path)
-            print("OUTPUT PATH", output_path)
+            print("OUTPUT PATH", output_folder)
 
             # remove contents of directory
             # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
