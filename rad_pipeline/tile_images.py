@@ -98,15 +98,11 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 # output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-def main():
+def main(args):
     print("MAIN START")
-    # tiles = vars(args)["tiles"]
-    # color = vars(args)["color"]
-    # percent = vars(args)["percent"]
-    tiles = "10"
-    color = "3"
-    percent = "10"
-
+    tiles = vars(args)["tiles"]
+    color = vars(args)["color"]
+    percent = vars(args)["percent"]
     # rows, cols = 10, 10
     rows, cols = int(tiles), int(tiles)
 
@@ -170,33 +166,32 @@ def main():
 
 if __name__ == "__main__":
     print('START')
-    # parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
 
-    # parser.add_argument(
-    # "-c",
-    # "--color",
-    # help="source folder name",
-    # type=str,
-    # required=True,
-    # )
+    parser.add_argument(
+    "-c",
+    "--color",
+    help="source folder name",
+    type=str,
+    required=True,
+    )
 
-    # parser.add_argument(
-    # "-t",
-    # "--tiles",
-    # help="source folder name",
-    # type=str,
-    # required=True,
-    # )
+    parser.add_argument(
+    "-t",
+    "--tiles",
+    help="source folder name",
+    type=str,
+    required=True,
+    )
 
-    # parser.add_argument(
-    # "-p",
-    # "--percent",
-    # help="source folder name",
-    # type=str,
-    # required=True,
-    # )
+    parser.add_argument(
+    "-p",
+    "--percent",
+    help="source folder name",
+    type=str,
+    required=True,
+    )
 
 
-    # args = parser.parse_args()
-    # main(args)
-    main()
+    args = parser.parse_args()
+    main(args)
