@@ -121,7 +121,7 @@ def main(args):
     rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
     # rads = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
     # weeks = ['week_one', 'week_two', 'week_three', 'week_four']
-    weeks = ['week_two']
+    weeks = ['week_nine']
 
     # remove contents of directory
     # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
@@ -137,7 +137,7 @@ def main(args):
             # image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
             # output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
             image_path = f'/eagle/FoundEpidem/astroka/rpe/'+week+'/results/rpe_rad/'+rad+'/'
-            output_folder = f'/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2/images/'+rad+'/'
+            output_folder = f'/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/images/'+rad+'/'
             if os.path.isdir(output_folder) == False:
                 print("output folder made")
                 os.mkdir(output_folder)
