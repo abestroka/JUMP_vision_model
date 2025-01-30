@@ -135,8 +135,12 @@ def main(args):
             # output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
             image_path = f'/eagle/FoundEpidem/astroka/rpe/'+week+'/results/rpe_rad/'+rad+'/'
             output_folder = f'/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2/images/'+rad+'/'
-            # if os.path.isdir(output_folder) == False:
-            #     os.mkdir(output_folder)
+            if os.path.isdir(output_folder) == False:
+                print("output folder made")
+                os.mkdir(output_folder)
+            
+            print("IMAGE_PATH", image_path)
+            print("OUTPUT PATH", output_path)
 
             # remove contents of directory
             # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
