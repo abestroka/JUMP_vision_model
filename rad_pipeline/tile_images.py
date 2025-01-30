@@ -99,6 +99,7 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 
 # Set rows and cols for segmentation
 def main(args):
+    print("MAIN START")
     tiles = vars(args)["tiles"]
     color = vars(args)["color"]
     percent = vars(args)["percent"]
@@ -109,6 +110,7 @@ def main(args):
     yellow_threshold = 50         # Tolerance for yellow (e.g. ±50 from 255,255,0)
     # yellow_percentage = 1.0       # Minimum percentage of yellow pixels required to save the tile
     yellow_percentage = 0.1 * float(percent)
+    print("THRESHOLD SET")
     # print("COLOR", color)
     if color == "1":
         curr_color = "white"
@@ -128,9 +130,10 @@ def main(args):
     #         item_path = os.path.join(dir_path, item)
     #         if os.path.isdir(item_path):
     #             shutil.rmtree(item_path)
-
+    print("START OF LOOP")
     for week in weeks:
         for rad in rads:
+            print(week, rad)
             # image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
             # output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
             image_path = f'/eagle/FoundEpidem/astroka/rpe/'+week+'/results/rpe_rad/'+rad+'/'
