@@ -165,6 +165,7 @@ def main(args):
 # segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage)
 
 if __name__ == "__main__":
+    print('START')
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
