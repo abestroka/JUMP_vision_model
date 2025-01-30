@@ -39,7 +39,8 @@ SECONDS=0
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
 # python ~/workspace/JUMP_vision_model/rad_pipeline/CNN.py
 echo "python start"
-python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py --color '3' --tiles '10' --percent '10'
+# python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py --color '3' --tiles '10' --percent '10'
+python ~/workspace/JUMP_vision_model/rad_pipeline/tile_images.py
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/pull_pngs.py
 # python ~/workspace/JUMP_vision_model/rad_pipeline/ViT.py

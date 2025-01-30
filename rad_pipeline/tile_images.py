@@ -98,11 +98,15 @@ def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yello
 # output_folder = f'/eagle/FoundEpidem/astroka/tiles/'  # Folder to save the tiles
 
 # Set rows and cols for segmentation
-def main(args):
+def main():
     print("MAIN START")
-    tiles = vars(args)["tiles"]
-    color = vars(args)["color"]
-    percent = vars(args)["percent"]
+    # tiles = vars(args)["tiles"]
+    # color = vars(args)["color"]
+    # percent = vars(args)["percent"]
+    tiles = "10"
+    color = "3"
+    percent = "10"
+
     # rows, cols = 10, 10
     rows, cols = int(tiles), int(tiles)
 
@@ -143,7 +147,7 @@ def main(args):
                 os.mkdir(output_folder)
             
             print("IMAGE_PATH", image_path)
-            print("OUTPUT PATH", output_folde)
+            print("OUTPUT PATH", output_folder)
 
             # remove contents of directory
             # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
@@ -166,32 +170,33 @@ def main(args):
 
 if __name__ == "__main__":
     print('START')
-    parser = argparse.ArgumentParser()
+    # parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-    "-c",
-    "--color",
-    help="source folder name",
-    type=str,
-    required=True,
-    )
+    # parser.add_argument(
+    # "-c",
+    # "--color",
+    # help="source folder name",
+    # type=str,
+    # required=True,
+    # )
 
-    parser.add_argument(
-    "-t",
-    "--tiles",
-    help="source folder name",
-    type=str,
-    required=True,
-    )
+    # parser.add_argument(
+    # "-t",
+    # "--tiles",
+    # help="source folder name",
+    # type=str,
+    # required=True,
+    # )
 
-    parser.add_argument(
-    "-p",
-    "--percent",
-    help="source folder name",
-    type=str,
-    required=True,
-    )
+    # parser.add_argument(
+    # "-p",
+    # "--percent",
+    # help="source folder name",
+    # type=str,
+    # required=True,
+    # )
 
 
-    args = parser.parse_args()
-    main(args)
+    # args = parser.parse_args()
+    # main(args)
+    main()
