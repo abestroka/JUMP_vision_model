@@ -11,10 +11,11 @@ def is_tile_yellow(tile, threshold, percentage_required, curr_color):
     if curr_color == "yellow":
         yellow_rgb = (255, 255, 0)
     elif curr_color == "green":
-        yellow_rgb = (0, 255, 0)
+        # yellow_rgb = (0, 255, 0)
+        yellow_rgb = (0, 150, 0)
     elif curr_color == "white":
         yellow_rgb = (255, 255, 255)
-    tolerance = 50 
+    tolerance = threshold
 
     print()
 
@@ -26,7 +27,8 @@ def is_tile_yellow(tile, threshold, percentage_required, curr_color):
 
 
     yellow_percentage = (yellow_pixels / total_pixels) * 100
-    # print("YELLOW PERCENTAGE", yellow_percentage)
+    print("YELLOW PERCENTAGE", yellow_percentage)
+    print("PERCENTAGE REQUIRED", percentage_required)
     return yellow_percentage >= percentage_required
 
 def threshold_images(image_path, confluency):
@@ -51,11 +53,14 @@ def threshold_images(image_path, confluency):
 def segment_image(image_path, output_folder, rows, cols, yellow_threshold, yellow_percentage, curr_color):
 
     # images = os.listdir(image_path)
-    confluency = 0.2
+    #threshold for 10% confluency
+    confluency = 0.1
     images = threshold_images(image_path, confluency)
+    #images = images that pass confluency thresholding
     tile_num = 0
     for image in images:
         # print("IMAGE", image)
+        #TODO only one stack? ie 'p03.png'
         if '.png' in image:
             curr_path = os.path.join(image_path, image)
 
@@ -111,9 +116,10 @@ def main(args):
         curr_color = "green"
     else:
         curr_color = "yellow"
-    # rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
-    rads = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
-    weeks = ['week_one', 'week_two', 'week_three', 'week_four']
+    rads = ['0.001', '0.01', '0.1', '1.0', '2.0']
+    # rads = ['untreated', 'Compound_1', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'Compound_10', 'Compound_11', 'Compound_12', 'Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17']
+    # weeks = ['week_one', 'week_two', 'week_three', 'week_four']
+    weeks = ['week_two']
 
     # remove contents of directory
     # dir_path = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'
@@ -127,8 +133,8 @@ def main(args):
         for rad in rads:
             # image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_rad/'+rad+'/'
             # output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_rad/'+rad+'/'
-            image_path = '/eagle/FoundEpidem/astroka/fib_and_htert/'+week+'/results/fib_control/'+rad+'/'
-            output_folder = f'/eagle/FoundEpidem/astroka/fib_and_htert/cnn_data/'+week+'/fib_control/'+rad+'/'
+            image_path = f'/eagle/FoundEpidem/astroka/rpe/'+week+'/results/rpe_rad/'+rad+'/'
+            output_folder = f'/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2/images/'+rad+'/'
             # if os.path.isdir(output_folder) == False:
             #     os.mkdir(output_folder)
 
