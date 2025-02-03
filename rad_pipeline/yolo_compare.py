@@ -39,7 +39,7 @@ import random
 ###########
 
 
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/images/**/*p03.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2_vs_9/images/**/*p03.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
@@ -178,13 +178,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        '/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/dataset/train'
+        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2_vs_9/data/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    '/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/dataset/val'
+    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2_vs_9/data/dataset/val'
 )
 
 # Define your class names
@@ -204,7 +204,7 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/datasets/config.yaml'
+    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2_vs_9/data/datasets/config.yaml'
     )
 
 # g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
@@ -219,7 +219,7 @@ model = YOLO("yolo11x-cls.pt")
 
 
 # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_whole_2_vs_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_whole_2_vs_9_p03', classes= ['week_two', 'week_nine'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_2_vs_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_tiles_2_vs_9_p03', classes= ['week_two', 'week_nine'])
 
 
 
