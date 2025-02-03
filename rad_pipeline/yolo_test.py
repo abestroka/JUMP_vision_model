@@ -14,7 +14,7 @@ import os
 import random
 
 # Path to the images directory
-base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images'
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/rpe_rad_seg'
 
 # Number of files to keep in each subdirectory
 num_files_to_keep = 2000
@@ -40,7 +40,7 @@ for subdir in subdirs:
 
 
 # files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_9/images/**/*p03.png')
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/rpe_rad_seg/**/*.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
