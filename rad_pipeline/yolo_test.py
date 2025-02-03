@@ -14,7 +14,7 @@ import os
 import random
 
 # Path to the images directory
-base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/rpe_rad_seg'
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/rpe_rad_seg/'
 
 # Number of files to keep in each subdirectory
 num_files_to_keep = 2000
