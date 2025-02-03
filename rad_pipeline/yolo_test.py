@@ -14,7 +14,7 @@ import os
 import random
 
 # Path to the images directory
-base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/images'
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images'
 
 # Number of files to keep in each subdirectory
 num_files_to_keep = 2000
@@ -40,7 +40,7 @@ for subdir in subdirs:
 
 
 # files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_9/images/**/*p03.png')
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/images/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/images/**/*.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
@@ -179,13 +179,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/data/dataset/train'
+        '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/data/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/data/dataset/val'
+    '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/data/dataset/val'
 )
 
 # Define your class names
@@ -205,7 +205,7 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/data/datasets/config.yaml'
+    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/data/datasets/config.yaml'
     )
 
 # g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
@@ -216,11 +216,11 @@ setup_classification_config(
 #############
 
 # Load a COCO-pretrained YOLO11n model
-model = YOLO("yolo11x-cls.pt")
+# model = YOLO("yolo11x-cls.pt")
 
 
-# results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_tiles_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_tiles_9', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
+# # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_9/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_9', classes= ['0.001', '0.01', '0.1', '1.0', '2.0'])
 
 
 
