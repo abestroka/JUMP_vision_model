@@ -445,9 +445,6 @@ setup_classification_config(
     config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_9/data/datasets/config.yaml'
     )
 
-# g = glob.glob('/eagle/FoundEpidem/astroka/yolo/dataset/**/**/*.png')
-
-# print("G", g)
 
 #################
 #############
