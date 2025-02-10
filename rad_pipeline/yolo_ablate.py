@@ -1,20 +1,30 @@
 import os
 import glob
-import shutil
 import numpy as np
+import shutil
+import cv2
 import yaml
+import torch
 from collections import defaultdict
 from typing import List, Tuple
+from tqdm import tqdm
 from ultralytics import YOLO
-import torch
 
-# Load Image Paths
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/images/**/*.png')
+# Define paths
+IMAGE_DIR = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/images/**/*.png"
+OUTPUT_FEATURES = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/features.npz"
+TRAIN_DIR = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/train"
+VAL_DIR = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/val"
+CONFIG_PATH = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/datasets/config.yaml"
 
-print("NUM FILES:", len(files))
+# Get all image file paths
+files = glob.glob(IMAGE_DIR)
+print(f"NUM FILES: {len(files)}\n")
 
-# Stratified Train/Test Split
 def stratified_split_with_groups(filenames: List[str], test_size: float = 0.25, random_state: int = 42) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Perform a stratified train/test split while keeping groups intact.
+    """
     np.random.seed(random_state)
     compound_groups = defaultdict(dict)
 
@@ -22,6 +32,7 @@ def stratified_split_with_groups(filenames: List[str], test_size: float = 0.25, 
         parts = filename.split('-')
         compound = parts[0]
         group_id = parts[1]
+        
         if group_id not in compound_groups[compound]:
             compound_groups[compound][group_id] = []
         compound_groups[compound][group_id].append(idx)
@@ -32,8 +43,8 @@ def stratified_split_with_groups(filenames: List[str], test_size: float = 0.25, 
     for compound, groups in compound_groups.items():
         group_ids = list(groups.keys())
         np.random.shuffle(group_ids)
+
         n_test = test_groups_target[compound]
-        
         for group_id in group_ids[:n_test]:
             test_indices.extend(compound_groups[compound][group_id])
         for group_id in group_ids[n_test:]:
@@ -41,87 +52,88 @@ def stratified_split_with_groups(filenames: List[str], test_size: float = 0.25, 
 
     return np.array(train_indices), np.array(test_indices)
 
+# Extract dataset fields
 fields = [x.split('/')[-2] + '-' + x.split('/')[-1][:9] for x in files]
 train_idx, test_idx = stratified_split_with_groups(fields)
 
-# Organize images into class folders
 def prepare_classification_data(images, labels, output_dir):
+    """
+    Organize images into class-labeled folders.
+    """
     os.makedirs(output_dir, exist_ok=True)
+
     for img_path, label in zip(images, labels):
         class_dir = os.path.join(output_dir, str(label))
         os.makedirs(class_dir, exist_ok=True)
-        wk = img_path.split('/')[-4]
-        img_name = wk + '_' + os.path.basename(img_path)
+        
+        img_name = img_path.split('/')[-4] + '_' + os.path.basename(img_path)
         shutil.copy2(img_path, os.path.join(class_dir, img_name))
+
     return output_dir
 
 labels = [x.split('/')[-2] for x in files]
-train_dir = prepare_classification_data(np.array(files)[train_idx], np.array(labels)[train_idx], '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/train')
-val_dir = prepare_classification_data(np.array(files)[test_idx], np.array(labels)[test_idx], '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/val')
 
-# Setup YAML config
+train_dir = prepare_classification_data(np.array(files)[train_idx], np.array(labels)[train_idx], TRAIN_DIR)
+val_dir = prepare_classification_data(np.array(files)[test_idx], np.array(labels)[test_idx], VAL_DIR)
+
 def setup_classification_config(train_dir, val_dir, class_names, config_path):
+    """
+    Create YOLO classification YAML configuration.
+    """
+    train_dir, val_dir = os.path.abspath(train_dir), os.path.abspath(val_dir)
     data_yaml = {
         'path': os.path.dirname(train_dir),
-        'train': os.path.abspath(train_dir),
-        'val': os.path.abspath(val_dir),
+        'train': train_dir,
+        'val': val_dir,
         'nc': len(class_names),
         'names': class_names
     }
+    
     with open(config_path, 'w') as f:
         yaml.dump(data_yaml, f, default_flow_style=False)
 
-class_names = ['week_two', 'week_eight']
-setup_classification_config(train_dir, val_dir, class_names, '/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/datasets/config.yaml')
+# Define class names
+class_names = ['week_two', 'week_nine']
+setup_classification_config(train_dir, val_dir, class_names, CONFIG_PATH)
 
-# Load YOLO Model (Feature Extraction)
+# Load pre-trained YOLO model
 model = YOLO("yolo11x-cls.pt")
 
-# Feature Extraction from YOLO
-def extract_features(model, image_paths):
+def extract_features(model, image_paths, output_file):
     """
-    Extracts deep features from YOLO backbone (before classification head)
+    Extract features from images using YOLO and save them.
     """
-    features = []
-    for img_path in image_paths:
-        results = model(img_path, feature=True)  # Extract features
-        feature_vector = results[0].features.cpu().numpy()  # Convert to numpy
-        features.append(feature_vector)
-    return np.array(features)
+    features, img_names = [], []
+    
+    for img_path in tqdm(image_paths, desc="Extracting Features"):
+        img = cv2.imread(img_path)
+        img = cv2.resize(img, (640, 640))
+        img = torch.tensor(img).permute(2, 0, 1).unsqueeze(0).float()
+        
+        with torch.no_grad():
+            preds = model(img)  # Extract features
+            embedding = preds[0].cpu().numpy()  # Convert to NumPy
 
-# Extract features for Train and Validation
-train_features = extract_features(model, np.array(files)[train_idx])
-val_features = extract_features(model, np.array(files)[test_idx])
+        features.append(embedding)
+        img_names.append(os.path.basename(img_path))
 
-# Save Features
-np.save('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/features/train_features.npy', train_features)
-np.save('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/features/val_features.npy', val_features)
+    np.savez(output_file, features=features, img_names=img_names)
+    print(f"Saved extracted features to {output_file}")
 
-# Ablation Study: Remove Specific Features
-def ablate_features(features, method='random_zero'):
+extract_features(model, files, OUTPUT_FEATURES)
+
+def mask_image(img_path):
     """
-    Perform ablation on extracted features.
-    - method='random_zero': Randomly zero out some feature elements.
-    - method='remove_first_half': Remove the first half of feature dimensions.
-    - method='remove_last_half': Remove the last half of feature dimensions.
+    Perform ablation by masking part of an image.
     """
-    ablated_features = features.copy()
-    if method == 'random_zero':
-        mask = np.random.rand(*features.shape) > 0.5  # 50% chance to zero out features
-        ablated_features *= mask
-    elif method == 'remove_first_half':
-        ablated_features[:, :features.shape[1] // 2] = 0
-    elif method == 'remove_last_half':
-        ablated_features[:, features.shape[1] // 2:] = 0
-    return ablated_features
+    img = cv2.imread(img_path)
+    img = cv2.resize(img, (640, 640))
+    img[200:400, 200:400] = 0  # Mask central region
+    return img
 
-# Apply ablation
-train_features_ablation = ablate_features(train_features, method='random_zero')
-val_features_ablation = ablate_features(val_features, method='random_zero')
-
-# Save Ablated Features
-np.save('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/features/train_features_ablation.npy', train_features_ablation)
-np.save('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/features/val_features_ablation.npy', val_features_ablation)
-
-# Train with Ablated Features
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_2_vs_8_ablation', classes=['week_two', 'week_eight'])
+# Training the model (Optional)
+results = model.train(
+    data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_8/data/dataset/",
+    epochs=100, imgsz=640, batch=24, patience=10,
+    name='rpe_rad_seg_2_vs_8', classes=['week_two', 'week_eight']
+)
