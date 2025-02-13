@@ -391,7 +391,7 @@ GrayToColor:[module_num:21|svn_version:'Unknown'|variable_revision_number:4|show
 
 ImageMath:[module_num:22|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Operation:None
-    Raise the power of the result by:0.5
+    Raise the power of the result by:1.0
     Multiply the result by:1.0
     Add to result:0.0
     Set values less than 0 equal to 0?:Yes
