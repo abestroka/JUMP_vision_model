@@ -37,7 +37,7 @@ SECONDS=0
 
 
 
-plate="rpe"
+plate="rpe_control"
 # week='week_one'
 images="/eagle/FoundEpidem/astroka/rpe/week_two/20241105_Week2_RPE-1/20241105_OSU_HTSC_MW_ANL_CellPainting_RPE-1_W2C1__2024-11-06T07_43_59-Measurement1/Images"
 # treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_five_rpe_layout.xlsx"
