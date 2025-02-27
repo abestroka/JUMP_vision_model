@@ -250,7 +250,7 @@ import os
 import random
 
 # # Path to the images directory
-base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/images/week_eight/untreated/'
+base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/images/week_eight'
 
 # Number of files to keep in each subdirectory
 num_files_to_keep = 5000
@@ -259,6 +259,7 @@ num_files_to_keep = 5000
 subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
 
 for subdir in subdirs:
+    print()
     # Find all PNG files in the current subdirectory
     files = glob.glob(os.path.join(subdir, '*.png'))
     
