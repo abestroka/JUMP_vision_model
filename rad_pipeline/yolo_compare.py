@@ -253,7 +253,7 @@ import random
 base_path = '/eagle/FoundEpidem/astroka/yolo/fibroblast_123/images'
 
 # Number of files to keep in each subdirectory
-num_files_to_keep = 5000
+num_files_to_keep = 2000
 
 # Find all subdirectories under the images directory
 subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
