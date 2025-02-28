@@ -249,35 +249,35 @@ import os
 
 import random
 
-# # Path to the images directory
-# base_path = '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/images'
+# Path to the images directory
+base_path = '/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/images'
 
-# # Number of files to keep in each subdirectory
-# num_files_to_keep = 5000
+# Number of files to keep in each subdirectory
+num_files_to_keep = 10000
 
-# # Find all subdirectories under the images directory
-# subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
+# Find all subdirectories under the images directory
+subdirs = [d for d in glob.glob(os.path.join(base_path, '*')) if os.path.isdir(d)]
 
-# for subdir in subdirs:
-#     print()
-#     # Find all PNG files in the current subdirectory
-#     files = glob.glob(os.path.join(subdir, '*.png'))
+for subdir in subdirs:
+    print()
+    # Find all PNG files in the current subdirectory
+    files = glob.glob(os.path.join(subdir, '*.png'))
     
-#     # If the number of files exceeds the limit, delete extras
-#     if len(files) > num_files_to_keep:
-#         files_to_delete = random.sample(files, len(files) - num_files_to_keep)
-#         for file in files_to_delete:
-#             os.remove(file)
-#         print(f"Deleted {len(files_to_delete)} files from {subdir}")
-#     else:
-#         print(f"{subdir} has {len(files)} files, no files deleted.")
+    # If the number of files exceeds the limit, delete extras
+    if len(files) > num_files_to_keep:
+        files_to_delete = random.sample(files, len(files) - num_files_to_keep)
+        for file in files_to_delete:
+            os.remove(file)
+        print(f"Deleted {len(files_to_delete)} files from {subdir}")
+    else:
+        print(f"{subdir} has {len(files)} files, no files deleted.")
 
 ###############
 ###########
 
 
 # files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2_vs_9/images/**/*p03.png')
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/images/**/*.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/images/**/*.png')
 
 print("NUM FILES")
 print(len(files))
@@ -417,13 +417,13 @@ labels = [x.split('/')[-2] for x in files]
 train_dir = prepare_classification_data(
         np.array(files)[train_idx],
         np.array(labels)[train_idx],
-        '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/data/dataset/train'
+        '/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/data/dataset/train'
     )
     
 val_dir = prepare_classification_data(
     np.array(files)[test_idx],
     np.array(labels)[test_idx],
-    '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/data/dataset/val'
+    '/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/data/dataset/val'
 )
 
 # Define your class names
@@ -433,8 +433,10 @@ val_dir = prepare_classification_data(
 #        'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8',
 #        'Compound_9', 'untreated']
 
-class_names = ['week_two', 'week_eight']
+# class_names = ['week_two', 'week_eight']
 # class_names = ['0.001', '0.01', '0.1', '1.0', '2.0']
+class_names = ['huvec', 'fibroblast', 'rpe']
+
 
 
 
@@ -443,7 +445,7 @@ setup_classification_config(
     train_dir=train_dir,
     val_dir=val_dir,
     class_names=class_names,
-    config_path = '/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/data/datasets/config.yaml'
+    config_path = '/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/data/datasets/config.yaml'
     )
 
 
@@ -455,7 +457,7 @@ model = YOLO("yolo11x-cls.pt")
 
 
 # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_untreated_2_vs_8/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_untreated_2_vs_8', classes= ['week_two', 'week_eight'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/all_cells_rad_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='all_cells_rad_1', classes= ['huvec', 'fibroblast', 'rpe'])
 
 
 
