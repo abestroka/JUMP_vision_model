@@ -186,11 +186,8 @@ def run_cellprofiler(
     with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
         f.write(str(confluency))
 
-    print('HERE')
     # Gather the segmented images and move them to the appropriate directory
     src_images = list(tmp_output_dir.glob('*.png'))
-    print("SRC")
-    print(src_images)
     # If there are more than one image, we need to assign unique names
     if len(src_images) > 1:
         for image in src_images:
