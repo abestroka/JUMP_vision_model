@@ -237,7 +237,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_rna.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_er.cppipe',
         ),
         type=Path,
     )
