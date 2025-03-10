@@ -225,42 +225,42 @@ results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/d
 
 import torch
 
-print(list(model.model.children()))
+# print(list(model.model.children()))
 
-print(len(list(model.model.children())))
+# print(len(list(model.model.children())))
 
-# for idx, layer in enumerate(model.model.children()):
-#     print(f"Layer {idx}: {layer}")
+for idx, layer in enumerate(model.model.children()):
+    print(f"Layer {idx}: {layer}")
 
-# def get_intermediate_features(model, img, layer_idx=9):  # Layer before classification
-#     features = []
+def get_intermediate_features(model, img, layer_idx=1):  # Layer before classification
+    features = []
     
-#     def hook_fn(module, input, output):
-#         features.append(output)
+    def hook_fn(module, input, output):
+        features.append(output)
 
-#     handle = list(model.model.children())[layer_idx].register_forward_hook(hook_fn)
+    handle = list(model.model.children())[layer_idx].register_forward_hook(hook_fn)
 
-#     img = torch.tensor(img).unsqueeze(0)  # Add batch dimension if needed
-#     model(img)
+    img = torch.tensor(img).unsqueeze(0)  # Add batch dimension if needed
+    model(img)
 
-#     handle.remove()
-#     return features[0]
+    handle.remove()
+    return features[0]
 
-# img = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/2.0/r07c02f02p05_e4496946-0e6e-4082-8119-b1d0cf5f548e.png"  # Path to an image
-# extracted_features = get_intermediate_features(model, img)
-# print(" ")
-# print(" ")
+img = "/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/2.0/r07c02f02p05_e4496946-0e6e-4082-8119-b1d0cf5f548e.png"  # Path to an image
+extracted_features = get_intermediate_features(model, img)
+print(" ")
+print(" ")
 
-# print(" ")
+print(" ")
 
-# print("EXTRACTED FEATURES SHAPE")
-# print(" ")
+print("EXTRACTED FEATURES SHAPE")
+print(" ")
 
-# print(" ")
+print(" ")
 
-# print(" ")
+print(" ")
 
-# print(extracted_features.shape)  # Feature tensor dimensions
+print(extracted_features.shape)  # Feature tensor dimensions
 
 
 
