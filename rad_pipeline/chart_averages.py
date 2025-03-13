@@ -31,7 +31,7 @@ def extract_intensity_averages(repo_path):
                         avg_intensity = df['Intensity_MedianIntensity_RescaleER'].mean()
                         averages.append(avg_intensity)
                         labels.append(file.split('.')[0])  # Extract filename without extension
-                        print(f"Processed: {file}, Average Intensity: {avg_intensity}")
+                        # print(f"Processed: {file}, Average Intensity: {avg_intensity}")
                     else:
                         print(f"Column 'Intensity_MedianIntensity_RescaleER' not found in {file}")
                 except Exception as e:
@@ -84,6 +84,8 @@ def plot_comparison(repo1_averages, repo2_averages, labels, save_path):
 
     avg1 = np.mean(repo1_averages)
     avg2 = np.mean(repo2_averages)
+    print("WEEK 1 AVG:", avg1)
+    print("WEEK 9 AVG:", avg2)
     plt.axhline(y=avg1, color='r', linestyle='--', label='Week 1 Average')
     plt.axhline(y=avg2, color='b', linestyle='--', label='Week 9 Average')
 
@@ -95,7 +97,7 @@ def plot_comparison(repo1_averages, repo2_averages, labels, save_path):
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
-    print(f"Plot saved to {save_path}")
+    # print(f"Plot saved to {save_path}")
 
 repo1_averages, repo1_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg_control/ch6/csv_files_untreated")
 repo2_averages, repo2_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch6/csv_files_untreated")
