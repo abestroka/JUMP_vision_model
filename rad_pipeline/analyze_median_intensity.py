@@ -32,4 +32,4 @@ def move_csv_files(repo_path):
                 print(f"Moved: {file_path} -> {new_path}")
 
 # Example usage
-move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg_control/ch6/untreated")
+move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch6/untreated")
