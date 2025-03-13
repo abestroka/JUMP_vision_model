@@ -104,3 +104,4 @@ if repo1_labels == repo2_labels:
     plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week1_vs_9_untreated_ch6_line.png")
 else:
     print("Labels do not match between repositories.")
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week1_vs_9_untreated_ch6_line.png")
