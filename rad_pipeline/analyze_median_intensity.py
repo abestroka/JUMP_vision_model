@@ -22,12 +22,13 @@ def move_csv_files(repo_path):
     # Walk through the repository and find CSV files
     for root, _, files in os.walk(repo_path):
         for file in files:
+            print("FILE", file)
             if file.endswith(".csv"):
                 file_path = os.path.join(root, file)
                 new_path = os.path.join(csv_dir, file)
                 
                 # Move the file
-                shutil.move(file_path, new_path)
+                shutil.copy2(file_path, new_path)
                 print(f"Moved: {file_path} -> {new_path}")
 
 # Example usage
