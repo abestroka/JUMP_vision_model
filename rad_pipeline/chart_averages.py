@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 def extract_intensity_averages(repo_path):
     """
@@ -36,13 +38,38 @@ def extract_intensity_averages(repo_path):
     
     return averages, labels
 
+
+
+def plot_comparison(repo1_averages, repo2_averages, labels, save_path):
+    """
+    Plots a bar graph comparing the intensity averages from two repositories and saves it.
+    
+    :param repo1_averages: List of average intensities from repository 1
+    :param repo2_averages: List of average intensities from repository 2
+    :param labels: List of labels corresponding to each file
+    :param save_path: Path to save the output plot
+    """
+    x = range(len(labels))
+    width = 0.4  # Bar width
+    
+    plt.figure(figsize=(12, 6))
+    plt.bar([i - width/2 for i in x], repo1_averages, width=width, label='Week 1')
+    plt.bar([i + width/2 for i in x], repo2_averages, width=width, label='Week 9')
+    
+    plt.xticks(x, labels, rotation=90)
+    plt.xlabel("Locations")
+    plt.ylabel("Average Intensity")
+    plt.title("Weeks 1 vs 9 2.0 Dose Average Median Ch6 Intensity Per Field")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+    print(f"Plot saved to {save_path}")
+
 repo1_averages, repo1_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg/ch6/csv_files_2.0")
 repo2_averages, repo2_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg/ch6/csv_files_2.0")
 
-print("AVG1", repo1_averages)
-print(" ")
-print("LABELS1", repo1_labels)
-print(" ")
-print("AVG2", repo2_averages)
-print(" ")
-print("LABELS2", repo2_labels)
+if repo1_labels == repo2_labels:
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week1_vs_9_2.0_ch6.png")
+else:
+    print("Labels do not match between repositories.")
