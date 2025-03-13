@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def extract_intensity_averages(repo_path):
@@ -80,6 +81,12 @@ def plot_comparison(repo1_averages, repo2_averages, labels, save_path):
     plt.figure(figsize=(12, 6))
     plt.plot(x, repo1_averages, marker='o', linestyle='-', label='Week 1')
     plt.plot(x, repo2_averages, marker='s', linestyle='-', label='Week 9')
+
+    avg1 = np.mean(repo1_averages)
+    avg2 = np.mean(repo2_averages)
+    plt.axhline(y=avg1, color='r', linestyle='--', label='Week 1 Average')
+    plt.axhline(y=avg2, color='b', linestyle='--', label='Week 9 Average')
+
     
     plt.xlabel("Well Location")
     plt.ylabel("Average Intensity")
