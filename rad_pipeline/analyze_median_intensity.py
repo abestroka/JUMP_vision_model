@@ -14,7 +14,7 @@ def move_csv_files(repo_path):
     
     # Define new directory name
     parent_dir = os.path.dirname(repo_path)
-    csv_dir = os.path.join(parent_dir, "csv_files_2.0")
+    csv_dir = os.path.join(parent_dir, "csv_files_untreated")
     
     # Create directory if it doesn't exist
     os.makedirs(csv_dir, exist_ok=True)
@@ -32,4 +32,4 @@ def move_csv_files(repo_path):
                 print(f"Moved: {file_path} -> {new_path}")
 
 # Example usage
-move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg/ch6/2.0")
+move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg_control/ch6/untreated")
