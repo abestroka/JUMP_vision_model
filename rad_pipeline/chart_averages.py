@@ -203,18 +203,18 @@ def plot_comparison(repo1_averages, repo2_averages, labels, save_path):
     
     plt.xlabel("Well Location")
     plt.ylabel("Average Intensity")
-    plt.title("DMSO vs Compound 4 Average Median Ch6 Intensity Per Field")
+    plt.title("DMSO vs Compound 4 Average Median Ch6 Intensity Per Field Week 9")
     plt.legend()
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
     # print(f"Plot saved to {save_path}")
 
-repo1_averages, repo1_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg_control/ch6/csv_files_Compound_1")
-repo2_averages, repo2_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_one/ind_channels_seg_control/ch6/csv_files_Compound_4")
+repo1_averages, repo1_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch6/csv_files_Compound_1")
+repo2_averages, repo2_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch6/csv_files_Compound_4")
 
 if repo1_labels == repo2_labels:
-    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_1_compounds_1_vs_4_ch6_line.png")
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_9_compounds_1_vs_4_ch6_line.png")
 else:
     print("Labels do not match between repositories.")
-    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_1_compounds_1_vs_4_ch6_line.png")
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_9_compounds_1_vs_4_ch6_line.png")
