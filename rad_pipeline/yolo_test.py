@@ -229,10 +229,12 @@ print(" ")
 print(" ")
 print(" ")
 # for result in results:
-embeddings = results.embeddings
-print(embeddings)
+# embeddings = results.embeddings
+# print(embeddings)
     # print("EMBEDDINGS", embeddings)
-
+for detection in results.xyxy[0]:  # xyxy format: [x1, y1, x2, y2, conf, cls]
+    x1, y1, x2, y2, conf, cls = detection.tolist()
+    print(f"Bounding Box: ({x1}, {y1}, {x2}, {y2}), Confidence: {conf}, Class: {cls}")
 # for idx, layer in enumerate(model.model.children()):
 #     print(f"Layer {idx}: {layer}")
 
