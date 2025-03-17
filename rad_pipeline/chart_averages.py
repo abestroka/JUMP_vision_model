@@ -214,7 +214,7 @@ repo1_averages, repo1_labels = extract_intensity_averages("/eagle/projects/Found
 repo2_averages, repo2_labels = extract_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch4/csv_files_Compound_12")
 
 if repo1_labels == repo2_labels:
-    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_9_compounds_1_vs_12_ch4_line.png")
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_nine/week_9_compounds_1_vs_12_ch4_line.png")
 else:
     print("Labels do not match between repositories.")
-    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_one/week_9_compounds_1_vs_12_ch4_line.png")
+    plot_comparison(repo1_averages, repo2_averages, repo1_labels, "/eagle/projects/FoundEpidem/astroka/rpe/week_nine/week_9_compounds_1_vs_12_ch4_line.png")
