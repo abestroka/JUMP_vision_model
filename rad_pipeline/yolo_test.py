@@ -228,10 +228,10 @@ print(results)
 print(" ")
 print(" ")
 print(" ")
-for result in results:
-    embeddings = result.embeddings
-
-    print("EMBEDDINGS", embeddings)
+# for result in results:
+embeddings = results.embeddings
+print(embeddings)
+    # print("EMBEDDINGS", embeddings)
 
 # for idx, layer in enumerate(model.model.children()):
 #     print(f"Layer {idx}: {layer}")
