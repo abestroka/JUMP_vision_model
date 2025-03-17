@@ -224,8 +224,7 @@ results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/d
 
 
 import torch
-
-results[0].show()
+print(results)
 
 # for idx, layer in enumerate(model.model.children()):
 #     print(f"Layer {idx}: {layer}")
