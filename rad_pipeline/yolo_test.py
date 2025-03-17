@@ -225,6 +225,13 @@ results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/data/d
 
 import torch
 print(results)
+print(" ")
+print(" ")
+print(" ")
+for result in results:
+    embeddings = result.embeddings
+
+    print("EMBEDDINGS", embeddings)
 
 # for idx, layer in enumerate(model.model.children()):
 #     print(f"Layer {idx}: {layer}")
