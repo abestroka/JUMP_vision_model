@@ -138,7 +138,7 @@ def extract_intensity_averages(repo_path):
                 
                 try:
                     df = pd.read_csv(file_path)
-                    if 'Intensity_MedianIntensity_RescaleER' in df.columns:
+                    if 'Intensity_MedianIntensity_RescaleRNA' in df.columns:
                         avg_intensity = df['Intensity_MedianIntensity_RescaleRNA'].mean()
                         averages.append(avg_intensity)
                         labels.append(file.split('.')[0])  # Extract filename without extension
