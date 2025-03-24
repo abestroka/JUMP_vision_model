@@ -44,10 +44,12 @@
 
 # plot_intensity_averages("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/averages_chart.png")
 
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+
 def plot_intensity_boxplot(base_path, save_path):
-    import matplotlib.pyplot as plt
-    import pandas as pd
-    import os
+
 
     data = {}
     
@@ -79,4 +81,48 @@ def plot_intensity_boxplot(base_path, save_path):
     plt.close()
 
 
+
+
+def plot_mean_of_averages_bargraph(base_path, save_path):
+    """
+    For each subdirectory in base_path:
+        - Finds all CSVs
+        - Computes the average of 'Intensity_MedianIntensity_RescaleAGP' in each CSV
+        - Then computes the mean of those averages per category (subdir)
+    Finally, plots a bar graph showing one bar per category.
+    """
+    category_means = {}
+
+    for subdir in sorted(os.listdir(base_path)):
+        subdir_path = os.path.join(base_path, subdir)
+        if os.path.isdir(subdir_path):
+            csv_averages = []
+
+            for file in os.listdir(subdir_path):
+                if file.endswith('.csv'):
+                    file_path = os.path.join(subdir_path, file)
+                    try:
+                        df = pd.read_csv(file_path)
+                        if 'Intensity_MedianIntensity_RescaleAGP' in df.columns:
+                            avg = df['Intensity_MedianIntensity_RescaleAGP'].mean()
+                            csv_averages.append(avg)
+                    except Exception as e:
+                        print(f"Error reading {file_path}: {e}")
+
+            if csv_averages:
+                category_mean = sum(csv_averages) / len(csv_averages)
+                category_means[subdir] = category_mean
+
+    # Plotting
+    plt.figure(figsize=(12, 6))
+    plt.bar(category_means.keys(), category_means.values(), color='skyblue')
+    plt.xticks(rotation=45, ha='right')
+    plt.ylabel('Mean of Averages')
+    plt.title('Mean Intensity per Treatment')
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+
+
 plot_intensity_boxplot("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/averages_chart.png")
+plot_mean_of_averages_bargraph("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/averages_bar_chart.png")
