@@ -32,7 +32,7 @@ def move_csv_files(repo_path, entry):
                 print(f"Moved: {file_path} -> {new_path}")
 
 # Example usage
-parent = "eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3"
+parent = "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3"
 for entry in os.listdir(parent):
     full_path = os.path.join(parent, entry)
     move_csv_files(full_path, entry)
