@@ -62,8 +62,8 @@ def plot_intensity_boxplot(base_path, save_path):
                     file_path = os.path.join(subdir_path, file)
                     try:
                         df = pd.read_csv(file_path)
-                        if 'Intensity_MedianIntensity_RescaleAGP' in df.columns:
-                            avg_value = df['Intensity_MedianIntensity_RescaleAGP'].mean()
+                        if 'Intensity_UpperQuartileIntensity_RescaleAGP' in df.columns:
+                            avg_value = df['Intensity_UpperQuartileIntensity_RescaleAGP'].mean()
                             averages.append(avg_value)
                     except Exception as e:
                         print(f"Error reading {file_path}: {e}")
@@ -75,7 +75,7 @@ def plot_intensity_boxplot(base_path, save_path):
     plt.boxplot(data.values(), labels=data.keys(), showmeans=True)
     plt.xticks(rotation=90)
     plt.title('Distribution of Intensity Averages per Treatment')
-    plt.ylabel('Avg Intensity_MedianIntensity_RescaleAGP')
+    plt.ylabel('Avg Intensity_UpperQuartileIntensity_RescaleAGP')
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
@@ -103,8 +103,8 @@ def plot_mean_of_averages_bargraph(base_path, save_path):
                     file_path = os.path.join(subdir_path, file)
                     try:
                         df = pd.read_csv(file_path)
-                        if 'Intensity_MedianIntensity_RescaleAGP' in df.columns:
-                            avg = df['Intensity_MedianIntensity_RescaleAGP'].mean()
+                        if 'Intensity_UpperQuartileIntensity_RescaleAGP' in df.columns:
+                            avg = df['Intensity_UpperQuartileIntensity_RescaleAGP'].mean()
                             csv_averages.append(avg)
                     except Exception as e:
                         print(f"Error reading {file_path}: {e}")
@@ -118,11 +118,11 @@ def plot_mean_of_averages_bargraph(base_path, save_path):
     plt.bar(category_means.keys(), category_means.values(), color='skyblue')
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('Mean of Averages')
-    plt.title('Mean Intensity per Treatment')
+    plt.title('Upper Quartile Intensity per Treatment')
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
 
 
-plot_intensity_boxplot("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/averages_chart.png")
-plot_mean_of_averages_bargraph("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/averages_bar_chart.png")
+plot_intensity_boxplot("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/uq_averages_chart.png")
+plot_mean_of_averages_bargraph("/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3", "/eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3/uq_averages_bar_chart.png")
