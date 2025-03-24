@@ -1,7 +1,7 @@
 import os
 import shutil
 
-def move_csv_files(repo_path):
+def move_csv_files(repo_path, entry):
     """
     Scans the given repository for CSV files and moves them to a new directory
     within the same parent directory.
@@ -14,7 +14,7 @@ def move_csv_files(repo_path):
     
     # Define new directory name
     parent_dir = os.path.dirname(repo_path)
-    csv_dir = os.path.join(parent_dir, "csv_files_Compound_12")
+    csv_dir = os.path.join(parent_dir, f"csv_files_{entry}")
     
     # Create directory if it doesn't exist
     os.makedirs(csv_dir, exist_ok=True)
@@ -32,4 +32,8 @@ def move_csv_files(repo_path):
                 print(f"Moved: {file_path} -> {new_path}")
 
 # Example usage
-move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch4/Compound_12")
+parent = "eagle/projects/FoundEpidem/astroka/rpe_2/20x_original/ind_channels_seg/ch3"
+for entry in os.listdir(parent):
+    full_path = os.path.join(parent, entry)
+    move_csv_files(full_path, entry)
+# move_csv_files("/eagle/projects/FoundEpidem/astroka/rpe/week_nine/ind_channels_seg_control/ch4/Compound_12")
