@@ -79,7 +79,7 @@ def collect_image_sets(
                         dna = img
                     elif 'ch4' in img:
                         rna = img
-                    elif 'ch3' in img:
+                    elif 'ch5' in img: #elif 'ch3' in img:
                         agp = img
                     elif 'ch6' in img:
                         er = img
