@@ -79,7 +79,7 @@ def collect_image_sets(
                         dna = img
                     elif 'ch4' in img:
                         rna = img
-                    elif 'ch5' in img: #elif 'ch3' in img:
+                    elif 'ch3' in img:
                         agp = img
                     elif 'ch6' in img:
                         er = img
@@ -237,7 +237,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_agp.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_agp_2.cppipe',
         ),
         type=Path,
     )
