@@ -211,7 +211,7 @@ CorrectIlluminationCalculate:[module_num:10|svn_version:'Unknown'|variable_revis
     Rescale the illumination function?:No
     Calculate function for each image individually, or based on all images?:Each
     Smoothing method:Gaussian Filter
-    Method to calculate smoothing filter size:Automatic
+    Method to calculate smoothing filter size:Manually
     Approximate object diameter:10
     Smoothing filter size:50
     Retain the averaged image?:No
@@ -374,7 +374,7 @@ GrayToColor:[module_num:21|svn_version:'Unknown'|variable_revision_number:4|show
     Select the image to be colored blue:Leave this black
     Name the output image:ColorImage
     Relative weight for the red image:1.0
-    Relative weight for the green image:1.1
+    Relative weight for the green image:1.0
     Relative weight for the blue image:1.0
     Select the image to be colored cyan:Leave this black
     Select the image to be colored magenta:Leave this black

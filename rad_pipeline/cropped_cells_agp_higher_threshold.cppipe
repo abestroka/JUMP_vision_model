@@ -211,7 +211,7 @@ CorrectIlluminationCalculate:[module_num:10|svn_version:'Unknown'|variable_revis
     Rescale the illumination function?:No
     Calculate function for each image individually, or based on all images?:Each
     Smoothing method:Gaussian Filter
-    Method to calculate smoothing filter size:Automatic
+    Method to calculate smoothing filter size:Manually
     Approximate object diameter:10
     Smoothing filter size:50
     Retain the averaged image?:No
@@ -318,7 +318,7 @@ IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_
     Thresholding method:Otsu
     Threshold smoothing scale:0.0
     Threshold correction factor:0.7
-    Lower and upper bounds on threshold:0.0005,.06
+    Lower and upper bounds on threshold:0.005,.06
     Manual threshold:0.0
     Select the measurement to threshold with:None
     Two-class or three-class thresholding?:Three classes
@@ -341,12 +341,12 @@ IdentifyTertiaryObjects:[module_num:18|svn_version:'Unknown'|variable_revision_n
 RescaleIntensity:[module_num:19|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the input image:CorrDNA
     Name the output image:RescaleDNA
-    Rescaling method:Choose specific values to be reset to the full intensity range
+    Rescaling method:Stretch each image to use the full intensity range
     Method to calculate the minimum intensity:Custom
     Method to calculate the maximum intensity:Custom
     Lower intensity limit for the input image:0.0
     Upper intensity limit for the input image:1.0
-    Intensity range for the input image:0.01,0.99
+    Intensity range for the input image:0.0,1.0
     Intensity range for the output image:0.0,1.0
     Select image to match in maximum intensity:None
     Divisor value:1.0
@@ -355,12 +355,12 @@ RescaleIntensity:[module_num:19|svn_version:'Unknown'|variable_revision_number:3
 RescaleIntensity:[module_num:20|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the input image:CorrAGP
     Name the output image:RescaleAGP
-    Rescaling method:Choose specific values to be reset to the full intensity range
+    Rescaling method:Stretch each image to use the full intensity range
     Method to calculate the minimum intensity:Custom
     Method to calculate the maximum intensity:Custom
     Lower intensity limit for the input image:0.0
     Upper intensity limit for the input image:1.0
-    Intensity range for the input image:0.01,0.99
+    Intensity range for the input image:0.0,1.0
     Intensity range for the output image:0.0,1.0
     Select image to match in maximum intensity:None
     Divisor value:1.0
@@ -370,11 +370,11 @@ GrayToColor:[module_num:21|svn_version:'Unknown'|variable_revision_number:4|show
     Select a color scheme:RGB
     Rescale intensity:No
     Select the image to be colored red:Leave this black
-    Select the image to be colored green:CorrAGP
+    Select the image to be colored green:RescaleAGP
     Select the image to be colored blue:Leave this black
     Name the output image:ColorImage
     Relative weight for the red image:1.0
-    Relative weight for the green image:1.1
+    Relative weight for the green image:1.0
     Relative weight for the blue image:1.0
     Select the image to be colored cyan:Leave this black
     Select the image to be colored magenta:Leave this black
@@ -409,7 +409,7 @@ ImageMath:[module_num:22|svn_version:'Unknown'|variable_revision_number:5|show_w
     Measurement:
 
 MeasureObjectIntensity:[module_num:23|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select images to measure:CorrAGP
+    Select images to measure:RescaleAGP
     Select objects to measure:Cells
 
 MeasureObjectSizeShape:[module_num:24|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
@@ -457,7 +457,7 @@ SaveImages:[module_num:27|svn_version:'Unknown'|variable_revision_number:16|show
 SaveCroppedObjects:[module_num:28|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Do you want to save cropped images or object masks?:Images
     Objects:Cells
-    Directory:Default Output Folder|Argonne/LUCID/488_iso/row1
+    Directory:Default Output Folder|Argonne/LUCID/h2ax_2_images/test/h2ax_50_10
     Prefix saved crop image name with input image name?:No
     Select image name to use as a prefix:None
     Save output crops in nested folders?:No
@@ -472,13 +472,13 @@ ExportToSpreadsheet:[module_num:29|svn_version:'Unknown'|variable_revision_numbe
     Calculate the per-image mean values for object measurements?:No
     Calculate the per-image median values for object measurements?:No
     Calculate the per-image standard deviation values for object measurements?:No
-    Output file location:Default Output Folder|Argonne/LUCID/488_iso/row1
+    Output file location:Default Output Folder|Argonne/LUCID/h2ax_2_images/test/h2ax_50_10
     Create a GenePattern GCT file?:No
     Select source of sample row name:Metadata
     Select the image to use as the identifier:None
     Select the metadata to use as the identifier:None
     Export all measurement types?:Yes
-    Press button to select measurements:Cells|Intensity_StdIntensityEdge_CorrAGP,Cells|Intensity_MedianIntensity_CorrAGP,Cells|Intensity_MADIntensity_CorrAGP,Cells|Intensity_MaxIntensity_CorrAGP,Cells|Intensity_MinIntensity_CorrAGP,Cells|Intensity_UpperQuartileIntensity_CorrAGP,Cells|Intensity_IntegratedIntensityEdge_CorrAGP,Cells|Intensity_MeanIntensityEdge_CorrAGP,Cells|Intensity_MaxIntensityEdge_CorrAGP,Cells|Intensity_StdIntensity_CorrAGP,Cells|Intensity_IntegratedIntensity_CorrAGP,Cells|Intensity_LowerQuartileIntensity_CorrAGP,Cells|Intensity_MassDisplacement_CorrAGP,Cells|Intensity_MeanIntensity_CorrAGP,Cells|Intensity_MinIntensityEdge_CorrAGP
+    Press button to select measurements:Cells|Intensity_MassDisplacement_RescaleAGP,Cells|Intensity_MADIntensity_RescaleAGP,Cells|Intensity_UpperQuartileIntensity_RescaleAGP,Cells|Intensity_MeanIntensity_RescaleAGP,Cells|Intensity_MeanIntensityEdge_RescaleAGP,Cells|Intensity_MinIntensityEdge_RescaleAGP,Cells|Intensity_MedianIntensity_RescaleAGP,Cells|Intensity_StdIntensityEdge_RescaleAGP,Cells|Intensity_LowerQuartileIntensity_RescaleAGP,Cells|Intensity_IntegratedIntensityEdge_RescaleAGP,Cells|Intensity_MinIntensity_RescaleAGP,Cells|Intensity_IntegratedIntensity_RescaleAGP,Cells|Intensity_MaxIntensity_RescaleAGP,Cells|Intensity_StdIntensity_RescaleAGP,Cells|Intensity_MaxIntensityEdge_RescaleAGP
     Representation of Nan/Inf:NaN
     Add a prefix to file names?:Yes
     Filename prefix:MyExpt_

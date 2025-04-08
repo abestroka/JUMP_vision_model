@@ -211,7 +211,7 @@ CorrectIlluminationCalculate:[module_num:10|svn_version:'Unknown'|variable_revis
     Rescale the illumination function?:No
     Calculate function for each image individually, or based on all images?:Each
     Smoothing method:Gaussian Filter
-    Method to calculate smoothing filter size:Manually
+    Method to calculate smoothing filter size:Automatic
     Approximate object diameter:10
     Smoothing filter size:50
     Retain the averaged image?:No
@@ -306,7 +306,7 @@ IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_
     Select the input objects:Nuclei
     Name the objects to be identified:Cells
     Select the method to identify the secondary objects:Watershed - Image
-    Select the input image:CorrER
+    Select the input image:CorrAGP
     Number of pixels by which to expand the primary objects:10
     Regularization factor:0.05
     Discard secondary objects touching the border of the image?:No
@@ -318,7 +318,7 @@ IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_
     Thresholding method:Otsu
     Threshold smoothing scale:0.0
     Threshold correction factor:0.7
-    Lower and upper bounds on threshold:0.0005,.06
+    Lower and upper bounds on threshold:0.005,.06
     Manual threshold:0.0
     Select the measurement to threshold with:None
     Two-class or three-class thresholding?:Three classes
