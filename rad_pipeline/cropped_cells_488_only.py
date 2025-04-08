@@ -237,7 +237,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_agp_higher_threshold.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_agp_high_threshold_no_rescale.cppipe',
         ),
         type=Path,
     )

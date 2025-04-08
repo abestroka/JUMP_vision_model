@@ -44,7 +44,7 @@ images="/eagle/FoundEpidem/astroka/h2ax_2/20250401_20x_ANL_CellPainting_RPE-1_H2
 # treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_five_rpe_layout.xlsx"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/h2ax_2_1_layout.xlsx"
 
-python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells_488_only.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/h2ax_2/ind_channels_seg/ch3_higher_threshold --tmp_dir /dev/shm --num_workers 32
+python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells_488_only.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/h2ax_2/ind_channels_seg/ch3_high_threshold_no_rescale --tmp_dir /dev/shm --num_workers 32
 # python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells_488_only.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/rpe/week_eight/ind_channels_seg/ch2 --tmp_dir /dev/shm --num_workers 32
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/rpe/week_seven/rpe_control --tmp_dir /dev/shm --num_workers 32
