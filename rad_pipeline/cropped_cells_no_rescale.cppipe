@@ -41,31 +41,31 @@ NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|sho
     Relative pixel spacing in X:1.0
     Relative pixel spacing in Y:1.0
     Relative pixel spacing in Z:1.0
-    Select the rule criteria:and (file does contain "ch2")
+    Select the rule criteria:and (file does contain "dna.tiff")
     Name to assign these images:OrigDNA
     Name to assign these objects:Cell
     Select the image type:Grayscale image
     Set intensity range from:Image bit-depth
     Maximum intensity:255.0
-    Select the rule criteria:and (file does contain "ch3")
+    Select the rule criteria:and (file does contain "agp.tiff")
     Name to assign these images:OrigER
     Name to assign these objects:Nucleus
     Select the image type:Grayscale image
     Set intensity range from:Image bit-depth
     Maximum intensity:255.0
-    Select the rule criteria:and (file does contain "ch4")
+    Select the rule criteria:and (file does contain "rna.tiff")
     Name to assign these images:OrigRNA
     Name to assign these objects:Cytoplasm
     Select the image type:Grayscale image
     Set intensity range from:Image bit-depth
     Maximum intensity:255.0
-    Select the rule criteria:and (file does contain "ch5")
+    Select the rule criteria:and (file does contain "er.tiff")
     Name to assign these images:OrigAGP
     Name to assign these objects:Speckle
     Select the image type:Grayscale image
     Set intensity range from:Image bit-depth
     Maximum intensity:255.0
-    Select the rule criteria:and (file does contain "ch8")
+    Select the rule criteria:and (file does contain "mito.tiff")
     Name to assign these images:OrigMito
     Name to assign these objects:Object1
     Select the image type:Grayscale image
