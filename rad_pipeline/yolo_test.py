@@ -195,7 +195,9 @@ val_dir = prepare_classification_data(
 #        'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8',
 #        'Compound_9', 'untreated']
 
-class_names = ['0.001', '0.01', '0.1', '1.0', '2.0', 'untreated']
+# class_names = ['0.001', '0.01', '0.1', '1.0', '2.0', 'untreated']
+class_names = ['0.001', '0.1', '1.0', '2.0', 'untreated']
+
 # class_names = ['0.001', '0.01', '0.1', '1.0', '2.0']
 
 
@@ -220,7 +222,7 @@ model = YOLO("yolo11x-cls.pt")
 
 
 # # results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_whole_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_whole_1', classes= ['Compound_1', 'Compound_10', 'Compound_11', 'Compound_12','Compound_13', 'Compound_14', 'Compound_15', 'Compound_16', 'Compound_17', 'Compound_2', 'Compound_3', 'Compound_4', 'Compound_5', 'Compound_6', 'Compound_7', 'Compound_8', 'Compound_9', 'untreated'])
-results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_1', classes= ['0.001', '0.01', '0.1', '1.0', '2.0', 'untreated'])
+results = model.train(data="/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/data/dataset/", epochs=100, imgsz=640, batch=24, patience=10, name='rpe_rad_seg_1', classes= ['0.001', '0.1', '1.0', '2.0', 'untreated'])
 
 
 # import torch
