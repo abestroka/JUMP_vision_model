@@ -39,8 +39,8 @@ for subdir in subdirs:
 ##########
 
 
-files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*p05.png')
-# files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_2/images/**/*.png')
+# files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*p05.png')
+files = glob.glob('/eagle/FoundEpidem/astroka/yolo/rpe_rad_seg_1/images/**/*.png')
 print("NUM FILES")
 print(len(files))
 print(" ")
