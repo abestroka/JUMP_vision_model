@@ -38,7 +38,7 @@ SECONDS=0
 
 
 # plate="rpe"
-plate="HUVEC_control"
+plate="HUVEC_Control"
 # week='week_one'
 images="/eagle/FoundEpidem/astroka/ten_week/week_one/20240718_Week1/20240717_OSU_HTSC_MW_ANL_CellPainting_C2_8Stacks_1__2024-07-17T20_00_59-Measurement1/Images"
 # treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_five_rpe_layout.xlsx"
