@@ -387,9 +387,9 @@ GrayToColor:[module_num:22|svn_version:'Unknown'|variable_revision_number:4|show
     Select the image to be colored green:OrigER
     Select the image to be colored blue:CorrAGP
     Name the output image:ColorImage
-    Relative weight for the red image:7
-    Relative weight for the green image:7
-    Relative weight for the blue image:7
+    Relative weight for the red image:1
+    Relative weight for the green image:1
+    Relative weight for the blue image:1
     Select the image to be colored cyan:Leave this black
     Select the image to be colored magenta:Leave this black
     Select the image to be colored yellow:Leave this black
