@@ -383,9 +383,9 @@ RescaleIntensity:[module_num:21|svn_version:'Unknown'|variable_revision_number:3
 GrayToColor:[module_num:22|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select a color scheme:RGB
     Rescale intensity:No
-    Select the image to be colored red:OrigDNA
-    Select the image to be colored green:OrigER
-    Select the image to be colored blue:CorrAGP
+    Select the image to be colored red:RescaleDNA
+    Select the image to be colored green:RescaleER
+    Select the image to be colored blue:RescaleAGP
     Name the output image:ColorImage
     Relative weight for the red image:1
     Relative weight for the green image:1
