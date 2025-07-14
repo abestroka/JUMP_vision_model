@@ -78,14 +78,26 @@ def collect_image_sets(
                 dna, rna, agp, er, mito, brightfield = None, None, None, None, None, None
 
                 for img in curr_images:
+                    # if 'ch2' in img:
+                    #     dna = img
+                    # elif 'ch4' in img:
+                    #     rna = img
+                    # elif 'ch3' in img:
+                    #     agp = img
+                    # elif 'ch6' in img:
+                    #     er = img
+                    # elif 'ch7' in img:
+                    #     brightfield = img
+                    # elif 'ch8' in img:
+                    #     mito = img
                     if 'ch2' in img:
                         dna = img
                     elif 'ch4' in img:
                         rna = img
                     elif 'ch3' in img:
-                        agp = img
-                    elif 'ch6' in img:
                         er = img
+                    elif 'ch5' in img:
+                        agp = img
                     elif 'ch7' in img:
                         brightfield = img
                     elif 'ch8' in img:
@@ -250,7 +262,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/outlines_and_sheet.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_three_color.cppipe',
         ),
         type=Path,
     )
