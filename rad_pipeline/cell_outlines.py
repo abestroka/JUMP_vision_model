@@ -154,7 +154,7 @@ def run_cellprofiler(
 
     # Create the temporary image directory
     print("HHHEERRREEE")
-    print(tmp_input_dir)
+    print(image_set.image_id)
     image_set.copy(tmp_input_dir)
 
     # Create the command
