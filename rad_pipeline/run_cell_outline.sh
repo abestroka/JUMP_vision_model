@@ -37,7 +37,7 @@ SECONDS=0
 
 
 
-plate="Control"
+plate="Control2"
 # plate="HUVEC_Control"
 # week='week_one'
 images="/eagle/FoundEpidem/astroka/rpe_h2a/week_three/20250529_RPE-1_H2A_Week3/20250528_20x_ANL_CellPainting_RPE-1_Control_1__2025-05-28T21_21_15-Measurement1/Images"
