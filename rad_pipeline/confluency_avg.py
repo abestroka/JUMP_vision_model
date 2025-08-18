@@ -13,7 +13,11 @@ DOSES = ["0.001", "0.01", "0.1", "1", "2"]
 results = {dose: [] for dose in DOSES}
 
 # Get sorted list of week folders
-week_folders = [f for f in os.listdir(REPO_PATH) if f.startswith("week_")]
+# week_folders = [f for f in os.listdir(REPO_PATH) if f.startswith("week_")]
+week_folders = sorted(
+    [f for f in os.listdir(REPO_PATH) if f.startswith("week_")],
+    key=lambda x: int(x.split("_")[1])
+)
 
 for week in week_folders:
     week_path = os.path.join(REPO_PATH, week, "results", "rpe_rad")
