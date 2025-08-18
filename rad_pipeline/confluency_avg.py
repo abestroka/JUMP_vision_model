@@ -17,16 +17,17 @@ results = {dose: [] for dose in DOSES}
 import re
 
 def extract_week_number(name):
-    match = re.search(r'\d+', name)  # look for digits in the folder name
-    if match:
-        return int(match.group())
-    else:
-        return float('inf')  # put non-numeric weeks at the end
+    match = re.search(r'\d+', name)  # look for digits
+    return int(match.group()) if match else float('inf')
 
+# --- sorted list of week folders ---
 week_folders = sorted(
     [f for f in os.listdir(REPO_PATH) if f.startswith("week_")],
     key=extract_week_number
 )
+
+# numeric week labels for plotting
+week_numbers = [extract_week_number(w) for w in week_folders]
 
 
 for week in week_folders:
@@ -65,12 +66,16 @@ df.to_csv(csv_path)
 
 # Plotting
 plt.figure(figsize=(8, 6))
-weeks = range(1, len(week_folders) + 1)
+# weeks = range(1, len(week_folders) + 1)
+df = pd.DataFrame(results, index=week_numbers)
+df.index.name = "Week"
+df.to_csv(csv_path)
+
 
 for dose, values in results.items():
-    plt.plot(weeks, values, marker="o", label=f"Dose {dose}")
+    plt.plot(week_numbers, values, marker="o", label=f"Dose {dose}")
 
-plt.xticks(weeks, week_folders, rotation=45)
+plt.xticks(week_numbers, week_folders, rotation=45)
 plt.xlabel("Week")
 plt.ylabel("Average Confluency")
 plt.title("Average Confluency per Dose over Weeks")
@@ -78,9 +83,24 @@ plt.legend(title="Dose")
 plt.grid(True)
 plt.tight_layout()
 
-# Save graph as PNG
 png_path = os.path.join(REPO_PATH, "average_confluency.png")
 plt.savefig(png_path, dpi=300)
 plt.close()
+
+# for dose, values in results.items():
+#     plt.plot(weeks, values, marker="o", label=f"Dose {dose}")
+
+# plt.xticks(weeks, week_folders, rotation=45)
+# plt.xlabel("Week")
+# plt.ylabel("Average Confluency")
+# plt.title("Average Confluency per Dose over Weeks")
+# plt.legend(title="Dose")
+# plt.grid(True)
+# plt.tight_layout()
+
+# # Save graph as PNG
+# png_path = os.path.join(REPO_PATH, "average_confluency.png")
+# plt.savefig(png_path, dpi=300)
+# plt.close()
 
 print(f"Saved results to:\n {csv_path}\n {png_path}")
