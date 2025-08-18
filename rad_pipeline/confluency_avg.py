@@ -14,10 +14,20 @@ results = {dose: [] for dose in DOSES}
 
 # Get sorted list of week folders
 # week_folders = [f for f in os.listdir(REPO_PATH) if f.startswith("week_")]
+import re
+
+def extract_week_number(name):
+    match = re.search(r'\d+', name)  # look for digits in the folder name
+    if match:
+        return int(match.group())
+    else:
+        return float('inf')  # put non-numeric weeks at the end
+
 week_folders = sorted(
     [f for f in os.listdir(REPO_PATH) if f.startswith("week_")],
-    key=lambda x: int(x.split("_")[1])
+    key=extract_week_number
 )
+
 
 for week in week_folders:
     week_path = os.path.join(REPO_PATH, week, "results", "rpe_rad")
