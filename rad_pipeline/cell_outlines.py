@@ -192,6 +192,14 @@ def run_cellprofiler(
     image_csv = next(tmp_output_dir.glob('*Image.csv'))
     shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
+    # Handle the nuclei CSV file
+    nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
+    shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
+
+    # Handle the cytoplasm CSV file
+    cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
+    shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
+
     # Calculate the confluency and write it to a file
     df = pd.read_csv(image_csv)
     totalarea = df['AreaOccupied_TotalArea_Cells'][0]
