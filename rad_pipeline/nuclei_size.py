@@ -164,34 +164,42 @@ import scipy.stats as stats
 p_values = []
 for j in range(len(nuclei_size_avgs_sorted[0])):  # loop doses
     # Gather data: 9 groups (weeks), each with replicates
-    groups = [nuclei_size_avgs_sorted[i][j] for i in range(len(nuclei_size_avgs_sorted))]
-    f_stat, p_val = stats.f_oneway(*groups)
-    p_values.append(p_val)
-    print(f"Dose {j+1}: ANOVA across weeks, p = {p_val:.4e}")
+    groups = []
+    for i in range(len(nuclei_size_avgs_sorted)):
+        if j < len(nuclei_size_avgs_sorted[i]):  # only if this dose exists in that week
+            if len(nuclei_size_avgs_sorted[i][j]) > 0:  # skip empty lists
+                groups.append(nuclei_size_avgs_sorted[i][j])
+    # groups = [nuclei_size_avgs_sorted[i][j] for i in range(len(nuclei_size_avgs_sorted))]
+    if len(groups) > 1:
+        f_stat, p_val = stats.f_oneway(*groups)
+        p_values.append(p_val)
+        print(f"Dose {j+1}: ANOVA across weeks, p = {p_val:.4e}")
+    else:
+        print(f"Dose {j+1}: not enough data for ANOVA")
 
 
-# at week n, does nuclues size differ between doses?
-for i in range(len(nuclei_size_avgs_sorted)):  # loop weeks
-    groups = [nuclei_size_avgs_sorted[i][j] for j in range(len(nuclei_size_avgs_sorted[i]))]
-    f_stat, p_val = stats.f_oneway(*groups)
-    print(f"Week {i+1}: ANOVA across doses, p = {p_val:.4e}")
+# # at week n, does nuclues size differ between doses?
+# for i in range(len(nuclei_size_avgs_sorted)):  # loop weeks
+#     groups = [nuclei_size_avgs_sorted[i][j] for j in range(len(nuclei_size_avgs_sorted[i]))]
+#     f_stat, p_val = stats.f_oneway(*groups)
+#     print(f"Week {i+1}: ANOVA across doses, p = {p_val:.4e}")
 
 
-# #2 way anova, does the dose depend on the week?
-import pandas as pd
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
+# # #2 way anova, does the dose depend on the week?
+# import pandas as pd
+# import statsmodels.api as sm
+# from statsmodels.formula.api import ols
 
-records = []
-for i, week in enumerate(x_labels_sorted):       # 9 weeks
-    for j, dose in enumerate(range(len(nuclei_size_avgs_sorted[0]))):  # 6 doses
-        for value in nuclei_size_avgs_sorted[i][j]:
-            records.append({"week": week, "dose": f"Dose_{j+1}", "size": value})
+# records = []
+# for i, week in enumerate(x_labels_sorted):       # 9 weeks
+#     for j, dose in enumerate(range(len(nuclei_size_avgs_sorted[0]))):  # 6 doses
+#         for value in nuclei_size_avgs_sorted[i][j]:
+#             records.append({"week": week, "dose": f"Dose_{j+1}", "size": value})
 
-df = pd.DataFrame(records)
+# df = pd.DataFrame(records)
 
-# Two-way ANOVA
-model = ols("size ~ C(week) + C(dose) + C(week):C(dose)", data=df).fit()
-anova_table = sm.stats.anova_lm(model, typ=2)
-print(anova_table)
+# # Two-way ANOVA
+# model = ols("size ~ C(week) + C(dose) + C(week):C(dose)", data=df).fit()
+# anova_table = sm.stats.anova_lm(model, typ=2)
+# print(anova_table)
 
