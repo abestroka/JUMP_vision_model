@@ -4,17 +4,17 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from statistics import mean
 
-repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
+repo_path = "/eagle/projects/FoundEpidem/astroka/rpe/"
 
 nuclei_size_avgs = []
 doses = ["0.001", "0.01", "0.1", "1.0", "2.0"]
-type = "huvec_rad"
+type = "rpe_rad"
 results = {dose: [] for dose in doses}
 
 week_folders = [f for f in os.listdir(repo_path) if f.startswith("week_")]
 
 for week in week_folders:
-    week_path = os.path.join(repo_path, week, "results", "huvec_rad")
+    week_path = os.path.join(repo_path, week, "sheets", "rpe_rad")
     if not os.path.isdir(week_path):
         continue
 
@@ -38,7 +38,7 @@ for week in week_folders:
     nuclei_size_avgs.append(week_vals)
 
 for week in week_folders:
-    week_path = os.path.join(repo_path, week, "results", "huvec_control")
+    week_path = os.path.join(repo_path, week, "sheets", "rpe_control")
     if not os.path.isdir(week_path):
         continue
 
