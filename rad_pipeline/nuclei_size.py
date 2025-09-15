@@ -106,9 +106,14 @@ colors = plt.cm.tab10.colors[:len(nuclei_size_avgs[0])]
 
 fig, axes = plt.subplots(1, len(nuclei_size_avgs[0]), figsize=(20, 6), sharey=True)
 x_labels = [f"Label {i+1}" for i in range(len(nuclei_size_avgs))]
-for j in range(len(nuclei_size_avgs[0])):  # 6 groups
+# for j in range(len(nuclei_size_avgs[0])):  # 6 groups
     # Collect data for this group: list of 9 arrays, each length 180
-    group_data = [nuclei_size_avgs[i][j] for i in range(len(nuclei_size_avgs))]
+    # group_data = [nuclei_size_avgs[i][j] for i in range(len(nuclei_size_avgs))]
+    
+for j in range(max(len(row) for row in nuclei_size_avgs)):  # up to max groups
+    group_data = [nuclei_size_avgs[i][j] for i in range(len(nuclei_size_avgs)) if j < len(nuclei_size_avgs[i])]
+    # now plot group_data
+
     
     bp = axes[j].boxplot(group_data, patch_artist=True, widths=0.6)
     
