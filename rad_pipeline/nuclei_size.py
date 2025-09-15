@@ -83,20 +83,26 @@ doses.append("untreated")
 
 
 colors = plt.cm.tab10.colors[:6]
-fig, ax = plt.subplots(figsize=(10, 6))
-for i in range(9):  # x-axis categories
-    for j in range(6):  # 5 groups per category
-        # spread out the x values a little so they don't overlap
-        x_vals = np.full(180, i) + (j - 2) * 0.1  
-        y_vals = nuclei_size_avgs[i, j, :]
-        ax.scatter(x_vals, y_vals, color=colors[j], alpha=0.6, s=10, label=f"Group {j+1}" if i == 0 else "")
+fig, axes = plt.subplots(1, 6, figsize=(18, 6), sharey=True)
 
-ax.set_xticks(range(9))
-ax.set_xticklabels(doses)
-ax.set_xlabel("Categories (10)")
-ax.set_ylabel("Values (180 per group)")
-ax.legend(title="Groups (5)")
-# plt.show()
+for j in range(6):  # 5 groups
+    # Collect data for this group: list of 10 arrays, each of length 180
+    group_data = [nuclei_size_avgs[i, j, :] for i in range(9)]
+    
+    bp = axes[j].boxplot(group_data, patch_artist=True, widths=0.6)
+    
+    # Color the boxes
+    for patch in bp['boxes']:
+        patch.set_facecolor(colors[j])
+        patch.set_alpha(0.6)
+    
+    axes[j].set_xticks(range(1, 10))
+    axes[j].set_xticklabels(doses, rotation=45, ha="right")
+    axes[j].set_title(f"Group {j+1}")
+
+axes[0].set_ylabel("Values")
+plt.tight_layout()
+plt.show()
 
 repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
 
