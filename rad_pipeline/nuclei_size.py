@@ -31,7 +31,7 @@ for week in week_folders:
             if file.endswith("nuclei.csv"):
                 df = pd.read_csv(os.path.join(dose_path, file))
                 col_data = df["AreaShape_Area"].tolist()
-        
+                print("RAD", col_data)
                 values.append(mean(col_data))
         
         week_vals.append(values)
@@ -57,7 +57,7 @@ for week in week_folders:
         if file.endswith("nuclei.csv"):
             df = pd.read_csv(os.path.join(dose_path, file))
             col_data = df["AreaShape_Area"].tolist()
-    
+            print("UNTREATED", col_data)
             values.append(mean(col_data))
         
     week_vals.append(values)
