@@ -36,8 +36,6 @@ for week in week_folders:
                 if col_data != []:
 
                     values.append(mean(col_data))
-                else:
-                    print("HERRRE", dose, week)
         
         week_vals.append(values)
     
@@ -55,8 +53,6 @@ for week in week_folders:
             # print("UNTREATED", col_data)
             if col_data != []:
                 values.append(mean(col_data))
-            else:
-                print("HERRRE", dose, week)
     week_vals.append(values)
 
     nuclei_size_avgs.append(week_vals)
