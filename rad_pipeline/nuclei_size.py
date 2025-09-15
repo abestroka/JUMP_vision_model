@@ -82,12 +82,18 @@ doses.append("untreated")
 
 
 
-colors = plt.cm.tab10.colors[:6]
-fig, axes = plt.subplots(1, 6, figsize=(18, 6), sharey=True)
+# colors = plt.cm.tab10.colors[:6]
 
-for j in range(6):  # 5 groups
-    # Collect data for this group: list of 10 arrays, each of length 180
-    group_data = [nuclei_size_avgs[i, j, :] for i in range(9)]
+data = np.array(nuclei_size_avgs)
+
+
+colors = plt.cm.tab10.colors[:data.shape[1]]  # 6 distinct colors
+
+fig, axes = plt.subplots(1, data.shape[1], figsize=(20, 6), sharey=True)
+
+for j in range(data.shape[1]):  # 6 groups
+    # Collect data for this group: list of 9 arrays, each of length 180
+    group_data = [data[i, j, :] for i in range(data.shape[0])]
     
     bp = axes[j].boxplot(group_data, patch_artist=True, widths=0.6)
     
@@ -96,13 +102,13 @@ for j in range(6):  # 5 groups
         patch.set_facecolor(colors[j])
         patch.set_alpha(0.6)
     
-    axes[j].set_xticks(range(1, 10))
+    axes[j].set_xticks(range(1, data.shape[0] + 1))
     axes[j].set_xticklabels(doses, rotation=45, ha="right")
     axes[j].set_title(f"Group {j+1}")
 
 axes[0].set_ylabel("Values")
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
 
