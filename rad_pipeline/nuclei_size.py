@@ -153,6 +153,18 @@ png_path = os.path.join(repo_path, "average_nuclei_size.png")
 plt.savefig(png_path, dpi=300)
 plt.close()
 
+def anova_eta_squared(groups):
+    # groups = list of lists
+    all_data = np.concatenate(groups)
+    grand_mean = np.mean(all_data)
+    
+    # between-group SS
+    ss_between = sum(len(g) * (np.mean(g) - grand_mean) ** 2 for g in groups)
+    # total SS
+    ss_total = sum(((x - grand_mean) ** 2).sum() for g in groups for x in g)
+    
+    return ss_between / ss_total
+
 # for dose x, does nucleus size change across weeks?
 
 import scipy.stats as stats
@@ -169,9 +181,14 @@ for j in range(len(nuclei_size_avgs_sorted[0])):  # loop doses
     if len(groups) > 1:
         f_stat, p_val = stats.f_oneway(*groups)
         p_values.append(p_val)
+        eta2 = anova_eta_squared(groups)
+        print(f"F={f_stat:.2f}, p={p_val:.2e}, η²={eta2:.3f}")
+
         print(f"Dose {doses[j]}: ANOVA across weeks, p = {p_val:.4e}")
     else:
         print(f"Dose {doses[j]}: not enough data for ANOVA")
+
+
 
 p_values = []
 # at week n, does nuclues size differ between doses?
