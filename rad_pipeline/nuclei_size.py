@@ -178,20 +178,20 @@ for i in range(len(nuclei_size_avgs_sorted)):  # loop weeks
 
 
 # #2 way anova, does the dose depend on the week?
-# import pandas as pd
-# import statsmodels.api as sm
-# from statsmodels.formula.api import ols
+import pandas as pd
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
 
-# records = []
-# for i, week in enumerate(x_labels_sorted):       # 9 weeks
-#     for j, dose in enumerate(range(len(nuclei_size_avgs_sorted[0]))):  # 6 doses
-#         for value in nuclei_size_avgs_sorted[i][j]:
-#             records.append({"week": week, "dose": f"Dose_{j+1}", "size": value})
+records = []
+for i, week in enumerate(x_labels_sorted):       # 9 weeks
+    for j, dose in enumerate(range(len(nuclei_size_avgs_sorted[0]))):  # 6 doses
+        for value in nuclei_size_avgs_sorted[i][j]:
+            records.append({"week": week, "dose": f"Dose_{j+1}", "size": value})
 
-# df = pd.DataFrame(records)
+df = pd.DataFrame(records)
 
-# # Two-way ANOVA
-# model = ols("size ~ C(week) + C(dose) + C(week):C(dose)", data=df).fit()
-# anova_table = sm.stats.anova_lm(model, typ=2)
-# print(anova_table)
+# Two-way ANOVA
+model = ols("size ~ C(week) + C(dose) + C(week):C(dose)", data=df).fit()
+anova_table = sm.stats.anova_lm(model, typ=2)
+print(anova_table)
 
