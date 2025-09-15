@@ -40,7 +40,8 @@ for week in week_folders:
                     print("HERRRE", dose, week)
         
         week_vals.append(values)
-        weeks.append(week)
+    
+    weeks.append(week)
 
 ################
 
@@ -107,9 +108,9 @@ print(len(nuclei_size_avgs[8]))
 colors = plt.cm.tab10.colors[:len(nuclei_size_avgs[0])]
 
 fig, axes = plt.subplots(1, len(nuclei_size_avgs[0]), figsize=(20, 6), sharey=True)
-x_labels = [f"Week {i+1}" for i in range(len(nuclei_size_avgs))]
+# x_labels = [f"Week {i+1}" for i in range(len(nuclei_size_avgs))]
 print(weeks)
-# x_labels = weeks
+x_labels = weeks
 # for j in range(len(nuclei_size_avgs[0])):  # 6 groups
     # Collect data for this group: list of 9 arrays, each length 180
     # group_data = [nuclei_size_avgs[i][j] for i in range(len(nuclei_size_avgs))]
