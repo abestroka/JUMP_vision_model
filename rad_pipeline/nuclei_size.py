@@ -107,8 +107,9 @@ print(len(nuclei_size_avgs[8]))
 colors = plt.cm.tab10.colors[:len(nuclei_size_avgs[0])]
 
 fig, axes = plt.subplots(1, len(nuclei_size_avgs[0]), figsize=(20, 6), sharey=True)
-# x_labels = [f"Week {i+1}" for i in range(len(nuclei_size_avgs))]
-x_labels = weeks
+x_labels = [f"Week {i+1}" for i in range(len(nuclei_size_avgs))]
+print(weeks)
+# x_labels = weeks
 # for j in range(len(nuclei_size_avgs[0])):  # 6 groups
     # Collect data for this group: list of 9 arrays, each length 180
     # group_data = [nuclei_size_avgs[i][j] for i in range(len(nuclei_size_avgs))]
@@ -128,6 +129,8 @@ for j in range(max(len(row) for row in nuclei_size_avgs)):  # up to max groups
     axes[j].set_xticks(range(1, len(nuclei_size_avgs) + 1))
     axes[j].set_xticklabels(x_labels, rotation=45, ha="right")
     axes[j].set_title(doses[j])
+    axes[j].set_yscale("log")
+
 
 axes[0].set_ylabel("Values")
 plt.tight_layout()
