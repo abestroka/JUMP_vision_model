@@ -71,6 +71,11 @@ nuclei_size_avgs.append(week_vals)
 doses.append("untreated")
 
 print(nuclei_size_avgs)
+print(len(nuclei_size_avgs))
+print(len(nuclei_size_avgs[0]))
+print(len(nuclei_size_avgs[0][0]))
+print(" ")
+# print(nuclei_size_avgs.shape())
 
 plt.boxplot(nuclei_size_avgs, labels=doses)
 
