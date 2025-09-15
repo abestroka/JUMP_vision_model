@@ -199,6 +199,9 @@ for i in range(len(nuclei_size_avgs_sorted)):  # loop weeks
             groups.append(nuclei_size_avgs_sorted[i][j])
     if len(groups) > 1:
         f_stat, p_val = stats.f_oneway(*groups)
+        p_values.append(p_val)
+        eta2 = anova_eta_squared(groups)
+        print(f"F={f_stat:.2f}, p={p_val:.2e}, η²={eta2:.3f}")
         print(f"Week {i+1}: ANOVA across doses, p = {p_val:.4e}")
     else:
         print(f"Week {i+1}: not enough data for ANOVA")
