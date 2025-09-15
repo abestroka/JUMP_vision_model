@@ -80,7 +80,16 @@ for week in week_folders:
 doses.append("untreated")
 
 
-
+print(len(nuclei_size_avgs[0]))
+print(len(nuclei_size_avgs[1]))
+print(len(nuclei_size_avgs[2]))
+print(len(nuclei_size_avgs[3]))
+print(len(nuclei_size_avgs[4]))
+print(len(nuclei_size_avgs[5]))
+print(len(nuclei_size_avgs[6]))
+print(len(nuclei_size_avgs[7]))
+print(len(nuclei_size_avgs[8]))
+# print(len(nuclei_size_avgs[0]))
 
 # colors = plt.cm.tab10.colors[:6]
 
@@ -110,7 +119,7 @@ for j in range(len(nuclei_size_avgs[0])):  # 6 groups
 
 axes[0].set_ylabel("Values")
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
 
