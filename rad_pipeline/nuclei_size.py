@@ -79,21 +79,46 @@ for week in week_folders:
 
 doses.append("untreated")
 
-print(nuclei_size_avgs)
-print(len(nuclei_size_avgs))
-print(len(nuclei_size_avgs[0]))
-print(len(nuclei_size_avgs[0][0]))
-print(" ")
-# print(nuclei_size_avgs.shape())
 
-plt.boxplot(nuclei_size_avgs, labels=doses)
 
-plt.ylabel("Nuclei Size")
-plt.xlabel("Dose")
-plt.title("Huvec Nuclei Size")
+
+colors = plt.cm.tab10.colors[:6]
+fig, ax = plt.subplots(figsize=(10, 6))
+for i in range(9):  # x-axis categories
+    for j in range(6):  # 5 groups per category
+        # spread out the x values a little so they don't overlap
+        x_vals = np.full(180, i) + (j - 2) * 0.1  
+        y_vals = nuclei_size_avgs[i, j, :]
+        ax.scatter(x_vals, y_vals, color=colors[j], alpha=0.6, s=10, label=f"Group {j+1}" if i == 0 else "")
+
+ax.set_xticks(range(9))
+ax.set_xticklabels(doses)
+ax.set_xlabel("Categories (10)")
+ax.set_ylabel("Values (180 per group)")
+ax.legend(title="Groups (5)")
+# plt.show()
 
 repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
 
 png_path = os.path.join(repo_path, "average_nuclei_size.png")
 plt.savefig(png_path, dpi=300)
 plt.close()
+
+# print(nuclei_size_avgs)
+# print(len(nuclei_size_avgs))
+# print(len(nuclei_size_avgs[0]))
+# print(len(nuclei_size_avgs[0][0]))
+# print(" ")
+# # print(nuclei_size_avgs.shape())
+
+# plt.boxplot(nuclei_size_avgs, labels=doses)
+
+# plt.ylabel("Nuclei Size")
+# plt.xlabel("Dose")
+# plt.title("Huvec Nuclei Size")
+
+# repo_path = "/eagle/projects/FoundEpidem/astroka/ten_week/"
+
+# png_path = os.path.join(repo_path, "average_nuclei_size.png")
+# plt.savefig(png_path, dpi=300)
+# plt.close()
