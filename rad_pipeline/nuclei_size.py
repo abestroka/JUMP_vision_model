@@ -32,7 +32,7 @@ for week in week_folders:
                 df = pd.read_csv(os.path.join(dose_path, file))
                 col_data = df["AreaShape_Area"].tolist()
         
-            values.append(mean(col_data))
+                values.append(mean(col_data))
         
         week_vals.append(values)
     nuclei_size_avgs.append(week_vals)
@@ -58,7 +58,7 @@ for week in week_folders:
             df = pd.read_csv(os.path.join(dose_path, file))
             col_data = df["AreaShape_Area"].tolist()
     
-        values.append(mean(col_data))
+            values.append(mean(col_data))
         
     week_vals.append(values)
 
