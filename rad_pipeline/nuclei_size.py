@@ -169,12 +169,12 @@ for j in range(len(nuclei_size_avgs_sorted[0])):  # loop doses
     if len(groups) > 1:
         f_stat, p_val = stats.f_oneway(*groups)
         p_values.append(p_val)
-        print(f"Dose {j+1}: ANOVA across weeks, p = {p_val:.4e}")
+        print(f"Dose {doses[j]}: ANOVA across weeks, p = {p_val:.4e}")
     else:
         print(f"Dose {j+1}: not enough data for ANOVA")
 
 
-# # at week n, does nuclues size differ between doses?
+# at week n, does nuclues size differ between doses?
 # for i in range(len(nuclei_size_avgs_sorted)):  # loop weeks
 #     groups = [nuclei_size_avgs_sorted[i][j] for j in range(len(nuclei_size_avgs_sorted[i]))]
 #     f_stat, p_val = stats.f_oneway(*groups)
