@@ -87,21 +87,35 @@ for week in week_folders:
 doses.append("untreated")
 
 
-print(len(nuclei_size_avgs[0]))
-print(len(nuclei_size_avgs[1]))
-print(len(nuclei_size_avgs[2]))
-print(len(nuclei_size_avgs[3]))
-print(len(nuclei_size_avgs[4]))
-print(len(nuclei_size_avgs[5]))
-print(len(nuclei_size_avgs[6]))
-print(len(nuclei_size_avgs[7]))
-print(len(nuclei_size_avgs[8]))
-# print(len(nuclei_size_avgs[0]))
+##########
 
-# colors = plt.cm.tab10.colors[:6]
+import re
 
-# data = np.array(nuclei_size_avgs)
+def week_number(label):
+    """Extract the week number from a string like 'week_one' -> 1"""
+    # If they're written as words like "one", "two" etc
+    words_to_nums = {
+        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+        "six": 6, "seven": 7, "eight": 8, "nine": 9
+    }
+    word = label.split("_")[1].lower()
+    return words_to_nums[word]
 
+# Pair labels with their data
+x_labels = weeks
+paired = list(zip(x_labels, nuclei_size_avgs))
+
+# Sort by extracted week number
+paired_sorted = sorted(paired, key=lambda x: week_number(x[0]))
+
+# Unpack back into labels and data
+x_labels_sorted, nuclei_size_avgs_sorted = zip(*paired_sorted)
+
+# Convert nuclei_size_avgs_sorted back into a list
+nuclei_size_avgs_sorted = list(nuclei_size_avgs_sorted)
+
+nuclei_size_avgs = nuclei_size_avgs_sorted
+#############
 
 # colors = plt.cm.tab10.colors[:data.shape[1]]  # 6 distinct colors
 
@@ -128,7 +142,7 @@ for j in range(max(len(row) for row in nuclei_size_avgs)):  # up to max groups
         patch.set_alpha(0.6)
     
     axes[j].set_xticks(range(1, len(nuclei_size_avgs) + 1))
-    axes[j].set_xticklabels(x_labels, rotation=45, ha="right")
+    axes[j].set_xticklabels(x_labels_sorted, rotation=45, ha="right")
     axes[j].set_title(doses[j])
     axes[j].set_yscale("log")
 
