@@ -142,7 +142,7 @@ for j in range(max(len(row) for row in nuclei_size_avgs)):  # up to max groups
     axes[j].set_yscale("log")
 
 
-axes[0].set_ylabel("Values")
+axes[0].set_ylabel("Nuclei Size")
 plt.tight_layout()
 # plt.show()
 
