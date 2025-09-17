@@ -156,6 +156,7 @@ def run_cellprofiler(
     print("HHHEERRREEE")
     print(image_set.image_id)
     image_set.copy(tmp_input_dir)
+    print("AHHHHHHHHH")
 
     # Create the command
     command = (
