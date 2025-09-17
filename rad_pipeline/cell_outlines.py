@@ -78,6 +78,7 @@ def collect_image_sets(
                 dna, rna, agp, er, mito, brightfield = None, None, None, None, None, None
 
                 for img in curr_images:
+                    print("CURRIMG", img)
                     # if 'ch2' in img:
                     #     dna = img
                     # elif 'ch4' in img:
