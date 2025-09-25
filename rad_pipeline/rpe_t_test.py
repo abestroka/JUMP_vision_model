@@ -73,29 +73,69 @@ for week in week_folders:
 df_all = pd.DataFrame(records)
 print(f"Collected {len(df_all)} measurements across {df_all['feature'].nunique()} features.")
 
-# -----------------------------
-# One-way ANOVA: effect of week (pooled doses)
-# -----------------------------
+
+def safe_anova(groups):
+    """Run one-way ANOVA only if groups are valid."""
+    # Drop groups that are empty
+    groups = [g for g in groups if len(g) > 0]
+    # Require at least 2 groups
+    if len(groups) < 2:
+        return None
+    # Require variance within groups
+    if all(np.allclose(g, g[0]) for g in groups):
+        return None
+    try:
+        f, p = stats.f_oneway(*groups)
+        return f, p
+    except Exception:
+        return None
+
+
 features = df_all["feature"].unique()
 week_results = {}
-
+# Week effect
 for feat in features:
     subset = df_all[df_all["feature"] == feat]
     groups = [g["value"].values for _, g in subset.groupby("week")]
-    if len(groups) > 1:
-        f, p = stats.f_oneway(*groups)
+    res = safe_anova(groups)
+    if res is not None:
+        f, p = res
         week_results[feat] = p
 
-# -----------------------------
-# One-way ANOVA: effect of dose (pooled weeks)
-# -----------------------------
+# Dose effect
 dose_results = {}
 for feat in features:
     subset = df_all[df_all["feature"] == feat]
     groups = [g["value"].values for _, g in subset.groupby("dose")]
-    if len(groups) > 1:
-        f, p = stats.f_oneway(*groups)
+    res = safe_anova(groups)
+    if res is not None:
+        f, p = res
         dose_results[feat] = p
+
+
+# -----------------------------
+# One-way ANOVA: effect of week (pooled doses)
+# -----------------------------
+# features = df_all["feature"].unique()
+# week_results = {}
+
+# for feat in features:
+#     subset = df_all[df_all["feature"] == feat]
+#     groups = [g["value"].values for _, g in subset.groupby("week")]
+#     if len(groups) > 1:
+#         f, p = stats.f_oneway(*groups)
+#         week_results[feat] = p
+
+# # -----------------------------
+# # One-way ANOVA: effect of dose (pooled weeks)
+# # -----------------------------
+# dose_results = {}
+# for feat in features:
+#     subset = df_all[df_all["feature"] == feat]
+#     groups = [g["value"].values for _, g in subset.groupby("dose")]
+#     if len(groups) > 1:
+#         f, p = stats.f_oneway(*groups)
+#         dose_results[feat] = p
 
 # -----------------------------
 # Two-way ANOVA: week + dose
