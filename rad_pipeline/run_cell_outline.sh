@@ -53,5 +53,5 @@ SECONDS=0
 
 plate="Plate3"
 images="/eagle/FoundEpidem/astroka/ten_week/week_three/20240811_Week3_Week4/20240811_OSU_HTSC_MW_ANL_CellPainting_W3P3__2024-08-11T15_57_46-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_cells_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/huvec_week_one_layout.xlsx"
 python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/ten_week/week_three/sheets/huvec_rad --tmp_dir /dev/shm --num_workers 1
