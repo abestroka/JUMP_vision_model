@@ -23,6 +23,25 @@ def week_number(label):
     word = label.split("_")[1].lower()
     return words_to_nums.get(word, None)
 
+def safe_anova(groups):
+    """Run one-way ANOVA only if groups are valid."""
+    groups = [g for g in groups if len(g) > 0]
+    if len(groups) < 2:
+        return None
+    if all(np.allclose(g, g[0]) for g in groups):
+        return None
+    try:
+        f, p = stats.f_oneway(*groups)
+        return f, p
+    except Exception:
+        return None
+
+def format_p(p):
+    if p < 1e-300:
+        return "<1e-300"
+    else:
+        return f"{p:.3e}"
+
 # -----------------------------
 # Collect all data into tidy format
 # -----------------------------
@@ -46,6 +65,8 @@ for week in week_folders:
                 if file.endswith("nuclei.csv"):
                     df = pd.read_csv(os.path.join(dose_path, file))
                     for col in df.select_dtypes(include=[np.number]).columns:
+                        if col == "ObjectNumber":
+                            continue
                         for val in df[col].dropna():
                             records.append({
                                 "week": week_num,
@@ -61,6 +82,8 @@ for week in week_folders:
             if file.endswith("nuclei.csv"):
                 df = pd.read_csv(os.path.join(control_path, file))
                 for col in df.select_dtypes(include=[np.number]).columns:
+                    if col == "ObjectNumber":
+                        continue
                     for val in df[col].dropna():
                         records.append({
                             "week": week_num,
@@ -73,27 +96,12 @@ for week in week_folders:
 df_all = pd.DataFrame(records)
 print(f"Collected {len(df_all)} measurements across {df_all['feature'].nunique()} features.")
 
-
-def safe_anova(groups):
-    """Run one-way ANOVA only if groups are valid."""
-    # Drop groups that are empty
-    groups = [g for g in groups if len(g) > 0]
-    # Require at least 2 groups
-    if len(groups) < 2:
-        return None
-    # Require variance within groups
-    if all(np.allclose(g, g[0]) for g in groups):
-        return None
-    try:
-        f, p = stats.f_oneway(*groups)
-        return f, p
-    except Exception:
-        return None
-
-
+# -----------------------------
+# One-way ANOVA: effect of week (pooled doses)
+# -----------------------------
 features = df_all["feature"].unique()
 week_results = {}
-# Week effect
+
 for feat in features:
     subset = df_all[df_all["feature"] == feat]
     groups = [g["value"].values for _, g in subset.groupby("week")]
@@ -102,7 +110,9 @@ for feat in features:
         f, p = res
         week_results[feat] = p
 
-# Dose effect
+# -----------------------------
+# One-way ANOVA: effect of dose (pooled weeks)
+# -----------------------------
 dose_results = {}
 for feat in features:
     subset = df_all[df_all["feature"] == feat]
@@ -111,31 +121,6 @@ for feat in features:
     if res is not None:
         f, p = res
         dose_results[feat] = p
-
-
-# -----------------------------
-# One-way ANOVA: effect of week (pooled doses)
-# -----------------------------
-# features = df_all["feature"].unique()
-# week_results = {}
-
-# for feat in features:
-#     subset = df_all[df_all["feature"] == feat]
-#     groups = [g["value"].values for _, g in subset.groupby("week")]
-#     if len(groups) > 1:
-#         f, p = stats.f_oneway(*groups)
-#         week_results[feat] = p
-
-# # -----------------------------
-# # One-way ANOVA: effect of dose (pooled weeks)
-# # -----------------------------
-# dose_results = {}
-# for feat in features:
-#     subset = df_all[df_all["feature"] == feat]
-#     groups = [g["value"].values for _, g in subset.groupby("dose")]
-#     if len(groups) > 1:
-#         f, p = stats.f_oneway(*groups)
-#         dose_results[feat] = p
 
 # -----------------------------
 # Two-way ANOVA: week + dose
@@ -154,13 +139,21 @@ for feat in features:
 week_ranked = sorted(week_results.items(), key=lambda x: x[1])
 dose_ranked = sorted(dose_results.items(), key=lambda x: x[1])
 
-print("\nMost significant features across weeks (one-way ANOVA):")
+print("\nTop 10 most significant features across weeks (one-way ANOVA):")
 for feat, p in week_ranked[:10]:
-    print(f"{feat:25s}  p={p:.3e}")
+    print(f"{feat:25s}  p={format_p(p)}")
 
-print("\nMost significant features across doses (one-way ANOVA):")
+print("\nTop 10 most significant features across doses (one-way ANOVA):")
 for feat, p in dose_ranked[:10]:
-    print(f"{feat:25s}  p={p:.3e}")
+    print(f"{feat:25s}  p={format_p(p)}")
+
+print("\nAll features across weeks (one-way ANOVA):")
+for feat, p in week_ranked:
+    print(f"{feat:25s}  p={format_p(p)}")
+
+print("\nAll features across doses (one-way ANOVA):")
+for feat, p in dose_ranked:
+    print(f"{feat:25s}  p={format_p(p)}")
 
 print("\nExample two-way ANOVA results for top week feature:")
 if week_ranked:
