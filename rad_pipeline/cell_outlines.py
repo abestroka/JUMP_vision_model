@@ -29,6 +29,8 @@ class ImageSet:
     @property
     def image_id(self) -> str:
         """Get the unique id for the image set, e.g., r06c04f09p14."""
+        print("HHHEERRRRE")
+        print(self.dna)
         return Path(self.dna).stem.split('-')[0]
 
     def copy(self, dst: Path) -> None:
@@ -153,10 +155,8 @@ def run_cellprofiler(
     tmp_output_dir.mkdir(exist_ok=True, parents=True)
 
     # Create the temporary image directory
-    print("HHHEERRREEE")
     print(image_set.image_id)
     image_set.copy(tmp_input_dir)
-    print("AHHHHHHHHH")
 
     # Create the command
     command = (
