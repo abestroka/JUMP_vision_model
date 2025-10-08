@@ -276,7 +276,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/whole_image_all_measurments.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_nuclei.cppipe',
         ),
         type=Path,
     )

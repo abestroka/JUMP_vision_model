@@ -1,0 +1,521 @@
+CellProfiler Pipeline: http://www.cellprofiler.org
+Version:5
+DateRevision:426
+GitHash:
+ModuleCount:31
+HasImagePlaneDetails:False
+
+Images:[module_num:1|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    :
+    Filter images?:No filtering
+    Select the rule criteria:and (extension does isimage) (directory doesnot containregexp "[\\\\/]\\.")
+
+Metadata:[module_num:2|svn_version:'Unknown'|variable_revision_number:6|show_window:False|notes:['The Metadata module optionally allows you to extract information describing your images (i.e, metadata) which will be stored along with your measurements. This information can be contained in the file name and/or location, or in an external file.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Extract metadata?:No
+    Metadata data type:Text
+    Metadata types:{}
+    Extraction method count:1
+    Metadata extraction method:Extract from file/folder names
+    Metadata source:File name
+    Regular expression to extract from file name:^(?P<Plate>.*)_(?P<Well>[A-P][0-9]{2})_s(?P<Site>[0-9])_w(?P<ChannelNumber>[0-9])
+    Regular expression to extract from folder name:(?P<Date>[0-9]{4}_[0-9]{2}_[0-9]{2})$
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:Elsewhere...|
+    Match file and image metadata:[]
+    Use case insensitive matching?:No
+    Metadata file name:None
+    Does cached metadata exist?:No
+
+NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|show_window:False|notes:['The NamesAndTypes module allows you to assign a meaningful name to each image by which other modules will refer to it.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Assign a name to:Images matching rules
+    Select the image type:Grayscale image
+    Name to assign these images:DNA
+    Match metadata:[]
+    Image set matching method:Order
+    Set intensity range from:Image metadata
+    Assignments count:5
+    Single images count:0
+    Maximum intensity:255.0
+    Process as 3D?:No
+    Relative pixel spacing in X:1.0
+    Relative pixel spacing in Y:1.0
+    Relative pixel spacing in Z:1.0
+    Select the rule criteria:and (file does contain "dna.tiff")
+    Name to assign these images:OrigDNA
+    Name to assign these objects:Cell
+    Select the image type:Grayscale image
+    Set intensity range from:Image bit-depth
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "agp.tiff")
+    Name to assign these images:OrigER
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image bit-depth
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "rna.tiff")
+    Name to assign these images:OrigRNA
+    Name to assign these objects:Cytoplasm
+    Select the image type:Grayscale image
+    Set intensity range from:Image bit-depth
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "er.tiff")
+    Name to assign these images:OrigAGP
+    Name to assign these objects:Speckle
+    Select the image type:Grayscale image
+    Set intensity range from:Image bit-depth
+    Maximum intensity:255.0
+    Select the rule criteria:and (file does contain "mito.tiff")
+    Name to assign these images:OrigMito
+    Name to assign these objects:Object1
+    Select the image type:Grayscale image
+    Set intensity range from:Image bit-depth
+    Maximum intensity:255.0
+
+Groups:[module_num:4|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['The Groups module optionally allows you to split your list of images into image subsets (groups) which will be processed independently of each other. Examples of groupings include screening batches, microtiter plates, time-lapse movies, etc.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Do you want to group your images?:No
+    grouping metadata count:1
+    Metadata category:None
+
+CorrectIlluminationApply:[module_num:5|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input image:OrigMito
+    Name the output image:Mito
+    Select the illumination function:IllumMito
+    Select how the illumination function is applied:Divide
+    Select the input image:OrigRNA
+    Name the output image:RNA
+    Select the illumination function:IllumRNA
+    Select how the illumination function is applied:Divide
+    Select the input image:OrigDNA
+    Name the output image:DNA
+    Select the illumination function:IllumDNA
+    Select how the illumination function is applied:Divide
+    Select the input image:OrigER
+    Name the output image:ER
+    Select the illumination function:IllumER
+    Select how the illumination function is applied:Divide
+    Select the input image:OrigAGP
+    Name the output image:AGP
+    Select the illumination function:IllumAGP
+    Select how the illumination function is applied:Divide
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationCalculate:[module_num:6|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigDNA
+    Name the output image:IllumDNA
+    Select how the illumination function is calculated:Background
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:30
+    Rescale the illumination function?:No
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Gaussian Filter
+    Method to calculate smoothing filter size:Manually
+    Approximate object diameter:10
+    Smoothing filter size:50
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationCalculate:[module_num:7|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigAGP
+    Name the output image:IllumAGP
+    Select how the illumination function is calculated:Background
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:30
+    Rescale the illumination function?:No
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Gaussian Filter
+    Method to calculate smoothing filter size:Manually
+    Approximate object diameter:10
+    Smoothing filter size:50
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationCalculate:[module_num:8|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigER
+    Name the output image:IllumER
+    Select how the illumination function is calculated:Background
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:30
+    Rescale the illumination function?:No
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Gaussian Filter
+    Method to calculate smoothing filter size:Manually
+    Approximate object diameter:10
+    Smoothing filter size:50
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationCalculate:[module_num:9|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigMito
+    Name the output image:IllumMito
+    Select how the illumination function is calculated:Background
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:30
+    Rescale the illumination function?:No
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Gaussian Filter
+    Method to calculate smoothing filter size:Manually
+    Approximate object diameter:10
+    Smoothing filter size:50
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationCalculate:[module_num:10|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigRNA
+    Name the output image:IllumRNA
+    Select how the illumination function is calculated:Background
+    Dilate objects in the final averaged image?:No
+    Dilation radius:1
+    Block size:30
+    Rescale the illumination function?:No
+    Calculate function for each image individually, or based on all images?:Each
+    Smoothing method:Gaussian Filter
+    Method to calculate smoothing filter size:Automatic
+    Approximate object diameter:10
+    Smoothing filter size:50
+    Retain the averaged image?:No
+    Name the averaged image:IllumBlueAvg
+    Retain the dilated image?:No
+    Name the dilated image:IllumBlueDilated
+    Automatically calculate spline parameters?:Yes
+    Background mode:auto
+    Number of spline points:5
+    Background threshold:2.0
+    Image resampling factor:2.0
+    Maximum number of iterations:40
+    Residual value for convergence:0.001
+
+CorrectIlluminationApply:[module_num:11|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigDNA
+    Name the output image:CorrDNA
+    Select the illumination function:IllumDNA
+    Select how the illumination function is applied:Subtract
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationApply:[module_num:12|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigAGP
+    Name the output image:CorrAGP
+    Select the illumination function:IllumAGP
+    Select how the illumination function is applied:Subtract
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationApply:[module_num:13|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigER
+    Name the output image:CorrER
+    Select the illumination function:IllumER
+    Select how the illumination function is applied:Subtract
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationApply:[module_num:14|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigMito
+    Name the output image:CorrMito
+    Select the illumination function:IllumMito
+    Select how the illumination function is applied:Subtract
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+CorrectIlluminationApply:[module_num:15|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:OrigRNA
+    Name the output image:CorrRNA
+    Select the illumination function:IllumRNA
+    Select how the illumination function is applied:Subtract
+    Set output image values less than 0 equal to 0?:Yes
+    Set output image values greater than 1 equal to 1?:Yes
+
+IdentifyPrimaryObjects:[module_num:16|svn_version:'Unknown'|variable_revision_number:15|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CorrDNA
+    Name the primary objects to be identified:Nuclei
+    Typical diameter of objects, in pixel units (Min,Max):15,90
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:8
+    Speed up by using lower-resolution image to find local maxima?:No
+    Fill holes in identified objects?:After declumping only
+    Automatically calculate size of smoothing filter for declumping?:No
+    Automatically calculate minimum allowed distance between local maxima?:No
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Minimum Cross-Entropy
+    Threshold smoothing scale:1
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.005,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+IdentifySecondaryObjects:[module_num:17|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input objects:Nuclei
+    Name the objects to be identified:Cells
+    Select the method to identify the secondary objects:Watershed - Image
+    Select the input image:CorrAGP
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Fill holes in identified objects?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:0.0
+    Threshold correction factor:0.7
+    Lower and upper bounds on threshold:0.0007,.06
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Three classes
+    Log transform before thresholding?:Yes
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+IdentifyTertiaryObjects:[module_num:18|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the larger identified objects:Cells
+    Select the smaller identified objects:Nuclei
+    Name the tertiary objects to be identified:Cytoplasm
+    Shrink smaller object prior to subtraction?:Yes
+
+RescaleIntensity:[module_num:19|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CorrDNA
+    Name the output image:RescaleDNA
+    Rescaling method:Stretch each image to use the full intensity range
+    Method to calculate the minimum intensity:Custom
+    Method to calculate the maximum intensity:Custom
+    Lower intensity limit for the input image:0.0
+    Upper intensity limit for the input image:1.0
+    Intensity range for the input image:0.0,1.0
+    Intensity range for the output image:0.0,1.0
+    Select image to match in maximum intensity:None
+    Divisor value:1.0
+    Divisor measurement:None
+
+RescaleIntensity:[module_num:20|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input image:CorrAGP
+    Name the output image:RescaleAGP
+    Rescaling method:Stretch each image to use the full intensity range
+    Method to calculate the minimum intensity:Custom
+    Method to calculate the maximum intensity:Custom
+    Lower intensity limit for the input image:0.0
+    Upper intensity limit for the input image:1.0
+    Intensity range for the input image:0.0,1.0
+    Intensity range for the output image:0.0,1.0
+    Select image to match in maximum intensity:None
+    Divisor value:1.0
+    Divisor measurement:None
+
+RescaleIntensity:[module_num:21|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the input image:CorrER
+    Name the output image:RescaleER
+    Rescaling method:Stretch each image to use the full intensity range
+    Method to calculate the minimum intensity:Custom
+    Method to calculate the maximum intensity:Custom
+    Lower intensity limit for the input image:0.0
+    Upper intensity limit for the input image:1.0
+    Intensity range for the input image:0.0,1.0
+    Intensity range for the output image:0.0,1.0
+    Select image to match in maximum intensity:None
+    Divisor value:1.0
+    Divisor measurement:None
+
+GrayToColor:[module_num:22|svn_version:'Unknown'|variable_revision_number:4|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select a color scheme:RGB
+    Rescale intensity:No
+    Select the image to be colored red:Leave this black
+    Select the image to be colored green:RescaleDNA
+    Select the image to be colored blue:Leave this black
+    Name the output image:ColorImage
+    Relative weight for the red image:1
+    Relative weight for the green image:1
+    Relative weight for the blue image:1
+    Select the image to be colored cyan:Leave this black
+    Select the image to be colored magenta:Leave this black
+    Select the image to be colored yellow:Leave this black
+    Select the image that determines brightness:Leave this black
+    Relative weight for the cyan image:1.0
+    Relative weight for the magenta image:1.0
+    Relative weight for the yellow image:1.0
+    Relative weight for the brightness image:1.0
+    Hidden:1
+    Image name:None
+    Color:#ff0000
+    Weight:1.0
+
+ImageMath:[module_num:23|svn_version:'Unknown'|variable_revision_number:5|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Operation:None
+    Raise the power of the result by:1.0
+    Multiply the result by:1.0
+    Add to result:0.0
+    Set values less than 0 equal to 0?:Yes
+    Set values greater than 1 equal to 1?:Yes
+    Replace invalid values with 0?:Yes
+    Ignore the image masks?:No
+    Name the output image:ImageAfterMath
+    Image or measurement?:Image
+    Select the first image:ColorImage
+    Multiply the first image by:1.0
+    Measurement:
+    Image or measurement?:Image
+    Select the second image:None
+    Multiply the second image by:1.0
+    Measurement:
+
+MeasureObjectIntensity:[module_num:24|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select images to measure:CorrAGP, CorrDNA, CorrER, CorrMito, CorrRNA
+    Select objects to measure:Cells, Cytoplasm, Nuclei
+
+MeasureObjectSizeShape:[module_num:25|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select object sets to measure:Cells, Cytoplasm, Nuclei
+    Calculate the Zernike features?:Yes
+    Calculate the advanced features?:No
+
+OverlayOutlines:[module_num:26|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Display outlines on a blank image?:No
+    Select image on which to display outlines:ImageAfterMath
+    Name the output image:OrigOverlay2
+    Outline display mode:Color
+    Select method to determine brightness of outlines:Max of image
+    How to outline:Inner
+    Select outline color:#FFFF0A
+    Select objects to display:Nuclei
+
+MeasureImageAreaOccupied:[module_num:27|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Measure the area occupied by:Objects
+    Select binary images to measure:CorrAGP
+    Select object sets to measure:Cells
+
+SaveImages:[module_num:28|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:OrigOverlay2
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:OrigDNA
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:png
+    Output file location:Default Output Folder|Argonne/LUCID/h2a_nine_week/week_one_control/neg_control/1
+    Image bit depth:8-bit integer
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:Yes
+
+SaveImages:[module_num:29|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:RescaleER
+    Select method for constructing file names:Single name
+    Select image name for file prefix:OrigDNA
+    Enter single file name:Caspase
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:png
+    Output file location:Default Input Folder sub-folder|Argonne/LUCID/h2a_nine_week/week_one_control/neg_control/1
+    Image bit depth:8-bit integer
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:Yes
+
+SaveCroppedObjects:[module_num:30|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Do you want to save cropped images or object masks?:Images
+    Objects:Nuclei
+    Directory:Default Output Folder|Argonne/LUCID/7-14-25/fib
+    Prefix saved crop image name with input image name?:No
+    Select image name to use as a prefix:None
+    Save output crops in nested folders?:No
+    Saved file format:png
+    Image to crop:OrigOverlay2
+
+ExportToSpreadsheet:[module_num:31|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:False|wants_pause:False]
+    Select the column delimiter:Comma (",")
+    Add image metadata columns to your object data file?:No
+    Add image file and folder names to your object data file?:No
+    Select the measurements to export:Yes
+    Calculate the per-image mean values for object measurements?:No
+    Calculate the per-image median values for object measurements?:No
+    Calculate the per-image standard deviation values for object measurements?:No
+    Output file location:Default Output Folder|Argonne/LUCID/h2a_nine_week/week_one_control/pos_control/1
+    Create a GenePattern GCT file?:No
+    Select source of sample row name:Metadata
+    Select the image to use as the identifier:None
+    Select the metadata to use as the identifier:None
+    Export all measurement types?:Yes
+    Press button to select measurements:Image|Frame_OrigAGP,Image|Frame_OrigER,Image|Frame_OrigRNA,Image|Frame_OrigDNA,Image|Frame_OrigMito,Image|MD5Digest_OrigAGP,Image|MD5Digest_OrigDNA,Image|MD5Digest_OrigMito,Image|MD5Digest_OrigER,Image|MD5Digest_OrigRNA,Image|ExecutionTime_11CorrectIlluminationApply,Image|ExecutionTime_14CorrectIlluminationApply,Image|ExecutionTime_18IdentifyTertiaryObjects,Image|ExecutionTime_06CorrectIlluminationCalculate,Image|ExecutionTime_16IdentifyPrimaryObjects,Image|ExecutionTime_19RescaleIntensity,Image|ExecutionTime_26OverlayOutlines,Image|ExecutionTime_03NamesAndTypes,Image|ExecutionTime_12CorrectIlluminationApply,Image|ExecutionTime_20RescaleIntensity,Image|ExecutionTime_04Groups,Image|ExecutionTime_13CorrectIlluminationApply,Image|ExecutionTime_25MeasureObjectSizeShape,Image|ExecutionTime_07CorrectIlluminationCalculate,Image|ExecutionTime_09CorrectIlluminationCalculate,Image|ExecutionTime_01Images,Image|ExecutionTime_02Metadata,Image|ExecutionTime_15CorrectIlluminationApply,Image|ExecutionTime_22GrayToColor,Image|ExecutionTime_24MeasureObjectIntensity,Image|ExecutionTime_27MeasureImageAreaOccupied,Image|ExecutionTime_21RescaleIntensity,Image|ExecutionTime_23ImageMath,Image|ExecutionTime_08CorrectIlluminationCalculate,Image|ExecutionTime_17IdentifySecondaryObjects,Image|ExecutionTime_10CorrectIlluminationCalculate,Image|ModuleError_10CorrectIlluminationCalculate,Image|ModuleError_18IdentifyTertiaryObjects,Image|ModuleError_23ImageMath,Image|ModuleError_19RescaleIntensity,Image|ModuleError_13CorrectIlluminationApply,Image|ModuleError_17IdentifySecondaryObjects,Image|ModuleError_14CorrectIlluminationApply,Image|ModuleError_08CorrectIlluminationCalculate,Image|ModuleError_27MeasureImageAreaOccupied,Image|ModuleError_12CorrectIlluminationApply,Image|ModuleError_01Images,Image|ModuleError_03NamesAndTypes,Image|ModuleError_21RescaleIntensity,Image|ModuleError_24MeasureObjectIntensity,Image|ModuleError_22GrayToColor,Image|ModuleError_04Groups,Image|ModuleError_20RescaleIntensity,Image|ModuleError_25MeasureObjectSizeShape,Image|ModuleError_02Metadata,Image|ModuleError_11CorrectIlluminationApply,Image|ModuleError_07CorrectIlluminationCalculate,Image|ModuleError_06CorrectIlluminationCalculate,Image|ModuleError_09CorrectIlluminationCalculate,Image|ModuleError_15CorrectIlluminationApply,Image|ModuleError_26OverlayOutlines,Image|ModuleError_16IdentifyPrimaryObjects,Image|Group_Index,Image|Group_Length,Image|Group_Number,Image|Height_OrigRNA,Image|Height_OrigAGP,Image|Height_OrigER,Image|Height_OrigDNA,Image|Height_OrigMito,Image|Scaling_OrigRNA,Image|Scaling_OrigER,Image|Scaling_OrigDNA,Image|Scaling_OrigAGP,Image|Scaling_OrigMito,Image|PathName_OrigER,Image|PathName_OrigMito,Image|PathName_OrigRNA,Image|PathName_OrigDNA,Image|PathName_OrigAGP,Image|Threshold_OrigThreshold_Nuclei,Image|Threshold_OrigThreshold_Cells,Image|Threshold_WeightedVariance_Cells,Image|Threshold_WeightedVariance_Nuclei,Image|Threshold_FinalThreshold_Cells,Image|Threshold_FinalThreshold_Nuclei,Image|Threshold_SumOfEntropies_Nuclei,Image|Threshold_SumOfEntropies_Cells,Image|FileName_OrigRNA,Image|FileName_OrigDNA,Image|FileName_OrigER,Image|FileName_OrigAGP,Image|FileName_OrigMito,Image|Series_OrigAGP,Image|Series_OrigER,Image|Series_OrigDNA,Image|Series_OrigRNA,Image|Series_OrigMito,Image|URL_OrigRNA,Image|URL_OrigER,Image|URL_OrigMito,Image|URL_OrigDNA,Image|URL_OrigAGP,Image|AreaOccupied_TotalArea_Cells,Image|AreaOccupied_AreaOccupied_Cells,Image|AreaOccupied_Perimeter_Cells,Image|Count_Cytoplasm,Image|Count_Nuclei,Image|Count_Cells,Image|Width_OrigRNA,Image|Width_OrigER,Image|Width_OrigMito,Image|Width_OrigAGP,Image|Width_OrigDNA,Cells|AreaShape_EquivalentDiameter,Cells|AreaShape_Zernike_8_4,Cells|AreaShape_Zernike_8_0,Cells|AreaShape_Zernike_8_8,Cells|AreaShape_Zernike_8_6,Cells|AreaShape_Zernike_8_2,Cells|AreaShape_Zernike_7_3,Cells|AreaShape_Zernike_7_1,Cells|AreaShape_Zernike_7_5,Cells|AreaShape_Zernike_7_7,Cells|AreaShape_Zernike_2_0,Cells|AreaShape_Zernike_2_2,Cells|AreaShape_Zernike_9_9,Cells|AreaShape_Zernike_9_1,Cells|AreaShape_Zernike_9_7,Cells|AreaShape_Zernike_9_3,Cells|AreaShape_Zernike_9_5,Cells|AreaShape_Zernike_5_3,Cells|AreaShape_Zernike_5_5,Cells|AreaShape_Zernike_5_1,Cells|AreaShape_Zernike_3_1,Cells|AreaShape_Zernike_3_3,Cells|AreaShape_Zernike_1_1,Cells|AreaShape_Zernike_6_4,Cells|AreaShape_Zernike_6_6,Cells|AreaShape_Zernike_6_2,Cells|AreaShape_Zernike_6_0,Cells|AreaShape_Zernike_4_0,Cells|AreaShape_Zernike_4_4,Cells|AreaShape_Zernike_4_2,Cells|AreaShape_Zernike_0_0,Cells|AreaShape_MinorAxisLength,Cells|AreaShape_BoundingBoxMinimum_Y,Cells|AreaShape_BoundingBoxMinimum_X,Cells|AreaShape_BoundingBoxMaximum_Y,Cells|AreaShape_BoundingBoxMaximum_X,Cells|AreaShape_Center_X,Cells|AreaShape_Center_Y,Cells|AreaShape_Compactness,Cells|AreaShape_BoundingBoxArea,Cells|AreaShape_MaxFeretDiameter,Cells|AreaShape_ConvexArea,Cells|AreaShape_Extent,Cells|AreaShape_MajorAxisLength,Cells|AreaShape_Area,Cells|AreaShape_MedianRadius,Cells|AreaShape_Solidity,Cells|AreaShape_Eccentricity,Cells|AreaShape_FormFactor,Cells|AreaShape_MaximumRadius,Cells|AreaShape_Orientation,Cells|AreaShape_MinFeretDiameter,Cells|AreaShape_MeanRadius,Cells|AreaShape_Perimeter,Cells|AreaShape_EulerNumber,Cells|Intensity_MADIntensity_CorrDNA,Cells|Intensity_MADIntensity_CorrMito,Cells|Intensity_MADIntensity_CorrER,Cells|Intensity_MADIntensity_CorrRNA,Cells|Intensity_MADIntensity_CorrAGP,Cells|Intensity_MassDisplacement_CorrDNA,Cells|Intensity_MassDisplacement_CorrMito,Cells|Intensity_MassDisplacement_CorrRNA,Cells|Intensity_MassDisplacement_CorrER,Cells|Intensity_MassDisplacement_CorrAGP,Cells|Intensity_UpperQuartileIntensity_CorrER,Cells|Intensity_UpperQuartileIntensity_CorrRNA,Cells|Intensity_UpperQuartileIntensity_CorrDNA,Cells|Intensity_UpperQuartileIntensity_CorrAGP,Cells|Intensity_UpperQuartileIntensity_CorrMito,Cells|Intensity_MinIntensityEdge_CorrAGP,Cells|Intensity_MinIntensityEdge_CorrRNA,Cells|Intensity_MinIntensityEdge_CorrDNA,Cells|Intensity_MinIntensityEdge_CorrER,Cells|Intensity_MinIntensityEdge_CorrMito,Cells|Intensity_IntegratedIntensity_CorrMito,Cells|Intensity_IntegratedIntensity_CorrAGP,Cells|Intensity_IntegratedIntensity_CorrER,Cells|Intensity_IntegratedIntensity_CorrRNA,Cells|Intensity_IntegratedIntensity_CorrDNA,Cells|Intensity_MeanIntensity_CorrAGP,Cells|Intensity_MeanIntensity_CorrRNA,Cells|Intensity_MeanIntensity_CorrDNA,Cells|Intensity_MeanIntensity_CorrMito,Cells|Intensity_MeanIntensity_CorrER,Cells|Intensity_IntegratedIntensityEdge_CorrAGP,Cells|Intensity_IntegratedIntensityEdge_CorrER,Cells|Intensity_IntegratedIntensityEdge_CorrMito,Cells|Intensity_IntegratedIntensityEdge_CorrRNA,Cells|Intensity_IntegratedIntensityEdge_CorrDNA,Cells|Intensity_MinIntensity_CorrDNA,Cells|Intensity_MinIntensity_CorrAGP,Cells|Intensity_MinIntensity_CorrMito,Cells|Intensity_MinIntensity_CorrRNA,Cells|Intensity_MinIntensity_CorrER,Cells|Intensity_MeanIntensityEdge_CorrER,Cells|Intensity_MeanIntensityEdge_CorrMito,Cells|Intensity_MeanIntensityEdge_CorrAGP,Cells|Intensity_MeanIntensityEdge_CorrRNA,Cells|Intensity_MeanIntensityEdge_CorrDNA,Cells|Intensity_StdIntensity_CorrER,Cells|Intensity_StdIntensity_CorrAGP,Cells|Intensity_StdIntensity_CorrRNA,Cells|Intensity_StdIntensity_CorrDNA,Cells|Intensity_StdIntensity_CorrMito,Cells|Intensity_MaxIntensity_CorrER,Cells|Intensity_MaxIntensity_CorrAGP,Cells|Intensity_MaxIntensity_CorrRNA,Cells|Intensity_MaxIntensity_CorrMito,Cells|Intensity_MaxIntensity_CorrDNA,Cells|Intensity_MedianIntensity_CorrDNA,Cells|Intensity_MedianIntensity_CorrAGP,Cells|Intensity_LowerQuartileIntensity_CorrDNA,Cells|Intensity_LowerQuartileIntensity_CorrRNA,Cells|Intensity_LowerQuartileIntensity_CorrMito,Cells|Intensity_LowerQuartileIntensity_CorrER,Cells|Intensity_LowerQuartileIntensity_CorrAGP,Cells|Intensity_StdIntensityEdge_CorrDNA,Cells|Intensity_StdIntensityEdge_CorrAGP,Cells|Intensity_StdIntensityEdge_CorrMito,Cells|Intensity_StdIntensityEdge_CorrER,Cells|Intensity_StdIntensityEdge_CorrRNA,Cells|Intensity_MaxIntensityEdge_CorrRNA,Cells|Intensity_MaxIntensityEdge_CorrAGP,Cells|Intensity_MaxIntensityEdge_CorrER,Cells|Intensity_MaxIntensityEdge_CorrDNA,Cells|Intensity_MaxIntensityEdge_CorrMito,Cells|Location_CenterMassIntensity_X_CorrAGP,Cells|Location_CenterMassIntensity_X_CorrMito,Cells|Location_CenterMassIntensity_X_CorrDNA,Cells|Location_CenterMassIntensity_X_CorrRNA,Cells|Location_CenterMassIntensity_X_CorrER,Cells|Location_CenterMassIntensity_Y_CorrDNA,Cells|Location_CenterMassIntensity_Y_CorrAGP,Cells|Location_CenterMassIntensity_Y_CorrER,Cells|Location_CenterMassIntensity_Y_CorrMito,Cells|Location_CenterMassIntensity_Y_CorrRNA,Cells|Location_CenterMassIntensity_Z_CorrER,Cells|Location_CenterMassIntensity_Z_CorrMito,Cells|Location_CenterMassIntensity_Z_CorrAGP,Cells|Location_CenterMassIntensity_Z_CorrDNA,Cells|Location_CenterMassIntensity_Z_CorrRNA,Cells|Location_Center_Y,Cells|Location_Center_X,Cells|Location_Center_Z,Cells|Location_MaxIntensity_Z_CorrDNA,Cells|Location_MaxIntensity_Z_CorrRNA,Cells|Location_MaxIntensity_Z_CorrMito,Cells|Location_MaxIntensity_Z_CorrER,Cells|Location_MaxIntensity_Z_CorrAGP,Cells|Location_MaxIntensity_X_CorrAGP,Cells|Location_MaxIntensity_X_CorrDNA,Cells|Location_MaxIntensity_Y_CorrER,Cells|Location_MaxIntensity_Y_CorrDNA,Cells|Location_MaxIntensity_Y_CorrMito,Cells|Location_MaxIntensity_Y_CorrAGP,Cells|Location_MaxIntensity_Y_CorrRNA,Cells|Number_Object_Number,Cells|Parent_Nuclei,Cells|Children_Cytoplasm_Count
+    Representation of Nan/Inf:NaN
+    Add a prefix to file names?:Yes
+    Filename prefix:MyExpt_
+    Overwrite existing files without warning?:Yes
+    Data to export:Do not use
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes
