@@ -52,6 +52,6 @@ SECONDS=0
 
 
 plate="fib_rad"
-images="/eagle/FoundEpidem/astroka/fib_and_htert/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1P3_1__2024-10-02T15_35_53-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/fib_and_htert/week_one/results/fib_rad_nuc --tmp_dir /dev/shm --num_workers 16
+images="/eagle/FoundEpidem/astroka/fib_and_htert/week_two/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W2P3_3__2024-10-02T17_17_31-Measurement1/Images"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_two_fib_layout.xlsx"
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/fib_and_htert/week_two/results/fib_rad_nuc --tmp_dir /dev/shm --num_workers 16
