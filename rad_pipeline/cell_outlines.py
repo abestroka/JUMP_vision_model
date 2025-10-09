@@ -29,8 +29,8 @@ class ImageSet:
     @property
     def image_id(self) -> str:
         """Get the unique id for the image set, e.g., r06c04f09p14."""
-        # print("COPYING DNA")
-        # print(self.dna)
+        print("COPYING DNA")
+        print(self.dna)
         return Path(self.dna).stem.split('-')[0]
 
     def copy(self, dst: Path) -> None:
@@ -155,7 +155,11 @@ def run_cellprofiler(
     tmp_output_dir.mkdir(exist_ok=True, parents=True)
 
     # Create the temporary image directory
+    print("IMAGE_SET.IMAGE_ID")
+    print(image_set.image_id)
+    print("IMAGE_SET.IMAGE_ID printed, now to copy")
     image_set.copy(tmp_input_dir)
+    print("COPIED")
 
     # Create the command
     command = (
@@ -310,8 +314,8 @@ if __name__ == '__main__':
         plate=args.plate,
         treatment_path=args.treatment_file,
     )
-    # print("IMAGE SETS")
-    # print(image_sets)
+    print("IMAGE SETS")
+    print(image_sets)
 
     # Define the worker function for quantization
     worker_fn = functools.partial(
