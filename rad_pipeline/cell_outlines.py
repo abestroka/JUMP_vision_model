@@ -187,30 +187,40 @@ def run_cellprofiler(
     # Create the output directory
     output_dir = output_dir / str(image_set.treatment)
     output_dir.mkdir(exist_ok=True, parents=True)
+
+
+
+
+
     # Handle the cells CSV file
 
-    cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
-    shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
+    # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
+    # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
     
-    # Handle the image CSV file
-    image_csv = next(tmp_output_dir.glob('*Image.csv'))
-    shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
+    # # Handle the image CSV file
+    # image_csv = next(tmp_output_dir.glob('*Image.csv'))
+    # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
-    # Handle the nuclei CSV file
-    nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
-    shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
+    # # Handle the nuclei CSV file
+    # nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
+    # shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
 
-    # Handle the cytoplasm CSV file
-    cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
-    shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
+    # # Handle the cytoplasm CSV file
+    # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
+    # shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
+
+
+
+
+
 
     # Calculate the confluency and write it to a file
-    df = pd.read_csv(image_csv)
-    totalarea = df['AreaOccupied_TotalArea_Cells'][0]
-    cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
-    confluency = float(cellarea / totalarea)
-    with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
-        f.write(str(confluency))
+    # df = pd.read_csv(image_csv)
+    # totalarea = df['AreaOccupied_TotalArea_Cells'][0]
+    # cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
+    # confluency = float(cellarea / totalarea)
+    # with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
+    #     f.write(str(confluency))
 
     # Gather the segmented images and move them to the appropriate directory
     src_images = list(tmp_output_dir.glob('*.png'))
