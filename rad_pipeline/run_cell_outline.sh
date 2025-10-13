@@ -53,5 +53,5 @@ SECONDS=0
 
 plate="fib_rad"
 images="/eagle/FoundEpidem/astroka/fib_and_htert/week_three/20241009_NewWeek3/20241009_ANL_CellPainting_W3P3_1__2024-10-09T22_29_20-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_three_fib_layout.xlsx"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_three_fib_layout2.xlsx"
 python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/fib_and_htert/week_three/results/fib_rad_nuc --tmp_dir /dev/shm --num_workers 16
