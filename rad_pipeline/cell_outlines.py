@@ -282,7 +282,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells_rescale.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells.cppipe',
         ),
         type=Path,
     )
