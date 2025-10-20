@@ -231,7 +231,7 @@ for week in week_folders:
 # ----------- PLOT HISTOGRAMS -----------
 fig, axes = plt.subplots(1, len(doses), figsize=(22, 5), sharey=True)
 
-bins = np.arange(0, 5000 + 250, 250)  # Adjust range as needed
+bins = np.arange(0, 3000, 250)  # Adjust range as needed
 
 for ax, dose in zip(axes, doses):
     data = dose_cell_areas[dose]
