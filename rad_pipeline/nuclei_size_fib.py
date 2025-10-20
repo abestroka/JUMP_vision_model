@@ -231,7 +231,7 @@ for week in week_folders:
 
 
 # ----------- PLOT WEEKLY HISTOGRAMS -----------
-bins = np.arange(0, 2500 + 250, 250)  # Adjust range as needed
+bins = np.arange(0, 2500, 100)  # Adjust range as needed
 
 for week, dose_data in week_dose_areas.items():
     fig, axes = plt.subplots(1, len(doses), figsize=(22, 5), sharey=True)
