@@ -196,13 +196,15 @@ repo_path = "/eagle/projects/FoundEpidem/astroka/fib_and_htert/"
 doses = ["0.001", "0.01", "0.1", "1.0", "2.0", "untreated"]
 type = "fib_rad"
 
-# Dictionary to store ALL cell areas across all weeks for each dose
-dose_cell_areas = {dose: [] for dose in doses}
+# Dictionary to store data per week and per dose
+week_dose_areas = {}
 
-# Iterate through all week folders
 week_folders = [f for f in os.listdir(repo_path) if f.startswith("week_")]
 
 for week in week_folders:
+    print(f"Processing {week}...")
+    week_dose_areas[week] = {dose: [] for dose in doses}
+
     # --- RADIATED samples ---
     rad_path = os.path.join(repo_path, week, "sheets", "fib_rad")
     if os.path.isdir(rad_path):
@@ -215,7 +217,7 @@ for week in week_folders:
                     df = pd.read_csv(os.path.join(dose_path, file))
                     if "AreaShape_Area" in df.columns:
                         col_data = df["AreaShape_Area"].dropna().tolist()
-                        dose_cell_areas[dose].extend(col_data)
+                        week_dose_areas[week][dose].extend(col_data)
     
     # --- UNTREATED control ---
     control_path = os.path.join(repo_path, week, "sheets", "fib_control", "untreated")
@@ -225,27 +227,36 @@ for week in week_folders:
                 df = pd.read_csv(os.path.join(control_path, file))
                 if "AreaShape_Area" in df.columns:
                     col_data = df["AreaShape_Area"].dropna().tolist()
-                    dose_cell_areas["untreated"].extend(col_data)
+                    week_dose_areas[week]["untreated"].extend(col_data)
 
 
-# ----------- PLOT HISTOGRAMS -----------
-fig, axes = plt.subplots(1, len(doses), figsize=(22, 5), sharey=True)
+# ----------- PLOT WEEKLY HISTOGRAMS -----------
+bins = np.arange(0, 2500 + 250, 250)  # Adjust range as needed
 
-bins = np.arange(0, 2500, 100)  # Adjust range as needed
+for week, dose_data in week_dose_areas.items():
+    fig, axes = plt.subplots(1, len(doses), figsize=(22, 5), sharey=True)
 
-for ax, dose in zip(axes, doses):
-    data = dose_cell_areas[dose]
-    ax.hist(data, bins=bins, color="steelblue", edgecolor="black", alpha=0.7)
-    ax.set_title(dose)
-    ax.set_xlabel("Cell area (µm²)")
-    ax.set_xlim([0, bins[-1]])
-    ax.grid(alpha=0.3)
+    for ax, dose in zip(axes, doses):
+        data = dose_data[dose]
+        if len(data) == 0:
+            ax.text(0.5, 0.5, "No data", ha="center", va="center", transform=ax.transAxes)
+            ax.set_xlim([0, bins[-1]])
+            ax.set_ylim([0, 10])
+        else:
+            ax.hist(data, bins=bins, color="steelblue", edgecolor="black", alpha=0.7)
+            ax.set_xlim([0, bins[-1]])
+        ax.set_title(dose)
+        ax.set_xlabel("Cell area (µm²)")
+        ax.grid(alpha=0.3)
 
-axes[0].set_ylabel("Number of cells")
-plt.tight_layout()
+    axes[0].set_ylabel("Number of cells")
+    fig.suptitle(f"{week} - Nuclei Area Distribution", fontsize=14)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
 
-png_path = os.path.join(repo_path, "nuclei_area_histograms.png")
-plt.savefig(png_path, dpi=300)
-plt.close()
+    png_path = os.path.join(repo_path, f"nuclei_area_histograms_{week}.png")
+    plt.savefig(png_path, dpi=300)
+    plt.close()
+    print(f"Saved {png_path}")
 
-print(f"Saved histograms to {png_path}")
+print("Done!")
+
