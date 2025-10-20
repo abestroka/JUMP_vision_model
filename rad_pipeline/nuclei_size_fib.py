@@ -245,6 +245,8 @@ for week, dose_data in week_dose_areas.items():
         else:
             ax.hist(data, bins=bins, color="steelblue", edgecolor="black", alpha=0.7)
             ax.set_xlim([0, bins[-1]])
+            if week == "week_two":
+                ax.set_ylim([0, 3000]) 
         ax.set_title(dose)
         ax.set_xlabel("Cell area (µm²)")
         ax.grid(alpha=0.3)
