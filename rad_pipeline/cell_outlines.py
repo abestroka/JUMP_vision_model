@@ -278,11 +278,19 @@ if __name__ == '__main__':
         default='/lus/eagle/projects/FoundEpidem/astroka/cellprofiler_4.2.6.sif',
         type=Path,
     )
+    # parser.add_argument(
+    #     '--cellprofiler_pipeline',
+    #     help='The cell profiler pipeline to use',
+    #     default=Path(
+    #         '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells.cppipe',
+    #     ),
+    #     type=Path,
+    # )
     parser.add_argument(
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_cells.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/cropped_ch2_tiff.cppipe',
         ),
         type=Path,
     )
