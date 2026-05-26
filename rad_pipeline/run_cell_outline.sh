@@ -3,8 +3,8 @@
 #PBS -l place=scatter
 #PBS -l walltime=1:00:00
 #PBS -q debug
-#PBS -A FoundEpidem
-#PBS -l filesystems=home:eagle
+#PBS -A FRAME-IDP
+#PBS -l filesystems=home:grand
 
 # module load singularity
 module use /soft/spack/gcc/0.6.1/install/modulefiles/Core
