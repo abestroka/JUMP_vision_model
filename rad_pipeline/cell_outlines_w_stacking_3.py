@@ -299,7 +299,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/cropped_ch2_tiff.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/mito_counting_v2.cppipe',
         ),
         type=Path,
     )
