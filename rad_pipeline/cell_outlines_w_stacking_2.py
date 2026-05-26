@@ -29,20 +29,13 @@ def _collect_planes(well_images: list[str], field_tag: str, channel: str) -> lis
 
 
 def _max_project(plane_paths: list[str]) -> np.ndarray:
-    """Load all planes and return a max-intensity projection cast to source dtype."""
+    """Load all planes and return a max-intensity projection."""
     planes = []
-    src_dtype = None
     for path in plane_paths:
         with tifffile.TiffFile(path) as tf:
-            page = tf.pages[0]
-            if src_dtype is None:
-                src_dtype = page.dtype
-            planes.append(page.asarray())
+            planes.append(tf.pages[0].asarray())
     volume = np.stack(planes, axis=0)
-    projected = volume.max(axis=0)
-    info = (np.iinfo(src_dtype) if np.issubdtype(src_dtype, np.integer)
-            else np.finfo(src_dtype))
-    return projected.clip(info.min, info.max).astype(src_dtype)
+    return volume.max(axis=0)
 
 
 def project_stacks(
@@ -54,7 +47,7 @@ def project_stacks(
     """Max-project the p-planes for DNA (ch2), AGP (ch5), and Mito (ch8) only.
 
     RNA, ER, and brightfield are single-plane channels not used by the mito
-    counting pipeline and are deliberately excluded to avoid unnecessary disk use.
+    counting pipeline and are deliberately excluded to minimise disk usage.
 
     Output structure mirrors the existing pipeline:
         output_dir / <treatment> / <image_id>_<channel>.tiff
@@ -99,6 +92,10 @@ def project_stacks(
                 if not planes:
                     continue
                 projected = _max_project(planes)
+                src_dtype = tifffile.TiffFile(planes[0]).pages[0].dtype
+                info = (np.iinfo(src_dtype) if np.issubdtype(src_dtype, np.integer)
+                        else np.finfo(src_dtype))
+                projected = projected.clip(info.min, info.max).astype(src_dtype)
                 tifffile.imwrite(
                     str(dest / f'{image_id}_{channel_name}.tiff'),
                     projected,
@@ -121,19 +118,48 @@ class ImageSet:
     @property
     def image_id(self) -> str:
         """Get the unique id for the image set, e.g., r06c04f09p14."""
-        # print("COPYING DNA")
-        # print(self.dna)
         return Path(self.dna).stem.split('-')[0]
 
     def copy(self, dst: Path) -> None:
         """Copy the images to the specified directory."""
-        # Move the images to the temporary directory
         dst.mkdir(parents=True, exist_ok=True)
         shutil.copy(self.dna, dst / 'dna.tiff')
         shutil.copy(self.rna, dst / 'rna.tiff')
         shutil.copy(self.agp, dst / 'agp.tiff')
         shutil.copy(self.er, dst / 'er.tiff')
         shutil.copy(self.mito, dst / 'mito.tiff')
+
+    def copy_from_projected(self, dst: Path, projected_dir: Path) -> None:
+        """Copy input images to dst, substituting projected TIFFs for DNA,
+        AGP, and Mito instead of the raw per-plane originals.
+
+        The projected files are looked up by image_id (with the p-component
+        stripped) under projected_dir / <treatment> / <image_id>_<channel>.tiff.
+        RNA and ER have no projected counterpart and are copied from the
+        original paths as normal.
+        """
+        dst.mkdir(parents=True, exist_ok=True)
+
+        # Strip the p-component from the raw image_id to match projected filenames
+        projected_id = re.sub(r'p\d+$', '', self.image_id, flags=re.IGNORECASE)
+        proj_src = projected_dir / str(self.treatment)
+
+        for channel_name, raw_path in (
+            ('dna',  self.dna),
+            ('agp',  self.agp),
+            ('mito', self.mito),
+        ):
+            projected_file = proj_src / f'{projected_id}_{channel_name}.tiff'
+            if projected_file.exists():
+                shutil.copy(projected_file, dst / f'{channel_name}.tiff')
+            else:
+                # Fall back to raw file if projection is missing
+                print(f'WARNING: projected file not found, falling back to raw: {projected_file}')
+                shutil.copy(raw_path, dst / f'{channel_name}.tiff')
+
+        # RNA and ER are not projected — copy originals directly
+        shutil.copy(self.rna, dst / 'rna.tiff')
+        shutil.copy(self.er,  dst / 'er.tiff')
 
 
 def collect_image_sets(
@@ -156,34 +182,14 @@ def collect_image_sets(
         # iterate through fields
         for field in range(1, 10):
             for stack in range(1, 6):
-                # print("field:", field, "stack:", stack)
                 curr_images = [
                     file
                     for file in well_images
                     if f'f0{field}' in file and f'p0{stack}' in file
                 ]
-                # iterate through images of this set
-                # dna = 'NA'
-                # rna = 'NA'
-                # agp = 'NA'
-                # er = 'NA'
-                # brightfield = 'NA'
-                # mito = 'NA'
                 dna, rna, agp, er, mito, brightfield = None, None, None, None, None, None
 
                 for img in curr_images:
-                    # if 'ch2' in img:
-                    #     dna = img
-                    # elif 'ch4' in img:
-                    #     rna = img
-                    # elif 'ch3' in img:
-                    #     agp = img
-                    # elif 'ch6' in img:
-                    #     er = img
-                    # elif 'ch7' in img:
-                    #     brightfield = img
-                    # elif 'ch8' in img:
-                    #     mito = img
                     if 'ch2' in img:
                         dna = img
                     elif 'ch4' in img:
@@ -199,14 +205,6 @@ def collect_image_sets(
                 image_sets.append(
                     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
                 )
-                # if all([dna, rna, agp, er, mito, brightfield]):
-                #     image_sets.append(
-                #         ImageSet(dna, rna, agp, er, mito, brightfield, treatment)
-                #     )
-                # else:
-                # # image_sets.append(
-                # #     ImageSet(dna, rna, agp, er, mito, brightfield, treatment),
-                # # )
     return image_sets
 
 
@@ -217,6 +215,7 @@ def run_cellprofiler(
     scratch_dir: Path,
     cellprofiler: str,
     cellprofiler_pipeline: Path,
+    projected_dir: Path | None = None,
 ) -> None:
     """Execute a cell profiler command with the specified parameters.
 
@@ -234,11 +233,20 @@ def run_cellprofiler(
         The path to the cell profiler singularity image.
     cellprofiler_pipeline : Path
         The cell profiler pipeline to use.
+    projected_dir : Path | None
+        If provided, DNA/AGP/Mito inputs are taken from the max-projected
+        TIFFs in this directory rather than the raw per-plane originals.
 
     Returns
     -------
         None
     """
+    # Skip if already processed — allows safe re-runs after a quota failure
+    # without redoing completed work.
+    final_output_dir = output_dir / str(image_set.treatment)
+    if list(final_output_dir.glob(f'{image_set.image_id}*.png')):
+        return
+
     # Create temp directories for input and output
     _tmp_dir = tmp_dir / str(uuid4())
     tmp_input_dir = _tmp_dir / 'input'
@@ -246,82 +254,80 @@ def run_cellprofiler(
     tmp_input_dir.mkdir(exist_ok=True, parents=True)
     tmp_output_dir.mkdir(exist_ok=True, parents=True)
 
-    # Create the temporary image directory
-    image_set.copy(tmp_input_dir)
-
-    # Create the command
-    command = (
-        f'singularity run --bind {tmp_dir} '
-        f'--bind {scratch_dir} '
-        f'{cellprofiler} -c -r '
-        f'-p {cellprofiler_pipeline} '
-        f'-i {tmp_input_dir} '
-        f'-o {tmp_output_dir}'
-    )
-    # print(" BEFORE SUBPROCESS")
-    # Run the command and check for errors
     try:
-        subprocess.run(command.split(), check=True)
-    except subprocess.CalledProcessError as e:
-        print(f'An error occurred: {e}')
-        return
-    except Exception as e:
-        print(f'Unexpected error: {e}')
-        return
-    # print("AFTER")
-    # Now we need to process and move the output files
-    # TODO: See if we just rename files in the tmp directory,
-    # then do bulk mv operation
-    # Create the output directory
-    output_dir = output_dir / str(image_set.treatment)
-    output_dir.mkdir(exist_ok=True, parents=True)
+        # Populate the temp input directory — use projected TIFFs when available
+        if projected_dir is not None:
+            image_set.copy_from_projected(tmp_input_dir, projected_dir)
+        else:
+            image_set.copy(tmp_input_dir)
 
+        # Create the command
+        command = (
+            f'singularity run --bind {tmp_dir} '
+            f'--bind {scratch_dir} '
+            f'{cellprofiler} -c -r '
+            f'-p {cellprofiler_pipeline} '
+            f'-i {tmp_input_dir} '
+            f'-o {tmp_output_dir}'
+        )
+        # Run the command and check for errors
+        try:
+            subprocess.run(command.split(), check=True)
+        except subprocess.CalledProcessError as e:
+            print(f'An error occurred: {e}')
+            return
+        except Exception as e:
+            print(f'Unexpected error: {e}')
+            return
 
+        # Now we need to process and move the output files
+        # TODO: See if we just rename files in the tmp directory,
+        # then do bulk mv operation
+        # Create the output directory
+        output_dir = final_output_dir
+        output_dir.mkdir(exist_ok=True, parents=True)
 
+        # Handle the cells CSV file
 
+        # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
+        # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
 
-    # Handle the cells CSV file
+        # # Handle the image CSV file
+        # image_csv = next(tmp_output_dir.glob('*Image.csv'))
+        # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
-    # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
-    # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
-    
-    # # Handle the image CSV file
-    # image_csv = next(tmp_output_dir.glob('*Image.csv'))
-    # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
+        # # Handle the nuclei CSV file
+        # nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
+        # shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
 
-    # # Handle the nuclei CSV file
-    # nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
-    # shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
+        # # Handle the cytoplasm CSV file
+        # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
+        # shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
 
-    # # Handle the cytoplasm CSV file
-    # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
-    # shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
+        # Calculate the confluency and write it to a file
+        # df = pd.read_csv(image_csv)
+        # totalarea = df['AreaOccupied_TotalArea_Cells'][0]
+        # cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
+        # confluency = float(cellarea / totalarea)
+        # with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
+        #     f.write(str(confluency))
 
+        # Gather the segmented images and move them to the appropriate directory
+        src_images = list(tmp_output_dir.glob('*.png'))
+        # If there are more than one image, we need to assign unique names
+        if len(src_images) > 1:
+            for image in src_images:
+                new_name = f'{image_set.image_id}_{uuid4()}.png'
+                shutil.copy(image, output_dir / new_name)
+        elif len(src_images) == 1:
+            shutil.copy(src_images[0], output_dir / f'{image_set.image_id}.png')
 
-
-
-
-
-    # Calculate the confluency and write it to a file
-    # df = pd.read_csv(image_csv)
-    # totalarea = df['AreaOccupied_TotalArea_Cells'][0]
-    # cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
-    # confluency = float(cellarea / totalarea)
-    # with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
-    #     f.write(str(confluency))
-
-    # Gather the segmented images and move them to the appropriate directory
-    src_images = list(tmp_output_dir.glob('*.png'))
-    # If there are more than one image, we need to assign unique names
-    if len(src_images) > 1:
-        for image in src_images:
-            new_name = f'{image_set.image_id}_{uuid4()}.png'
-            shutil.copy(image, output_dir / new_name)
-    elif len(src_images) == 1:
-        shutil.copy(src_images[0], output_dir / f'{image_set.image_id}.png')
-
-    # Clean up the temporary directory
-    shutil.rmtree(_tmp_dir)
+    finally:
+        # Always clean up temp dir, even on quota errors or CP failures.
+        # Without this, failed parallel workers leave orphaned dirs that
+        # accumulate and consume quota across the entire run.
+        if _tmp_dir.exists():
+            shutil.rmtree(_tmp_dir)
 
 
 if __name__ == '__main__':
@@ -394,8 +400,9 @@ if __name__ == '__main__':
     )
     parser.add_argument(
         '--projected_output_dir',
-        help='Output directory for max-projected z-stack TIFFs (DNA, AGP, Mito only). '
-             'RNA, ER, and brightfield are excluded to minimise disk usage.',
+        help='Output directory for max-projected z-stack TIFFs (DNA, AGP, Mito). '
+             'When provided, projections are written here first, then CellProfiler '
+             'reads from these projected TIFFs instead of the raw per-plane originals.',
         type=Path,
         default=None,
     )
@@ -405,7 +412,8 @@ if __name__ == '__main__':
     os.environ['SINGULARITY_TMPDIR'] = str(args.scratch_dir)
     os.environ['SINGULARITY_CACHEDIR'] = str(args.scratch_dir)
 
-    # Project z-stacks into the separate output repo if requested
+    # If requested, project z-stacks and write to the separate output repo.
+    # CellProfiler will then read from these projected TIFFs.
     if args.projected_output_dir is not None:
         print(f'Projecting z-stacks → {args.projected_output_dir}')
         project_stacks(
@@ -428,8 +436,6 @@ if __name__ == '__main__':
         plate=args.plate,
         treatment_path=args.treatment_file,
     )
-    # print("IMAGE SETS")
-    # print(image_sets)
 
     # Define the worker function for quantization
     worker_fn = functools.partial(
@@ -438,7 +444,8 @@ if __name__ == '__main__':
         tmp_dir=args.tmp_dir,
         cellprofiler=scratch_cellprofiler,
         cellprofiler_pipeline=scratch_pipeline,
-        scratch_dir=args.scratch_dir
+        scratch_dir=args.scratch_dir,
+        projected_dir=args.projected_output_dir,
     )
 
     # Run the cell profiler on each image set in parallel
