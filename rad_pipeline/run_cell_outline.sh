@@ -54,6 +54,6 @@ SECONDS=0
 plate="fib_rad"
 images="/grand/FRAME-IDP/astroka/fib_1/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1P3_1__2024-10-02T15_35_53-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines_w_stacking_3.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/mito_imgs/ --tmp_dir /dev/shm --num_workers 16 --projected_output_dir /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/stacked_mito_imgs/
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines_w_stacking.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/mito_imgs/ --tmp_dir /dev/shm --num_workers 16 --projected_output_dir /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/stacked_mito_imgs/
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tiffs_preprocess.py
