@@ -289,12 +289,12 @@ def run_cellprofiler(
 
         # Handle the cells CSV file
 
-        # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
-        # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
+        cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
+        shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
 
-        # # Handle the image CSV file
-        # image_csv = next(tmp_output_dir.glob('*Image.csv'))
-        # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
+        # Handle the image CSV file
+        image_csv = next(tmp_output_dir.glob('*Image.csv'))
+        shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
         # # Handle the nuclei CSV file
         # nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
@@ -303,6 +303,18 @@ def run_cellprofiler(
         # # Handle the cytoplasm CSV file
         # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
         # shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
+
+        # Handle the mito count CSV file
+        mitocount_csv = next(tmp_output_dir.glob('*MitoCount.csv'))
+        shutil.copy(mitocount_csv, output_dir / f'{image_set.image_id}_mitocount.csv')
+
+        # Handle the mito CSV file
+        mito_csv = next(tmp_output_dir.glob('*Mitochondria.csv'))
+        shutil.copy(mito_csv, output_dir / f'{image_set.image_id}_mito.csv')
+
+        # Handle the mito summary CSV file
+        mito_summary_csv = next(tmp_output_dir.glob('*MitoSummary.csv'))
+        shutil.copy(mito_summary_csv, output_dir / f'{image_set.image_id}_mito_summary.csv')
 
         # Calculate the confluency and write it to a file
         # df = pd.read_csv(image_csv)
