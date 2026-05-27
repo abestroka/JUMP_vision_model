@@ -304,9 +304,9 @@ def run_cellprofiler(
         # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
         # shutil.copy(cytoplasm_csv, output_dir / f'{image_set.image_id}_cytoplasm.csv')
 
-        # Handle the mito count CSV file
-        mitocount_csv = next(tmp_output_dir.glob('*MitoCount.csv'))
-        shutil.copy(mitocount_csv, output_dir / f'{image_set.image_id}_mitocount.csv')
+        # # Handle the mito count CSV file
+        # mitocount_csv = next(tmp_output_dir.glob('*MitoCount.csv'))
+        # shutil.copy(mitocount_csv, output_dir / f'{image_set.image_id}_mitocount.csv')
 
         # # Handle the mito CSV file
         # mito_csv = next(tmp_output_dir.glob('*Mitochondria.csv'))
