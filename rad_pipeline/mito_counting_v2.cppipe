@@ -268,7 +268,7 @@ EnhanceOrSuppressFeatures:[module_num:14|svn_version:'Unknown'|variable_revision
 IdentifyPrimaryObjects:[module_num:15|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:['Detect individual mitochondria as primary objects. Min/Max diameter (pixels) must be tuned to your microscopy resolution. At 20x: individual mito ~2-8px, clusters ~8-20px. Use Otsu 3-class with Log transform for dim, punctate signal. Lower the threshold correction factor if too few are detected.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the input image:Mito_Enhanced
     Name the primary objects to be identified:Mitochondria
-    Typical diameter of objects, in pixel units (Min,Max):2,20
+    Typical diameter of objects, in pixel units (Min,Max):2,8
     Discard objects outside the diameter range?:Yes
     Discard objects touching the border of the image?:No
     Method to distinguish clumped objects:Intensity
@@ -286,7 +286,7 @@ IdentifyPrimaryObjects:[module_num:15|svn_version:'Unknown'|variable_revision_nu
     Threshold strategy:Global
     Thresholding method:Otsu
     Threshold smoothing scale:1.0
-    Threshold correction factor:0.9
+    Threshold correction factor:0.5
     Lower and upper bounds on threshold:0.005,1.0
     Manual threshold:0.0
     Select the measurement to threshold with:None
