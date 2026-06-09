@@ -400,7 +400,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/grand/projects/FRAME-IDP/astroka/mito_counting_v5.cppipe',
+            '/lus/grand/projects/FRAME-IDP/astroka/mito_counting_v6.cppipe',
         ),
         type=Path,
     )
