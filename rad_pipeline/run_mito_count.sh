@@ -51,9 +51,9 @@ SECONDS=0
 # # python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/ten_week/week_one_corrected/results/huvec_control_seg --tmp_dir /dev/shm --num_workers 32
 
 
-plate="Plate3"
-images="/grand/FRAME-IDP/astroka/exp_05_26/week_one/20260531_Exp1/20260528_20x_ANL_CellPainting_RPE-1_Plate3_1__2026-05-28T19_03_26-Measurement1/Images"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_one/results/Plate3/ --tmp_dir /dev/shm --num_workers 16
+plate="fib_rad"
+images="/grand/FRAME-IDP/astroka/fib_1/week_one/20241003_NewWeek1_Week2/20241002_OSU_HTSC_MW_ANL_CellPainting_W1P3_1__2024-10-02T15_35_53-Measurement1/Images"
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_one_fib_layout.xlsx"
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines_w_stacking_2.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/mito_imgs/ --tmp_dir /dev/shm --num_workers 16 --projected_output_dir /grand/projects/FRAME-IDP/astroka/fib_1/week_one/results/stacked_mito_imgs/
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tiffs_preprocess.py
