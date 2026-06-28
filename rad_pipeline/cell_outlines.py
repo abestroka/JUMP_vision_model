@@ -190,16 +190,16 @@ def run_cellprofiler(
 
     # Handle the cells CSV file
 
-    # cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
-    # shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
+    cells_csv = next(tmp_output_dir.glob('*Cells.csv'))
+    shutil.copy(cells_csv, output_dir / f'{image_set.image_id}_cells.csv')
     
-    # # Handle the image CSV file
-    # image_csv = next(tmp_output_dir.glob('*Image.csv'))
-    # shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
+    # Handle the image CSV file
+    image_csv = next(tmp_output_dir.glob('*Image.csv'))
+    shutil.copy(image_csv, output_dir / f'{image_set.image_id}_image.csv')
 
-    # # Handle the nuclei CSV file
-    # nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
-    # shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
+    # Handle the nuclei CSV file
+    nuclei_csv = next(tmp_output_dir.glob('*Nuclei.csv'))
+    shutil.copy(nuclei_csv, output_dir / f'{image_set.image_id}_nuclei.csv')
 
     # # Handle the cytoplasm CSV file
     # cytoplasm_csv = next(tmp_output_dir.glob('*Cytoplasm.csv'))
