@@ -52,8 +52,8 @@ SECONDS=0
 
 
 plate="Control"
-images="/grand/FRAME-IDP/astroka/exp_05_26/week_one/20260531_Exp1/20260528_20x_ANL_CellPainting_RPE-1_Control_1__2026-05-28T22_00_34-Measurement1/Images"
+images="/grand/FRAME-IDP/astroka/exp_05_26/week_two/20260609_ANL_Week2/20260608_20x_ANL_CellPainting_RPE-1_Control_1__2026-06-08T20_50_29-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_one/results/Control/ --tmp_dir /dev/shm --num_workers 16
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_two/results/Control/ --tmp_dir /dev/shm --num_workers 16
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tiffs_preprocess.py
