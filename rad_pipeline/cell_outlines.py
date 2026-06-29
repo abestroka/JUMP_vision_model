@@ -333,5 +333,6 @@ if __name__ == '__main__':
 
     # Run the cell profiler on each image set in parallel
     with ProcessPoolExecutor(max_workers=args.num_workers) as executor:
-        for _ in tqdm(executor.map(worker_fn, image_sets)):
-            pass
+        if image_sets is not None:
+            for _ in tqdm(executor.map(worker_fn, image_sets)):
+                pass
