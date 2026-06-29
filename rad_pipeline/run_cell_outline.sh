@@ -51,9 +51,9 @@ SECONDS=0
 # # python ~/workspace/JUMP_vision_model/rad_pipeline/cropped_cells.py -i $images -p $plate -t $treatment_file -o /eagle/projects/FoundEpidem/astroka/ten_week/week_one_corrected/results/huvec_control_seg --tmp_dir /dev/shm --num_workers 32
 
 
-plate="Plate3"
-images="/grand/FRAME-IDP/astroka/exp_05_26/week_three/20260610_ANL_Week3/20260609_20x_ANL_CellPainting_RPE-1_Plate3_1__2026-06-09T17_24_09-Measurement1/Images"
+plate="Control"
+images="/grand/FRAME-IDP/astroka/exp_05_26/week_three/20260610_ANL_Week3/20260609_20x_ANL_CellPainting_RPE-1_Control_1__2026-06-09T20_20_26-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_three/results/Plate3/ --tmp_dir /dev/shm --num_workers 16
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_three/results/Control/ --tmp_dir /dev/shm --num_workers 16
 
 # python ~/workspace/JUMP_vision_model/rad_pipeline/tiffs_preprocess.py
