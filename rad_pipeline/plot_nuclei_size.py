@@ -90,13 +90,11 @@ def plot_plate(data: pd.DataFrame, plate: str, output_dir: Path) -> None:
         upper_err = tdata["q3"].values - medians
 
         color = cmap(i % 10)
-        ax.errorbar(
+        ax.plot(
             weeks,
             medians,
-            yerr=[lower_err, upper_err],
             label=treatment,
             marker="o",
-            capsize=4,
             linewidth=1.8,
             markersize=6,
             color=color,
