@@ -27,6 +27,11 @@ class ImageSet:
     treatment: str
 
     @property
+    def is_valid(self) -> bool:
+        """Return True if all required image paths are set."""
+        return all([self.dna, self.rna, self.agp, self.er, self.mito, self.brightfield])
+
+    @property
     def image_id(self) -> str:
         """Get the unique id for the image set, e.g., r06c04f09p14."""
         # print("COPYING DNA")
@@ -147,6 +152,8 @@ def run_cellprofiler(
     -------
         None
     """
+    if not image_set.is_valid:
+        return
     # Create temp directories for input and output
     _tmp_dir = tmp_dir / str(uuid4())
     tmp_input_dir = _tmp_dir / 'input'
