@@ -37,4 +37,4 @@ SECONDS=0
 
 
 
-python plot_nuclei_size.py -b /grand/FRAME-IDP/astroka/exp_05_26 -o /grand/FRAME-IDP/astroka/exp_05_26/nuclei_plots
+python ~/workspace/JUMP_vision_model/rad_pipeline/plot_nuclei_size.py -b /grand/FRAME-IDP/astroka/exp_05_26 -o /grand/FRAME-IDP/astroka/exp_05_26/nuclei_plots
