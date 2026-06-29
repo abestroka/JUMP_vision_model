@@ -73,7 +73,11 @@ def plot_plate(data: pd.DataFrame, plate: str, output_dir: Path) -> None:
         .reset_index()
     )
 
-    treatments = sorted(summary["treatment"].unique(), key=lambda t: float(t) if _is_numeric(t) else t)
+    # treatments = sorted(summary["treatment"].unique(), key=lambda t: float(t) if _is_numeric(t) else t)
+    treatments = sorted(
+        summary["treatment"].unique(),
+        key=lambda t: (0, float(t)) if _is_numeric(t) else (1, t)
+    )
 
     fig, ax = plt.subplots(figsize=(8, 5))
     cmap = plt.get_cmap("tab10")
