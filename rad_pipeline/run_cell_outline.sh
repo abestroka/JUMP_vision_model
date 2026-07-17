@@ -38,7 +38,7 @@ SECONDS=0
 
 
 plate="Plate3"
-images="/grand/FRAME-IDP/astroka/exp_05_26/week_five/20260705_ANL_Week5/20260701_ANL_Week5_Plate3_1__2026-07-01T13_43_16-Measurement1/Images"
+images="/grand/FRAME-IDP/astroka/exp_05_26/week_four/20260716_ANL_Week4/20260617_20x_ANL_CellPainting_RPE-1_Plate3_1__2026-06-16T18_41_35-Measurement1/Images"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_five/results/Plate3/ --tmp_dir /dev/shm --num_workers 16
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/exp_05_26/week_four/results/Plate3/ --tmp_dir /dev/shm --num_workers 16
 
