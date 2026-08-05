@@ -38,7 +38,7 @@ SECONDS=0
 
 
 plate="HUVEC_Control"
-images="/grand/FRAME-IDP/astroka/ten_week/week_two/20240725_Week2/20240725_OSU_HTSC_MW_ANL_CellPainting_P3_8stacks_1__2024-07-25T18_16_43-Measurement1/Images"
+images="/grand/FRAME-IDP/astroka/ten_week/week_two/20240725_Week2/20240725_OSU_HTSC_MW_ANL_CellPainting_Ctl_8Stacks_1__2024-07-25T19_59_06-Measurement1/Images"
 # treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
 treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/week_two_cells_layout.xlsx"
 python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/ten_week/week_two/results/huvec_control_new --tmp_dir /dev/shm --num_workers 16
