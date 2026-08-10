@@ -35,8 +35,8 @@ import scipy.stats as stats
 
 # WEEKS = ["week_one", "week_two", "week_three", "week_four", "week_five"]
 # WEEK_LABELS = [1, 2, 3, 4, 5]
-WEEKS = ["week_one"]
-WEEK_LABELS = [1]
+WEEKS = ["week_one", "week_two", "week_three"]
+WEEK_LABELS = [1, 2, 3]
 PLATE = "plate8"
 FOCI_COL = "Children_NucFoci_Count"
 
