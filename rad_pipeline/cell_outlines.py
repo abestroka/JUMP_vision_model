@@ -297,7 +297,7 @@ if __name__ == '__main__':
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/nuc_foci_counting.cppipe',
+            '/lus/grand/projects/FRAME-IDP/astroka/nuc_foci_counting.cppipe',
         ),
         type=Path,
     )
