@@ -90,7 +90,7 @@ def collect_data(base_dir: Path) -> pd.DataFrame:
                 continue
             color, dose = parsed
 
-            nuclei_csvs = list(treatment_dir.glob("*Nuclei*.csv"))
+            nuclei_csvs = list(treatment_dir.glob("*nuclei*.csv"))
             if not nuclei_csvs:
                 print(f"  [skip] no Nuclei CSVs in {treatment_dir}")
                 continue
