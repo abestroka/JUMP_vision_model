@@ -37,4 +37,6 @@ SECONDS=0
 
 
 
-python ~/workspace/JUMP_vision_model/rad_pipeline/plot_nuclei_size.py -b /grand/FRAME-IDP/astroka/exp_05_26 -o /grand/FRAME-IDP/astroka/exp_05_26/nuclei_plots
+# python ~/workspace/JUMP_vision_model/rad_pipeline/plot_nuclei_size.py -b /grand/FRAME-IDP/astroka/exp_05_26 -o /grand/FRAME-IDP/astroka/exp_05_26/nuclei_plots
+
+python plot_nuclear_foci.py -b /grand/FRAME-IDP/astroka/rpe_h2a -o /grand/FRAME-IDP/astroka/rpe_h2a/foci_plots
