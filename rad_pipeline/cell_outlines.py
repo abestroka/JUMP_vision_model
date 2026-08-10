@@ -285,22 +285,22 @@ if __name__ == '__main__':
         default='/lus/eagle/projects/FoundEpidem/astroka/cellprofiler_4.2.6.sif',
         type=Path,
     )
-    parser.add_argument(
-        '--cellprofiler_pipeline',
-        help='The cell profiler pipeline to use',
-        default=Path(
-            '/lus/eagle/projects/FoundEpidem/astroka/outlines_and_sheet.cppipe',
-        ),
-        type=Path,
-    )
     # parser.add_argument(
     #     '--cellprofiler_pipeline',
     #     help='The cell profiler pipeline to use',
     #     default=Path(
-    #         '/lus/eagle/projects/FoundEpidem/astroka/cropped_ch2_tiff.cppipe',
+    #         '/lus/eagle/projects/FoundEpidem/astroka/outlines_and_sheet.cppipe',
     #     ),
     #     type=Path,
     # )
+    parser.add_argument(
+        '--cellprofiler_pipeline',
+        help='The cell profiler pipeline to use',
+        default=Path(
+            '/lus/eagle/projects/FoundEpidem/astroka/nuc_foci_counting.cppipe',
+        ),
+        type=Path,
+    )
     parser.add_argument(
         '--num_workers',
         help='The number of workers to use for processing',
