@@ -218,7 +218,7 @@ def plot_dose_trend(df: pd.DataFrame, output_dir: Path) -> None:
                     linewidth=1.5, alpha=0.7, label="Linear trend")
             direction = "increasing" if slope > 0 else "decreasing"
             ax.annotate(
-                # f"r = {r:.3f}, p = {p:.3f}\nTrend: {direction}",
+                f"r = {r:.3f}, p = {p:.3f}\nTrend: {direction}",
                 xy=(0.05, 0.93), xycoords="axes fraction",
                 fontsize=9, va="top",
                 bbox=dict(boxstyle="round,pad=0.3", fc="white", alpha=0.7),
@@ -227,8 +227,7 @@ def plot_dose_trend(df: pd.DataFrame, output_dir: Path) -> None:
         ax.set_title(COLOR_LABELS[color], fontsize=11, fontweight="bold", color=gc)
         ax.set_xlabel("Dose", fontsize=11)
         ax.set_ylabel("Median Foci Count per Nucleus\n(all weeks pooled)", fontsize=10)
-        # ax.set_xticks(doses)
-        ax.set_xticks(range(len(doses)))
+        ax.set_xticks(doses)
         ax.set_xticklabels([str(d) for d in doses], rotation=30, ha="right")
         ax.grid(axis="y", linestyle="--", alpha=0.4)
         ax.legend(fontsize=8)
