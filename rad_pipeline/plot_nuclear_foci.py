@@ -55,7 +55,7 @@ GROUP_COLORS = {
 }
  
 WEEK_PALETTE = [
-    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+    "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#17b1cf", "#cbce0e", "#c1568a"
 ]
  
  
