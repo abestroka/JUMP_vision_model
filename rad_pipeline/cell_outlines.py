@@ -218,12 +218,12 @@ def run_cellprofiler(
 
 
     # Calculate the confluency and write it to a file
-    # df = pd.read_csv(image_csv)
-    # totalarea = df['AreaOccupied_TotalArea_Cells'][0]
-    # cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
-    # confluency = float(cellarea / totalarea)
-    # with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
-    #     f.write(str(confluency))
+    df = pd.read_csv(image_csv)
+    totalarea = df['AreaOccupied_TotalArea_Cells'][0]
+    cellarea = df['AreaOccupied_AreaOccupied_Cells'][0]
+    confluency = float(cellarea / totalarea)
+    with open(output_dir / f'{image_set.image_id}_confluency.txt', 'w') as f:
+        f.write(str(confluency))
 
     # Gather the segmented images and move them to the appropriate directory
     src_images = list(tmp_output_dir.glob('*.png'))
@@ -285,22 +285,22 @@ if __name__ == '__main__':
         default='/lus/eagle/projects/FoundEpidem/astroka/cellprofiler_4.2.6.sif',
         type=Path,
     )
-    # parser.add_argument(
-    #     '--cellprofiler_pipeline',
-    #     help='The cell profiler pipeline to use',
-    #     default=Path(
-    #         '/lus/eagle/projects/FoundEpidem/astroka/outlines_and_sheet.cppipe',
-    #     ),
-    #     type=Path,
-    # )
     parser.add_argument(
         '--cellprofiler_pipeline',
         help='The cell profiler pipeline to use',
         default=Path(
-            '/lus/grand/projects/FRAME-IDP/astroka/nuc_foci_counting2.cppipe',
+            '/lus/eagle/projects/FoundEpidem/astroka/outlines_and_sheet.cppipe',
         ),
         type=Path,
     )
+    # parser.add_argument(
+    #     '--cellprofiler_pipeline',
+    #     help='The cell profiler pipeline to use',
+    #     default=Path(
+    #         '/lus/grand/projects/FRAME-IDP/astroka/nuc_foci_counting2.cppipe',
+    #     ),
+    #     type=Path,
+    # )
     parser.add_argument(
         '--num_workers',
         help='The number of workers to use for processing',

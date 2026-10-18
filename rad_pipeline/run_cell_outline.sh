@@ -38,8 +38,8 @@ SECONDS=0
 
 
 plate="Plate8"
-images="/grand/FRAME-IDP/astroka/rpe_h2a/week_eight/20250701_RPE-1_H2A_Week8/20250701_20x_ANL_CellPainting_RPE-1_Plate8_1__2025-07-01T17_56_41-Measurement1/Images/"
+images="/grand/FRAME-IDP/astroka/wt_ko/week_nine/ANL_CellPaiting_Week9/20260727_20x_ANL_CellPainting_RPE-1_Plate8__2026-07-27T18_45_08-Measurement1/Images"
 # treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
-treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe_h2a.xlsx"
-python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/rpe_h2a/week_eight/results/plate8 --tmp_dir /dev/shm --num_workers 16
+treatment_file="/home/astroka/workspace/JUMP_vision_model/rad_pipeline/rpe1_ko_wt.xlsx"
+python ~/workspace/JUMP_vision_model/rad_pipeline/cell_outlines.py -i $images -p $plate -t $treatment_file -o /grand/projects/FRAME-IDP/astroka/wt_ko/week_nine/results/plate8 --tmp_dir /dev/shm --num_workers 16
 
