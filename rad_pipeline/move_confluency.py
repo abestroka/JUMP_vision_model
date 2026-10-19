@@ -1,8 +1,8 @@
 import shutil
 from pathlib import Path
  
-SRC = Path("/grand/projects/FRAME-IDP/astroka/wt_ko/week_nine/results/plate8")
-DST = Path("/grand/projects/FRAME-IDP/astroka/wt_ko/week_nine/results/confluency")
+SRC = Path("/grand/projects/FRAME-IDP/astroka/wt_ko/week_nine/results/control/untreated")
+DST = Path("/grand/projects/FRAME-IDP/astroka/wt_ko/week_nine/results/confluency_untreated")
  
 DST.mkdir(parents=True, exist_ok=True)
  
